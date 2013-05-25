@@ -5,14 +5,14 @@ Throughout all our projects we aim to use one unified coding style for best read
 
 ## PHP (and JavaScript)
 
-**Indentation and Brace Style**
+**Indentation and Brace Style**  
 The brace style follows the 1TBS, the one true brace style. Tabulators are used to indent subordinated code.
 
-**Spacing**
+**Spacing**  
 Between the function- or statement names and their brackets there are no spaces.
 Operators (except "++", "--", "::", "->" or ".") have spaces before and after.
 
-**Naming**
+**Naming**  
 All variable, function- and method names are lowerCamelCase, meaning the first letter is always lower case. Classes, including interfaces, are named using UpperCamelCase, capitalising the first letter. Interface's names are prepended with an `I` (capital i).
 However, keys of arrays are named lower case and by using underscores `_`.
 Constants are named all upper case and using underscores, e.g. `DEBUG_CONSTANT`.
@@ -58,9 +58,8 @@ class ExampleClass implements IFooInterface {
 
 ## HTML / TPL
 
-Indent with tabs and keep everything lower case!
-**Example:**
-
+Indent with tabs and keep everything lower case!  
+**Example:**   
 ```html
 <div class="i_am_a_class">
 	<span id="hurr">{$variable_with_underscores}</span>
@@ -72,9 +71,8 @@ Indent with tabs and keep everything lower case!
 ```
 
 ## CSS
-IDs, classes and fairly everything else is lower case. Descendants may be indented.
-**Example:**
-
+IDs, classes and fairly everything else is lower case. Descendants may be indented.  
+**Example:**  
 ```css
 .i_am_a_class {
 	position: absolute;
