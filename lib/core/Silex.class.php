@@ -9,8 +9,35 @@
  * One class to rule them all
  */
 class Silex {
+
+	/**
+	 * @var Database
+	 */
+	protected static $db = null;
+
+	/**
+	 * Start Silex up!
+	 */
 	public final function __construct() {
-		// Initialize everything
+		$this->initDb();
+	}
+
+	private final function initDb() {
+		// Read config file
+		if(!file_exists(DIR_LIB.'config.inc.php'))
+			throw new CoreException('Y U HAVE NO CONFIG FILE?!', 0, 'Your config file can\'t be found. ');
+
+		// Default values
+		$dbHost = $dbUser = $dbPassword = $dbClass = $dbName = '';
+		$dbPort = 0;
+		require_once DIR_LIB.'config.inc.php';
+
+		self::$db = new $dbClass($dbHost, $dbUser, $dbPassword, $dbName, $dbPort);
+
+		if(!(self::$db instanceof Database) || !self::$db->isSupported()) {
+			throw new CoreException('Failed to create a database object.', 0, 'Failed to create the database object. Either there was a connection error or the DB type isn\'t supported.');
+		}
+
 	}
 	
 	/**
