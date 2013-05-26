@@ -22,7 +22,7 @@ class Autoloader {
 			define('SILEX_AUTOLOADER', true);
 
 			// Tell PHP to use us
-			spl_autoload_register([new self, 'autoload']);
+			spl_autoload_register(['self', 'autoload']);
 
 			// Index all directories, but ignore some
 			self::$directories = [
