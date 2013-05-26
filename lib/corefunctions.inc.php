@@ -1,11 +1,5 @@
 <?php
 /**
- * @author    Janek Ostendorf (ozzy) <ozzy2345de@gmail.com>
- * @copyright Copyright (c) 2013 SilexLab
- * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
- */
-
-/**
  * Recursive scandir
  * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
  * @param  string $directory
@@ -30,4 +24,100 @@ function scandirr($directory, $sorting_order = 0) {
 			$rfiles[] = $f;
 	}
 	return $rfiles;
+}
+
+/**
+ * Get the file extension
+ * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
+ * @param  string $file
+ * @return string
+ */
+function file_ext($file) {
+	return pathinfo($file, PATHINFO_EXTENSION);
+}
+
+
+/* ARRAYS */
+
+/**
+ * Searches the array for a given value and returns the corresponding key(s) if successful
+ * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
+ * @param  mixed $needle
+ * @param  array $haystack
+ * @param  bool  $strict = false
+ * @return mixed
+ */
+function array_search_all($needle, array $haystack, $strict = false) {
+	$founds = [];
+	foreach($haystack as $key => $value) {
+		if(!$strict && $value == $needle)
+			$founds[] = $key;
+		else if($strict && $value === $needle)
+			$founds[] = $key;
+	}
+	return empty($founds) ? false : $founds;
+}
+
+
+/* MATH */
+
+/**
+ * clamp the value
+ * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
+ * @param  mixed $value
+ * @param  mixed $min_value
+ * @param  mixed $max_value
+ * @return mixed
+ */
+function clamp($value, $min, $max) { return max(min($value, $max), $min); }
+
+
+/* STRINGS */
+
+/**
+ * Can we find the needle in the haystack?
+ * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
+ * @param  string $haystack
+ * @param  string $needle
+ * @return bool
+ */
+function strfind($haystack, $needle) { return strpos($haystack, $needle) !== false; }
+
+/**
+ * urlencode without touching the slashes
+ * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
+ * @param  string $url
+ * @return string
+ */
+function urlencode_slashes($url) {
+	$scheme = '';
+	if(preg_match('/^(?<scheme>[a-z][a-z0-9+\-.]*):/ix', $url, $m)) {
+		$scheme = $m[0].'//';
+		$url = substr($url, strlen($scheme));
+	}
+	$new_url = '';
+	$e = explode('/', $url);
+	for($i = 0; $i < sizeof($e); $i++)
+		$new_url .= urlencode($e[$i]).(($i < sizeof($e) - 1) ? '/' : '');
+	return $scheme.$new_url;
+}
+
+
+/**
+ * rawurlencode without touching the slashes
+ * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
+ * @param  string $url
+ * @return string
+ */
+function rawurlencode_slashes($url) {
+	$scheme = '';
+	if(preg_match('/^(?<scheme>[a-z][a-z0-9+\-.]*):/ix', $url, $m)) {
+		$scheme = $m[0].'//';
+		$url = substr($url, strlen($scheme));
+	}
+	$new_url = '';
+	$e = explode('/', $url);
+	for($i = 0; $i < sizeof($e); $i++)
+		$new_url .= rawurlencode($e[$i]).(($i < sizeof($e) - 1) ? '/' : '');
+	return $scheme.$new_url;
 }

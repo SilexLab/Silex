@@ -9,9 +9,7 @@
  * One class to rule them all
  */
 class Silex {
-
 	public final function __construct() {
 		// Initialize everything
 	}
-
 }

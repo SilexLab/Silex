@@ -9,7 +9,6 @@
  * Loads all the classes
  */
 class Autoloader {
-
 	protected static $directories = [];
 	protected static $index = [];
 	protected static $ignoreList = [];
@@ -18,10 +17,8 @@ class Autoloader {
 	 * Register this autoloader
 	 */
 	public static function register() {
-
 		// Are we registered already?
 		if(!defined('SILEX_AUTOLOADER')) {
-
 			define('SILEX_AUTOLOADER', true);
 
 			// Tell PHP to use us
@@ -32,14 +29,11 @@ class Autoloader {
 				'*'
 			];
 			self::$ignoreList = [
-
 			];
 
 			// Index files
 			self::indexFiles();
-
 		}
-
 	}
 
 	/**
@@ -57,10 +51,8 @@ class Autoloader {
 	 * Indexes all files in the specified directories
 	 */
 	protected static function indexFiles() {
-
 		// Go through the directories
 		foreach(self::$directories as $curDir) {
-
 			// Wildcard?
 			if(preg_match('/^(.*)\*$/', $curDir, $matches)) {
 				$curDir = $matches[1];
@@ -71,25 +63,20 @@ class Autoloader {
 
 				// Search for files
 				foreach(scandirr(DIR_LIB.$curDir) as $curFile) {
-
 					if(is_file(DIR_LIB.$curDir.$curFile) && preg_match('/([a-zA-Z0-9_]+)\.class\.php/', $curFile, $fileMatches)) {
-
 						// Is ignored?
 						foreach (self::$ignoreList as $i) { // TODO: Do this better
 							if(preg_match('/^'.$i.'\//', $curDir.$curFile))
 								continue 2;
 						}
-
 						// Add file
 						if(!isset(self::$index[$fileMatches[1]]))
 							self::$index[$fileMatches[1]] = $curDir.$curFile;
 					}
 				}
 			} else {
-
 				// Search for files
 				foreach(scandir(DIR_LIB.$curDir) as $curFile) {
-
 					// Add trailing slash if necessary
 					if(!preg_match('/^(.+)\/$/', $curDir))
 						$curDir .= '/';
@@ -103,5 +90,4 @@ class Autoloader {
 			}
 		}
 	}
-
 }
