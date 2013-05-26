@@ -4,8 +4,17 @@
  * @copyright Copyright (c) 2013 SilexLab
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
+ 
 
-define('SILEX_VERSION', '0.1.0-DEV');
+/**
+ * Exceptions which can be displayed
+ */
+interface IPrintableException {
 
-// New line
-define('NL', "\n");
+	/**
+	 * Print this exception
+	 * @return void
+	 */
+	public function show();
+
+}

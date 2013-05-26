@@ -16,4 +16,8 @@ require_once DIR_LIB.'corefunctions.inc.php';
 require_once DIR_LIB.'Autoloader.class.php';
 Autoloader::register();
 
+// Set exception handler
+set_exception_handler(['Silex', 'handleException']);
+set_error_handler(['Silex', 'handleError'], E_ALL);
+
 new Silex();
