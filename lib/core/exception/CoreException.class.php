@@ -75,10 +75,10 @@ class CoreException extends LoggedException implements IPrintableException {
 								<strong>Error code:</strong> <?= intval($e->getCode()) ?>
 								<br>
 								<?= $this->information ?>
-								<strong>File:</strong> <?= StringUtil::encodeHtml($e->getFile().':'.$e->getLine()) ?>
+								<strong>File:</strong> <?= StringUtil::encodeHtml($e->getFile().':'.$e->getLine()) ?><br>
 								<strong>Time:</strong> <?= gmdate('r'); ?><br>
-								<strong>Request:</strong> <?= isset($_SERVER['REQUEST_URI']) ? StringUtil::encodeHtml($_SERVER['REQUEST_URI']) : '' ?>
-								<strong>Referer:</strong> <?= isset($_SERVER['HTTP_REFERER']) ? StringUtil::encodeHtml($_SERVER['HTTP_REFERER']) : '' ?>
+								<strong>Request:</strong> <?= isset($_SERVER['REQUEST_URI']) ? StringUtil::encodeHtml($_SERVER['REQUEST_URI']) : '' ?><br>
+								<strong>Referer:</strong> <?= isset($_SERVER['HTTP_REFERER']) ? StringUtil::encodeHtml($_SERVER['HTTP_REFERER']) : '' ?><br>
 							</p>
 
 							<h2>Stacktrace</h2>

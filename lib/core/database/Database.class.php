@@ -99,7 +99,7 @@ abstract class Database {
 	/**
 	 * @return string
 	 */
-	public function getDbType() {
+	public function getType() {
 		return get_class($this);
 	}
 
@@ -161,7 +161,7 @@ abstract class Database {
 		return $this->username;
 	}
 
-	public function incrementQureyCount() {
+	public function incrementQueryCount() {
 		$this->queryCount++;
 	}
 }
