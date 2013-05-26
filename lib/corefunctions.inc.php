@@ -19,8 +19,7 @@ function scandirr($directory, $sorting_order = 0) {
 			$rf = scandirr($directory.$f, $sorting_order);
 			for($i = 0; $i < sizeof($rf); $i++)
 				$rfiles[] = $f.'/'.$rf[$i];
-		}
-		else
+		} else
 			$rfiles[] = $f;
 	}
 	return $rfiles;
@@ -35,7 +34,6 @@ function scandirr($directory, $sorting_order = 0) {
 function file_ext($file) {
 	return pathinfo($file, PATHINFO_EXTENSION);
 }
-
 
 /* ARRAYS */
 
@@ -58,35 +56,37 @@ function array_search_all($needle, array $haystack, $strict = false) {
 	return empty($founds) ? false : $founds;
 }
 
-
 /* MATH */
 
 /**
  * clamp the value
  * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
- * @param  mixed $value
- * @param  mixed $min_value
- * @param  mixed $max_value
+ * @param mixed $value
+ * @param int   $min
+ * @param int   $max
  * @return mixed
  */
-function clamp($value, $min, $max) { return max(min($value, $max), $min); }
-
+function clamp($value, $min, $max) {
+	return max(min($value, $max), $min);
+}
 
 /* STRINGS */
 
 /**
  * Can we find the needle in the haystack?
  * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
- * @param  string $haystack
- * @param  string $needle
+ * @param string $haystack
+ * @param string $needle
  * @return bool
  */
-function strfind($haystack, $needle) { return strpos($haystack, $needle) !== false; }
+function strfind($haystack, $needle) {
+	return strpos($haystack, $needle) !== false;
+}
 
 /**
  * urlencode without touching the slashes
  * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
- * @param  string $url
+ * @param string $url
  * @return string
  */
 function urlencode_slashes($url) {
@@ -101,7 +101,6 @@ function urlencode_slashes($url) {
 		$new_url .= urlencode($e[$i]).(($i < sizeof($e) - 1) ? '/' : '');
 	return $scheme.$new_url;
 }
-
 
 /**
  * rawurlencode without touching the slashes

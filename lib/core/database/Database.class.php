@@ -4,7 +4,6 @@
  * @copyright Copyright (c) 2013 SilexLab
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
- 
 
 /**
  * PDO Wrapper. Super class, will be extended by driver specific subclasses
@@ -165,5 +164,4 @@ abstract class Database {
 	public function incrementQureyCount() {
 		$this->queryCount++;
 	}
-
 }

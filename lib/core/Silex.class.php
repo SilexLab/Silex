@@ -37,9 +37,8 @@ class Silex {
 		if(!(self::$db instanceof Database) || !self::$db->isSupported()) {
 			throw new CoreException('Failed to create a database object.', 0, 'Failed to create the database object. Either there was a connection error or the DB type isn\'t supported.');
 		}
-
 	}
-	
+
 	/**
 	 * @return bool
 	 */
@@ -64,8 +63,8 @@ class Silex {
 	/**
 	 * Catches php errors and throws instead a system exceptions
 	 * @param integer $errorNo
-	 * @param string $message
-	 * @param string $filename
+	 * @param string  $message
+	 * @param string  $filename
 	 * @param integer $lineNo
 	 * @throws CoreException
 	 */

@@ -4,7 +4,6 @@
  * @copyright Copyright (c) 2013 SilexLab
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
- 
 
 /**
  * MySQL PDO wrapper and driver
@@ -18,7 +17,8 @@ class MySQLDatabase extends Database {
 	 */
 	public function connect() {
 		// Default port
-		if(!$this->port) $this->port = 3306;
+		if(!$this->port)
+			$this->port = 3306;
 
 		$dsn = 'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->database.';';
 		$options = [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'];
@@ -38,5 +38,4 @@ class MySQLDatabase extends Database {
 	public function isSupported() {
 		return (extension_loaded('PDO') && extension_loaded('pdo_mysql'));
 	}
-
 }

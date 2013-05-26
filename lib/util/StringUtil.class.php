@@ -4,7 +4,6 @@
  * @copyright Copyright (c) 2013 SilexLab
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
- 
 
 /**
  * Utility methods for strings
@@ -28,5 +27,4 @@ class StringUtil {
 	public static function encodeHtml($string) {
 		return @htmlspecialchars($string, ENT_COMPAT, 'UTF-8');
 	}
-
 }

@@ -65,7 +65,7 @@ class Autoloader {
 				foreach(scandirr(DIR_LIB.$curDir) as $curFile) {
 					if(is_file(DIR_LIB.$curDir.$curFile) && preg_match('/([a-zA-Z0-9_]+)\.class\.php/', $curFile, $fileMatches)) {
 						// Is ignored?
-						foreach (self::$ignoreList as $i) { // TODO: Do this better
+						foreach(self::$ignoreList as $i) { // TODO: Do this better
 							if(preg_match('/^'.$i.'\//', $curDir.$curFile))
 								continue 2;
 						}

@@ -4,7 +4,6 @@
  * @copyright Copyright (c) 2013 SilexLab
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
- 
 
 /**
  * Database errors
@@ -73,8 +72,7 @@ class DatabaseException extends CoreException {
 		if($this->sqlVersion === '') {
 			try {
 				$this->sqlVersion = $this->db->getVersion();
-			}
-			catch(DatabaseException $e) {
+			} catch(DatabaseException $e) {
 				$this->sqlVersion = 'unknown';
 			}
 		}
@@ -105,5 +103,4 @@ class DatabaseException extends CoreException {
 		}
 		parent::show();
 	}
-
 }

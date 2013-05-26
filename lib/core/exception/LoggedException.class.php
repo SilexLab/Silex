@@ -4,7 +4,6 @@
  * @copyright Copyright (c) 2013 SilexLab
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
- 
 
 /**
  * Exceptions being logged
@@ -37,7 +36,6 @@ class LoggedException extends Exception {
 		// Exception to use
 		$e = ($this->getPrevious() ? : $this);
 		return $e->getMessage();
-
 	}
 
 	/**
@@ -56,7 +54,7 @@ class LoggedException extends Exception {
 		}
 
 		// Do we have a repacked exception?
-		$e = ($this->getPrevious() ?: $this);
+		$e = ($this->getPrevious() ? : $this);
 
 		// Build the message
 		$text = date('r', TIME).NL.
@@ -73,5 +71,4 @@ class LoggedException extends Exception {
 
 		return $id;
 	}
-
 }
