@@ -7,5 +7,7 @@
 
 define('SILEX_VERSION', '0.1.0-DEV');
 
+define('DEBUG', true);
+
 // New line
 define('NL', "\n");

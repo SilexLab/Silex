@@ -17,15 +17,15 @@ class Silex {
 	 * @return bool
 	 */
 	public final static function isDebug() {
-		return true; // TODO: Read from config or elsewhere
+		return DEBUG;
 	}
 
 	/**
 	 * Handle our Exceptions
-	 * @param \Exception $e
+	 * @param Exception $e
 	 */
-	public static final function handleException(\Exception $e) {
-		if($e instanceof CoreException) {
+	public static final function handleException(Exception $e) {
+		if($e instanceof IPrintableException) {
 			$e->show();
 			exit;
 		}
