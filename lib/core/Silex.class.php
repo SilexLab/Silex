@@ -22,10 +22,10 @@ class Silex {
 
 	/**
 	 * Handle our Exceptions
-	 * @param \Exception $e
+	 * @param Exception $e
 	 */
-	public static final function handleException(\Exception $e) {
-		if($e instanceof CoreException) {
+	public static final function handleException(Exception $e) {
+		if($e instanceof IPrintableException) {
 			$e->show();
 			exit;
 		}
