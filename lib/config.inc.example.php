@@ -1,7 +1,9 @@
 <?php
-$dbHost = '127.0.0.1';
-$dbUser = 'silex';
-$dbPassword = '';
-$dbName = 'silex';
-$dbPort = 3306;
-$dbClass = 'MySQLDatabase';
+return [
+'database.host'     => 'localhost',
+'database.user'     => 'root',
+'database.password' => '',
+'database.name'     => 'silex',
+'database.port'     => 3306,
+'database.wrapper'  => 'mysql'
+];

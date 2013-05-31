@@ -48,7 +48,7 @@ class LoggedException extends Exception {
 		@touch($logFilePath);
 
 		// Check file
-		if(!file_exists($logFilePath) || !is_writable($logFilePath)) {
+		if(!is_file($logFilePath) || !is_writable($logFilePath)) {
 			// Hey server admin, you need to fix this
 			return '1337';
 		}

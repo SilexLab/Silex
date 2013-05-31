@@ -9,7 +9,6 @@
  * PDO Wrapper. Super class, will be extended by driver specific subclasses
  */
 abstract class Database {
-
 	protected $username = '';
 	protected $password = '';
 	protected $host = '';

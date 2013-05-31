@@ -9,7 +9,6 @@
  * MySQL PDO wrapper and driver
  */
 class MySQLDatabase extends Database {
-
 	/**
 	 * Connect to the SQL server
 	 * @throws DatabaseException

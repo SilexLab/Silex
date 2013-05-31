@@ -14,35 +14,48 @@ class Silex {
 	 * @var Database
 	 */
 	protected static $db = null;
+	protected static $config = null;
 
 	/**
 	 * Start Silex up!
 	 */
 	public final function __construct() {
-		$this->initDb();
+		// Read config file
+		if(!is_file(DIR_LIB.'config.inc.php'))
+			throw new CoreException('Y U NO HAVE A CONFIG FILE?!', 0, 'Your config file can\'t be found.');
+		$config = require_once DIR_LIB.'config.inc.php';
+
+		self::$db = DatabaseFactory::initDatabase(
+			$config['database.wrapper'],
+			$config['database.host'],
+			$config['database.user'],
+			$config['database.password'],
+			$config['database.name'],
+			$config['database.port']);
+		self::$config = new Config($config);
 	}
 
-	private final function initDb() {
-		// Read config file
-		if(!file_exists(DIR_LIB.'config.inc.php'))
-			throw new CoreException('Y U HAVE NO CONFIG FILE?!', 0, 'Your config file can\'t be found. ');
+	/**
+	 * Access to database instance
+	 * @return Database
+	 */
+	public static final function db() {
+		return self::$db;
+	}
 
-		// Default values
-		$dbHost = $dbUser = $dbPassword = $dbClass = $dbName = '';
-		$dbPort = 0;
-		require_once DIR_LIB.'config.inc.php';
-
-		self::$db = new $dbClass($dbHost, $dbUser, $dbPassword, $dbName, $dbPort);
-
-		if(!(self::$db instanceof Database) || !self::$db->isSupported()) {
-			throw new CoreException('Failed to create a database object.', 0, 'Failed to create the database object. Either there was a connection error or the DB type isn\'t supported.');
-		}
+	/**
+	 * Get the config instance
+	 * @return Config
+	 */
+	public static final function config() {
+		//return self::$config->get($node);
+		return self::$config;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public final static function isDebug() {
+	public static final function isDebug() {
 		return DEBUG;
 	}
 
