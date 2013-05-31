@@ -9,12 +9,22 @@
  * PDO Factory
  */
 class DatabaseFactory {
+	/**
+	 * @var array $databaseWrapper
+	 */
 	private static $databaseWrapper = [
 		'mysql' => 'MySQLDatabase'
 	];
 
 	/**
-	 * Create a new database
+	 * Handle database wrappers
+	 * @param  string $dbWrapper
+	 * @param  string $dbHost
+	 * @param  string $dbUser
+	 * @param  string $dbPassword
+	 * @param  string $dbName
+	 * @param  int    $dbPort
+	 * @return Database
 	 */
 	public static function initDatabase($dbWrapper, $dbHost, $dbUser, $dbPassword, $dbName, $dbPort) {
 		if(!isset(self::$databaseWrapper[$dbWrapper]))

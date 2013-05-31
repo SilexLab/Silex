@@ -9,11 +9,19 @@
  * Class for configuration stuff
  */
 class Config {
+	/**
+	 * @var array $config
+	 */
 	private $config = [];
 
-	public function __construct(array $config) {
+	/**
+	 * Get the config
+	 * @param array $config optional
+	 */
+	public function __construct(array $config = []) {
 		// Fetch config
-		$this->config = $config;
+		if($config)
+			$this->config = $config;
 		$config = Silex::getDB()->query('SELECT * FROM `config`')->fetchAllObject();
 
 		// Now work with that stuff you got
@@ -31,10 +39,20 @@ class Config {
 
 	private function __clone() {}
 
+	/**
+	 * Get the value of a config option
+	 * @param  string $node
+	 * @return mixed
+	 */
 	public function get($node) {
 		return array_key_exists($node, $this->config) ? $this->config[$node] : null;
 	}
 
+	/**
+	 * Set the value of a config option
+	 * @param  string $node
+	 * @param  mixed  $value
+	 */
 	public function set($node, $value) {
 		if(defined('ACP')) {
 			// TODO: Set the value
@@ -82,7 +100,7 @@ class Config {
 	/**
 	 * Parse length or range
 	 * @param reference $type
-	 * @param bool      $onlyLength
+	 * @param bool      $onlyLength optional
 	 */
 	private function parseType(&$type, $onlyLength = false) {
 		if(!$onlyLength && preg_match('/(\-{0,1}[0-9]+(\.[0-9]+){0,1}){0,1}\|(\-{0,1}[0-9]+(\.[0-9]+){0,1}){0,1}/', $type, $range)) {
