@@ -24,6 +24,8 @@ Constants are named all upper case and using underscores, e.g. `DEBUG_CONSTANT`.
 
 class ExampleClass implements IFooInterface {
 
+	const RANDOM_CONSTANT = 42;
+
 	protected $fooVar = 0;
 	protected $array = [];
 	protected $fooBool = false;
@@ -50,6 +52,14 @@ class ExampleClass implements IFooInterface {
 			return false;
 		}
 
+	}
+	
+	public function isFoo() {
+		return $this->fooBool;
+	}
+	
+	public function getArray() {
+		return $this->array;
 	}
 
 }
