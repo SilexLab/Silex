@@ -14,7 +14,7 @@ class Config {
 	public function __construct(array $config) {
 		// Fetch config
 		$this->config = $config;
-		$config = Silex::db()->query('SELECT * FROM `config`')->fetchAllObject();
+		$config = Silex::getDB()->query('SELECT * FROM `config`')->fetchAllObject();
 
 		// Now work with that stuff you got
 		if($config) {

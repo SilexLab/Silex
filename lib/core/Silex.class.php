@@ -39,7 +39,7 @@ class Silex {
 	 * Access to database instance
 	 * @return Database
 	 */
-	public static final function db() {
+	public static final function getDB() {
 		return self::$db;
 	}
 
@@ -47,7 +47,7 @@ class Silex {
 	 * Get the config instance
 	 * @return Config
 	 */
-	public static final function config() {
+	public static final function getConfig() {
 		//return self::$config->get($node);
 		return self::$config;
 	}
