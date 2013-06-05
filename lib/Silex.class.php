@@ -9,17 +9,21 @@
  * One class to rule them all
  */
 class Silex {
-
 	/**
 	 * @var Database
 	 */
 	protected static $db = null;
 	protected static $config = null;
+	protected static $event = null;
+	protected static $modules = null;
 
 	/**
 	 * Start Silex up!
 	 */
 	public final function __construct() {
+		if(self::isDebug())
+			header('Content-Type: text/plain; charset=utf-8');
+
 		// Read config file
 		if(!is_file(DIR_LIB.'config.inc.php'))
 			throw new CoreException('Y U NO HAVE A CONFIG FILE?!', 0, 'Your config file can\'t be found.');
@@ -33,6 +37,9 @@ class Silex {
 			$config['database.name'],
 			$config['database.port']);
 		self::$config = new Config($config);
+
+		self::$event = new Event();
+		self::$modules = new Modules(DIR_LIB.'modules/');
 	}
 
 	/**
@@ -50,6 +57,14 @@ class Silex {
 	public static final function getConfig() {
 		//return self::$config->get($node);
 		return self::$config;
+	}
+
+	/**
+	 * Access the event instance
+	 * @return Event
+	 */
+	public static final function getEvent() {
+		return self::$event;
 	}
 
 	/**

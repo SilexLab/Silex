@@ -9,7 +9,6 @@
  * Exceptions which can be displayed
  */
 interface IPrintableException {
-
 	/**
 	 * Print this exception
 	 * @return void

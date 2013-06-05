@@ -90,16 +90,14 @@ function strfind($haystack, $needle) {
  * @return string
  */
 function urlencode_slashes($url) {
-	$scheme = '';
-	if(preg_match('/^(?<scheme>[a-z][a-z0-9+\-.]*):/ix', $url, $m)) {
-		$scheme = $m[0].'//';
-		$url = substr($url, strlen($scheme));
+	if(preg_match('/^(?<scheme>[a-z][a-z0-9+\-.]*:\/\/)/ix', $url, $m)) {
+		$newURL = $m['scheme'];
+		$url = explode('/', substr($url, strlen($newURL)));
+		for($i = 0; $i < sizeof($url); $i++)
+			$newURL .= urlencode($url[$i]).(($i < sizeof($url) - 1) ? '/' : '');
+		return $newURL;
 	}
-	$new_url = '';
-	$e = explode('/', $url);
-	for($i = 0; $i < sizeof($e); $i++)
-		$new_url .= urlencode($e[$i]).(($i < sizeof($e) - 1) ? '/' : '');
-	return $scheme.$new_url;
+	return urlencode($url);
 }
 
 /**
@@ -109,14 +107,12 @@ function urlencode_slashes($url) {
  * @return string
  */
 function rawurlencode_slashes($url) {
-	$scheme = '';
-	if(preg_match('/^(?<scheme>[a-z][a-z0-9+\-.]*):/ix', $url, $m)) {
-		$scheme = $m[0].'//';
-		$url = substr($url, strlen($scheme));
+	if(preg_match('/^(?<scheme>[a-z][a-z0-9+\-.]*:\/\/)/ix', $url, $m)) {
+		$newURL = $m['scheme'];
+		$url = explode('/', substr($url, strlen($newURL)));
+		for($i = 0; $i < sizeof($url); $i++)
+			$newURL .= rawurlencode($url[$i]).(($i < sizeof($url) - 1) ? '/' : '');
+		return $newURL;
 	}
-	$new_url = '';
-	$e = explode('/', $url);
-	for($i = 0; $i < sizeof($e); $i++)
-		$new_url .= rawurlencode($e[$i]).(($i < sizeof($e) - 1) ? '/' : '');
-	return $scheme.$new_url;
+	return rawurlencode($url);
 }

@@ -9,7 +9,6 @@
  * Database errors
  */
 class DatabaseException extends CoreException {
-
 	protected $errorNumber = 0;
 	protected $errorDesc = '';
 	protected $sqlVersion = '';

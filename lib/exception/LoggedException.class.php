@@ -9,7 +9,6 @@
  * Exceptions being logged
  */
 class LoggedException extends Exception {
-
 	/**
 	 * @var string
 	 */

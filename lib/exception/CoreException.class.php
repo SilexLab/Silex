@@ -9,7 +9,6 @@
  * Something bad happened
  */
 class CoreException extends LoggedException implements IPrintableException {
-
 	/**
 	 * @param string    $message     Error message
 	 * @param int       $code        Error code
