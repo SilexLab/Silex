@@ -21,6 +21,9 @@ class Silex {
 	 * Start Silex up!
 	 */
 	public final function __construct() {
+		// We do use this
+		header('Content-Type: text/html; charset=utf-8');
+
 		// Read config file
 		if(!is_file(DIR_LIB.'config.inc.php'))
 			throw new CoreException('Y U NO HAVE A CONFIG FILE?!', 0, 'Your config file can\'t be found.');
@@ -36,6 +39,9 @@ class Silex {
 		self::$config = new Config($config);
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
+
+		// test call
+		Event::call('silex.construct.end');
 	}
 
 	/**

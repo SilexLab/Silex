@@ -31,13 +31,13 @@ class Event {
 	public static function call($hook) {
 		if(isset(self::$events[$hook])) {
 			// additional call parameters
-			// you can pass references by using Event::call('hook', [&$refence]);
+			// you can pass references by using Event::call('hook', [&$reference]);
 			$args = func_get_args();
 			array_shift($args);
 
 			// call the registered functions
-			foreach(self::$events[$hook] as $function) {
-				call_user_func_array($function, $args);
+			foreach(self::$events[$hook] as $callback) {
+				call_user_func_array($callback, $args);
 			}
 		}
 	}

@@ -5,6 +5,7 @@ class org_silex_test implements IModule {
 	}
 
 	public function register() {
+		Event::register('silex.construct.end', [$this, 'testest']);
 	}
 
 	public function getParents() {
@@ -12,5 +13,10 @@ class org_silex_test implements IModule {
 			'org.silex.core' => 'required',
 			'org.silex.test2' => 'optional'
 		];
+	}
+
+
+	public function testest($v = null) {
+		// we are testing stuff
 	}
 }
