@@ -9,6 +9,10 @@ class Modules {
 	private $modules = [];
 	private $registered = [];
 
+	/**
+	 * Initialize modules
+	 * @param string $modulesPath
+	 */
 	public function __construct($modulesPath) {
 		// search for and call modules
 		foreach(scandir($modulesPath) as $file) {
@@ -27,6 +31,11 @@ class Modules {
 		$this->register();
 	}
 
+	/**
+	 * Register a modul
+	 * @param string $module
+	 * @param string $source
+	 */
 	private function register($module = '', $source = '') {
 		if(empty($module)) {
 			foreach($this->modules as $m => $n) {

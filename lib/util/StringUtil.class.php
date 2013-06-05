@@ -9,10 +9,9 @@
  * Utility methods for strings
  */
 class StringUtil {
-
 	/**
 	 * We use SHA1
-	 * @param string $string
+	 * @param  string $string
 	 * @return string Hash
 	 */
 	public static function getHash($string) {
@@ -21,10 +20,10 @@ class StringUtil {
 
 	/**
 	 * Convert special HTML chars
-	 * @param string $string
+	 * @param  string $string
 	 * @return string
 	 */
 	public static function encodeHtml($string) {
-		return @htmlspecialchars($string, ENT_COMPAT, 'UTF-8');
+		return @htmlspecialchars($string, ENT_COMPAT | ENT_HTML5, 'UTF-8');
 	}
 }

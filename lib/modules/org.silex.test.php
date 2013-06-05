@@ -5,8 +5,6 @@ class org_silex_test implements IModule {
 	}
 
 	public function register() {
-		if(Silex::isDebug())
-			echo 'registered test'.NL;
 	}
 
 	public function getParents() {

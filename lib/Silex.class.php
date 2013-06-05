@@ -21,9 +21,6 @@ class Silex {
 	 * Start Silex up!
 	 */
 	public final function __construct() {
-		if(self::isDebug())
-			header('Content-Type: text/plain; charset=utf-8');
-
 		// Read config file
 		if(!is_file(DIR_LIB.'config.inc.php'))
 			throw new CoreException('Y U NO HAVE A CONFIG FILE?!', 0, 'Your config file can\'t be found.');
@@ -38,7 +35,6 @@ class Silex {
 			$config['database.port']);
 		self::$config = new Config($config);
 
-		self::$event = new Event();
 		self::$modules = new Modules(DIR_LIB.'modules/');
 	}
 
