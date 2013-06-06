@@ -10,6 +10,22 @@ define('TIME', time());
 
 // Where are we?
 define('DIR_ROOT', dirname(__FILE__).'/');
+define('DIR_LIB', DIR_ROOT.'lib/');
 
-// Start this up!
-require_once DIR_ROOT.'lib/init.php';
+// Load common stuff
+require_once DIR_ROOT.'options.inc.php';
+require_once DIR_LIB.'corefunctions.inc.php';
+
+// Register autoloader
+require_once DIR_LIB.'Autoloader.class.php';
+Autoloader::register();
+
+// Set default timezone
+// TODO: read from config and prefer user settings
+date_default_timezone_set('Europe/Berlin');
+
+// Set exception handler
+set_exception_handler(['Silex', 'handleException']);
+set_error_handler(['Silex', 'handleError'], E_ALL);
+
+new Silex();
