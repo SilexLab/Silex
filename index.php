@@ -10,7 +10,6 @@ define('TIME', time());
 
 // Where are we?
 define('DIR_ROOT', dirname(__FILE__).'/');
-define('DIR_LIB', DIR_ROOT.'lib/');
 
 // Load common stuff
 require_once DIR_ROOT.'options.inc.php';
