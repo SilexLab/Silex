@@ -40,7 +40,6 @@ class Silex {
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
 
-		// test call
 		Event::call('silex.construct.end');
 	}
 

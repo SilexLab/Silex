@@ -23,7 +23,7 @@ class StringUtil {
 	 * @param  string $string
 	 * @return string
 	 */
-	public static function encodeHtml($string) {
+	public static function encodeHTML($string) {
 		return @htmlspecialchars($string, ENT_COMPAT | ENT_HTML5, 'UTF-8');
 	}
 }

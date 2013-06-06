@@ -1,11 +1,10 @@
 <?php
 class org_silex_test implements IModule {
 	public function __construct() {
-		//
+		Event::register('silex.construct.end', [$this, 'testest']);
 	}
 
 	public function register() {
-		Event::register('silex.construct.end', [$this, 'testest']);
 	}
 
 	public function getParents() {

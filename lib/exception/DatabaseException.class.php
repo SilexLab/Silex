@@ -83,20 +83,20 @@ class DatabaseException extends CoreException {
 	 */
 	public function show() {
 		// Put it into the information var
-		$this->information .= '<strong>SQL type:</strong> '.StringUtil::encodeHtml($this->dbType).'<br />'.NL;
-		$this->information .= '<strong>SQL error number:</strong> '.StringUtil::encodeHtml($this->errorNumber).'<br />'.NL;
-		$this->information .= '<strong>SQL error message:</strong> '.StringUtil::encodeHtml($this->errorDesc).'<br />'.NL;
-		$this->information .= '<strong>SQL version:</strong> '.StringUtil::encodeHtml($this->getSqlVersion()).'<br />'.NL;
+		$this->information .= '<strong>SQL type:</strong> '.StringUtil::encodeHTML($this->dbType).'<br />'.NL;
+		$this->information .= '<strong>SQL error number:</strong> '.StringUtil::encodeHTML($this->errorNumber).'<br />'.NL;
+		$this->information .= '<strong>SQL error message:</strong> '.StringUtil::encodeHTML($this->errorDesc).'<br />'.NL;
+		$this->information .= '<strong>SQL version:</strong> '.StringUtil::encodeHTML($this->getSqlVersion()).'<br />'.NL;
 
 		// Do we have some additional query stuff?
 		if($this->preparedStatement !== null) {
-			$this->information .= '<strong>SQL query:</strong> '.StringUtil::encodeHtml($this->preparedStatement->getQuery()).'<br />'.NL;
+			$this->information .= '<strong>SQL query:</strong> '.StringUtil::encodeHTML($this->preparedStatement->getQuery()).'<br />'.NL;
 
 			// Parameters?
 			$parameters = $this->preparedStatement->getParameters();
 			if(!empty($parameters)) {
 				foreach($parameters as $key => $value) {
-					$this->information .= '<strong>SQL parameter '.$key.':</strong> '.StringUtil::encodeHtml($value).'<br />'.NL;
+					$this->information .= '<strong>SQL parameter '.$key.':</strong> '.StringUtil::encodeHTML($value).'<br />'.NL;
 				}
 			}
 		}
