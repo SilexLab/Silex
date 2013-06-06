@@ -14,7 +14,6 @@ class Silex {
 	 */
 	protected static $db = null;
 	protected static $config = null;
-	protected static $event = null;
 	protected static $modules = null;
 
 	/**
@@ -58,14 +57,6 @@ class Silex {
 	public static final function getConfig() {
 		//return self::$config->get($node);
 		return self::$config;
-	}
-
-	/**
-	 * Access the event instance
-	 * @return Event
-	 */
-	public static final function getEvent() {
-		return self::$event;
 	}
 
 	/**

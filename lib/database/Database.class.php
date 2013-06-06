@@ -35,8 +35,6 @@ abstract class Database {
 		$this->password = $password;
 		$this->database = $database;
 		$this->port = $port;
-
-		$this->connect();
 	}
 
 	/**
@@ -50,6 +48,12 @@ abstract class Database {
 	 * @return bool
 	 */
 	abstract public function isSupported();
+
+	/**
+	 * What's the id of the wrapper?
+	 * @return string
+	 */
+	abstract public function getID();
 
 	/**
 	 * Get the ID of the last inserted row

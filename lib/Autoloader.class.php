@@ -29,6 +29,8 @@ class Autoloader {
 				'*'
 			];
 			self::$ignoreList = [
+				'modules',
+				'smarty\/(.*)\/'
 			];
 
 			// Index files
@@ -66,7 +68,7 @@ class Autoloader {
 					if(is_file(DIR_LIB.$curDir.$curFile) && preg_match('/([a-zA-Z0-9_]+)\.class\.php/', $curFile, $fileMatches)) {
 						// Is ignored?
 						foreach(self::$ignoreList as $i) { // TODO: Do this better
-							if(preg_match('/^'.$i.'\//', $curDir.$curFile))
+							if(preg_match('/^'.$i.'/', $curDir.$curFile))
 								continue 2;
 						}
 						// Add file

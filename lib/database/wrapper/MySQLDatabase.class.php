@@ -37,4 +37,12 @@ class MySQLDatabase extends Database {
 	public function isSupported() {
 		return (extension_loaded('PDO') && extension_loaded('pdo_mysql'));
 	}
+
+	/**
+	 * What's the id of the wrapper?
+	 * @return string
+	 */
+	public function getID() {
+		return 'mysql';
+	}
 }
