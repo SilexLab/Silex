@@ -14,4 +14,4 @@ define('NL', "\n");
 // Directories
 define('DIR_LIB', DIR_ROOT.'lib/');
 define('DIR_CACHE', DIR_ROOT.'cache/');
-define('DIR_SMARTY', DIR_ROOT.'smarty/');
+define('DIR_TPL', DIR_ROOT.'template/');

@@ -15,6 +15,7 @@ class Silex {
 	protected static $db = null;
 	protected static $config = null;
 	protected static $modules = null;
+	protected static $template = null;
 
 	/**
 	 * Start Silex up!
@@ -38,6 +39,12 @@ class Silex {
 		self::$config = new Config($config);
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
+		Event::call('silex.construct.after_modules');
+
+		self::$template = new Template(DIR_TPL);
+
+		Event::call('silex.construct.before_display');
+		self::getTemplate()->display('index.tpl');
 
 		Event::call('silex.construct.end');
 	}
@@ -57,6 +64,14 @@ class Silex {
 	public static final function getConfig() {
 		//return self::$config->get($node);
 		return self::$config;
+	}
+
+	/**
+	 * Get template instance
+	 * @return Template
+	 */
+	public static final function getTemplate() {
+		return self::$template;
 	}
 
 	/**
