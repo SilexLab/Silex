@@ -34,6 +34,7 @@ class Silex {
 			$config['database.name'],
 			$config['database.port']);
 		self::$config = new Config($config);
+		URL::check();
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
 		Event::fire('silex.construct.after_modules');
