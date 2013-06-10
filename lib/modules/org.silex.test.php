@@ -1,7 +1,7 @@
 <?php
 class org_silex_test implements IModule {
 	public function __construct() {
-		Event::register('silex.construct.end', [$this, 'testest']);
+		Event::listen('silex.construct.end', [$this, 'testest']);
 	}
 
 	public function register() {

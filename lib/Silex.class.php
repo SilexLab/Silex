@@ -9,9 +9,6 @@
  * One class to rule them all
  */
 class Silex {
-	/**
-	 * @var Database
-	 */
 	protected static $db = null;
 	protected static $config = null;
 	protected static $modules = null;
@@ -39,14 +36,14 @@ class Silex {
 		self::$config = new Config($config);
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
-		Event::call('silex.construct.after_modules');
+		Event::fire('silex.construct.after_modules');
 
 		self::$template = new Template(DIR_TPL);
 
-		Event::call('silex.construct.before_display');
+		Event::fire('silex.construct.before_display');
 		self::getTemplate()->display('index.tpl');
 
-		Event::call('silex.construct.end');
+		Event::fire('silex.construct.end');
 	}
 
 	/**

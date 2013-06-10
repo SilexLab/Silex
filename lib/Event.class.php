@@ -10,7 +10,7 @@
  */
 class Event {
 	/**
-	 * $events = ['hook' => ['function 1', 'function 2', ...]]
+	 * $events = ['hook' => [['callback1', priority], ['callback2', priority], ...]]
 	 */
 	private static $events = [];
 
@@ -19,25 +19,31 @@ class Event {
 	 * @param string   $hook
 	 * @param callable $callback
 	 */
-	public static function register($hook, callable $callback) {
-		self::$events[$hook][] = $callback;
+	public static function listen($hook, callable $callback, $priority = 0) {
+		self::$events[$hook][] = [$callback, $priority];
 	}
 
 	/**
-	 * Call a hook and their registered functions
+	 * Fire an event
 	 * @param string $hook
-	 * @param mixed  [...] more arguments
+	 * @param array  $args optional
 	 */
-	public static function call($hook) {
+	public static function fire($hook, array $args = []) {
 		if(isset(self::$events[$hook])) {
 			// additional call parameters
-			// you can pass references by using Event::call('hook', [&$reference]);
-			$args = func_get_args();
-			array_shift($args);
+			//$args = func_get_args();
+			//array_shift($args);
+
+			// sort listeners
+			usort(self::$events[$hook], function($a, $b) {
+				if($a[1] > $b[1] && $a[1] != 0) return -1;
+				if($a[1] < $b[1] && $b[1] != 0) return 1;
+				return 0;
+			});
 
 			// call the registered functions
-			foreach(self::$events[$hook] as $callback) {
-				call_user_func_array($callback, $args);
+			foreach(self::$events[$hook] as $listener) {
+				call_user_func_array($listener[0], $args);
 			}
 		}
 	}
