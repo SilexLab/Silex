@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS `config` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `config` (`config_node`, `config_value`, `value_type`, `package`) VALUES
-('test.node', 'hi', 'string(255)', 1),
-('test.node2', 'Hallo na', 'string(255)', 1),
-('test.node3', '18', 'int(8)', 1);
+('page.title', 'Silex', 'string(255)', 1),
+('url.base', '/', 'string(255)', 1),
+('url.format', '1', 'int(1)', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
