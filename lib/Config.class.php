@@ -27,12 +27,12 @@ class Config {
 		// Now work with that stuff you got
 		if($config) {
 			foreach ($config as $c) {
-				$value = $c->config_value;
-				$type = $c->value_type;
-				$this->formatValue($c->config_node, $value, $type);
+				$value = $c->value;
+				$type = $c->type;
+				$this->formatValue($c->option, $value, $type);
 
 				// TODO: for ACP, include type
-				$this->config[$c->config_node] = $value;
+				$this->config[$c->option] = $value;
 			}
 		}
 	}

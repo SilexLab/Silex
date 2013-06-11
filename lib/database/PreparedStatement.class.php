@@ -63,7 +63,7 @@ class PreparedStatement {
 		$this->db->incrementQueryCount();
 
 		try {
-			if(emptry($parameters))
+			if(empty($parameters))
 				$this->pdoStatement->execute();
 			else
 				$this->pdoStatement->execute($parameters);

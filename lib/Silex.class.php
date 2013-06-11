@@ -34,6 +34,7 @@ class Silex {
 			$config['database.name'],
 			$config['database.port']);
 		self::$config = new Config($config);
+		Session::start();
 		URL::check();
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
@@ -43,7 +44,6 @@ class Silex {
 
 		Event::fire('silex.construct.before_display');
 		self::getTemplate()->display('index.tpl');
-
 		Event::fire('silex.construct.end');
 	}
 
