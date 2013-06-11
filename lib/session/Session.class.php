@@ -59,4 +59,14 @@ class Session {
 	public static function remove($key) {
 		unset($_SESSION[$key]);
 	}
+
+	public static function destroy() {
+		unset($_SESSION);
+		session_destroy();
+	}
+
+	public static function restart() {
+		self::Destroy();
+		session_start();
+	}
 }
