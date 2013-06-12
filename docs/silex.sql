@@ -9,17 +9,34 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `config`;
 CREATE TABLE IF NOT EXISTS `config` (
-  `config_node` varchar(255) NOT NULL,
-  `config_value` varchar(255) NOT NULL,
-  `value_type` varchar(16) NOT NULL,
+  `option` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  `type` varchar(16) NOT NULL,
   `package` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`config_node`)
+  PRIMARY KEY (`option`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `config` (`config_node`, `config_value`, `value_type`, `package`) VALUES
+INSERT INTO `config` (`option`, `value`, `type`, `package`) VALUES
 ('page.title', 'Silex', 'string(255)', 1),
+('session.autologout', '3600', 'int(8)', 1),
+('session.autologout_probability', '25', 'int(3)', 1),
+('session.cookie_time', '86400', 'int(8)', 1),
+('session.name', 'silex', 'string(255)', 1),
 ('url.base', '/', 'string(255)', 1),
 ('url.format', '1', 'int(1)', 1);
+
+DROP TABLE IF EXISTS `session`;
+CREATE TABLE IF NOT EXISTS `session` (
+  `id` varchar(32) NOT NULL,
+  `session_value` mediumtext NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `ip_address` varchar(64) NOT NULL,
+  `user_agent` tinytext NOT NULL,
+  `last_activity_time` int(11) NOT NULL,
+  `Token` tinytext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
