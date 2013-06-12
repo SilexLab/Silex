@@ -12,11 +12,11 @@ class Session {
 	public static function start() {
 		if(self::status() === PHP_SESSION_DISABLED)
 			throw new CoreException('Sessions are disabled', 1, 'You can\'t use sessions with disabled sessions!');
-			
-		if(!defined('CLASS_SESSION')) {
-			define('CLASS_SESSION', true);
 
-			// session configuration
+		// session configuration
+		if(!defined('SILEX_SESSION')) {
+			define('SILEX_SESSION', true);
+
 			ini_set('session.gc_maxlifetime', Silex::getConfig()->get('session.autologout'));
 			ini_set('session.gc_probability', Silex::getConfig()->get('session.autologout_probability'));
 			ini_set('session.gc_divisor', 100);

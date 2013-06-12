@@ -35,11 +35,11 @@ class SessionDatabaseHandler implements SessionHandlerInterface {
 		$s = $this->db->prepare('SELECT COUNT(*) FROM `'.$this->table.'` WHERE `id` = :id');
 		$s->execute([':id' => $session_id]);
 		if($s->fetchArray()['COUNT(*)'] == 0) {
-			$s = $this->db->prepare('INSERT INTO `'.$this->table.'` (`id`, `session_value`, `last_activity_time`) VALUES (:id, :value, :time)');
+			$s = $this->db->prepare('INSERT INTO `'.$this->table.'` (`id`, `session_value`, `last_activity`) VALUES (:id, :value, :time)');
 			return (bool)$s->execute([':id' => $session_id, ':value' => $session_data, ':time' => time()]);
 		}
 
-		$s = $this->db->prepare('UPDATE `'.$this->table.'` SET `session_value` = :value, `last_activity_time` = :time WHERE `id` = :id');
+		$s = $this->db->prepare('UPDATE `'.$this->table.'` SET `session_value` = :value, `last_activity` = :time WHERE `id` = :id');
 		return (bool)$s->execute([':id' => $session_id, ':value' => $session_data, ':time' => time()]);
 	}
 
@@ -49,7 +49,7 @@ class SessionDatabaseHandler implements SessionHandlerInterface {
 	}
 
 	public function gc($maxlifetime) {
-		$s = $this->db->prepare('DELETE FROM `'.$this->table.'` WHERE `last_activity_time` < :time');
+		$s = $this->db->prepare('DELETE FROM `'.$this->table.'` WHERE `last_activity` < :time');
 		return (bool)$s->execute([':time' => time() - $maxlifetime]);
 	}
 }

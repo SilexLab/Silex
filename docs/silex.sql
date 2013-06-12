@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `session` (
   `username` varchar(255) NOT NULL,
   `ip_address` varchar(64) NOT NULL,
   `user_agent` tinytext NOT NULL,
-  `last_activity_time` int(11) NOT NULL,
+  `last_activity` int(11) NOT NULL,
   `Token` tinytext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
