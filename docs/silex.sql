@@ -34,8 +34,16 @@ CREATE TABLE IF NOT EXISTS `session` (
   `ip_address` varchar(64) NOT NULL,
   `user_agent` tinytext NOT NULL,
   `last_activity` int(11) NOT NULL,
-  `Token` tinytext NOT NULL,
+  `token` tinytext NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+	`id` int(255) NOT NULL AUTO_INCREMENT,
+	`name` mediumtext NOT NULL,
+	`mail` mediumtext NOT NULL
+	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
