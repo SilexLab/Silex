@@ -35,6 +35,7 @@ class Silex {
 			$config['database.port']);
 		self::$config = new Config($config);
 		Session::start();
+		LoginCheck::init();
 		URL::check();
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
