@@ -67,4 +67,12 @@ class UserFactory {
 		// Not buffered and failed to create: User not found
 		throw new UserNotFoundException();
 	}
+
+	/**
+	 * Get a fresh new guest
+	 * @return GuestUser
+	 */
+	public static function getGuest() {
+		return new GuestUser();
+	}
 }

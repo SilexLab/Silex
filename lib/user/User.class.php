@@ -57,4 +57,8 @@ class User {
 	public function getName() {
 		return $this->name;
 	}
+
+	public function isGuest() {
+		return false;
+	}
 }

@@ -22,9 +22,10 @@ class LoginCheck {
 
 	public static function init() {
 		// Load LoginCheckers
-		foreach(scandir(DIR_LIB.'login/checker/') as $file) {
+		foreach(scandir(DIR_LIB.'login/checkers/') as $file) {
 			// Get the class
-			preg_match('/^([a-zA-Z0-9]+LoginChecker)\.class\.php$/', $file, $matches);
+			if(!preg_match('/^([a-zA-Z0-9]+LoginChecker)\.class\.php$/', $file, $matches))
+				continue;
 			$checker = new $matches[1];
 
 			if($checker instanceof ILoginChecker)
@@ -36,6 +37,8 @@ class LoginCheck {
 	 * @return bool
 	 */
 	public static function isLoggedIn() {
+		if(self::$checkerInUse !== null && self::$checkerInUse->isLoggedIn())
+			return true;
 		$i = 0;
 		while(isset(self::$loginCheckers[$i])) {
 			if(self::$loginCheckers[$i]->isLoggedIn()) {
@@ -51,8 +54,8 @@ class LoginCheck {
 	 * @return null|User
 	 */
 	public static function getUser() {
-		if(self::$checkerInUse !== null && self::$checkerInUse->isLoggedIn() && self::$checkerInUse->getUser() instanceof User)
+		if(self::isLoggedIn() && self::$checkerInUse->getUser() instanceof User)
 			return self::$checkerInUse->getUser();
-		return null;
+		return UserFactory::getGuest();
 	}
 }

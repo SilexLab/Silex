@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
 	`id` int(255) NOT NULL AUTO_INCREMENT,
 	`name` mediumtext NOT NULL,
-	`mail` mediumtext NOT NULL
+	`mail` mediumtext NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

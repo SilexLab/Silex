@@ -13,6 +13,7 @@ class Silex {
 	protected static $config = null;
 	protected static $modules = null;
 	protected static $template = null;
+	protected static $user = null;
 
 	/**
 	 * Start Silex up!
@@ -34,8 +35,13 @@ class Silex {
 			$config['database.name'],
 			$config['database.port']);
 		self::$config = new Config($config);
+
+		// User and session stuff
 		Session::start();
 		LoginCheck::init();
+		self::$user = LoginCheck::getUser();
+		var_dump(self::$user);
+
 		URL::check();
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
