@@ -40,7 +40,6 @@ class Silex {
 		Session::start();
 		LoginCheck::init();
 		self::$user = LoginCheck::getUser();
-		var_dump(self::$user);
 
 		URL::check();
 

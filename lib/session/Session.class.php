@@ -124,8 +124,6 @@ class Session {
 				self::destroy();
 				return self::getUser(); // Possible endless loop?
 			}
-		} else {
-			$user = null;
 		}
 		return $user;
 	}
