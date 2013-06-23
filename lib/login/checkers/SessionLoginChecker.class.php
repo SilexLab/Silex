@@ -11,7 +11,7 @@ class SessionLoginChecker implements ILoginChecker {
 	 * @return bool
 	 */
 	public function isLoggedIn() {
-		return (Session::getUser() instanceof User && !Session::getUser()->isGuest());
+		return ($this->getUser() instanceof User && $this->getUser()->isGuest());
 	}
 
 	/**
@@ -19,6 +19,15 @@ class SessionLoginChecker implements ILoginChecker {
 	 * @return User
 	 */
 	public function getUser() {
-		return Session::getUser();
+		$user = null;
+		if(Session::get('userID', false)) {
+			try {
+				$user = UserFactory::getUserByID(Session::get('userID'));
+			} catch(UserNotFoundException $e) {
+				// Relog. Afterwards there is no login, so return null
+				Session::destroy();
+			}
+		}
+		return $user;
 	}
 }

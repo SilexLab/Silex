@@ -109,30 +109,4 @@ class Session {
 		self::destroy();
 		session_start();
 	}
-
-	/**
-	 * Get the currently user logged in by PHP session
-	 * @return User
-	 */
-	public static function getUser() {
-		$user = null;
-		if(self::get('userID', false)) {
-			try {
-				$user = UserFactory::getUserByID(self::get('userID'));
-			} catch(UserNotFoundException $e) {
-				// Relog
-				self::destroy();
-				return self::getUser(); // Possible endless loop?
-			}
-		}
-		return $user;
-	}
-
-	/**
-	 * Assign a user to this session
-	 * @param User $user
-	 */
-	public static function setUser(User $user) {
-		self::set('userID', $user->getID());
-	}
 }
