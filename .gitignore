@@ -2,3 +2,5 @@
 /lib/config.inc.php
 .svn
 /cache/*
+/vendor/
+/composer.phar
