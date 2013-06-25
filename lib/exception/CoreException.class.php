@@ -35,6 +35,7 @@ class CoreException extends LoggedException implements IPrintableException {
 	public function __getTraceAsString() {
 		$e = ($this->getPrevious() ? : $this);
 		$string = preg_replace('/Database->__construct\(.*\)/', 'Database->__construct(...)', $e->getTraceAsString());
+		$string = preg_replace('/DatabaseFactory::initDatabase\(.*\)/', 'DatabaseFactory::initDatabase(...)', $e->getTraceAsString());
 		$string = preg_replace('/mysqli->mysqli\(.*\)/', 'mysqli->mysqli(...)', $string);
 		return $string;
 	}
