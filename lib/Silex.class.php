@@ -92,7 +92,7 @@ class Silex {
 	public static final function handleException(Exception $e) {
 		if($e instanceof IPrintableException) {
 			$e->show();
-			exit;
+			exit(1);
 		}
 
 		// Repack Exception
