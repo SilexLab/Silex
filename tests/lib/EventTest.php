@@ -30,7 +30,7 @@ class EventTest extends PHPUnit_Framework_TestCase {
 		Event::fire('test.hook.1');
 	}
 
-	public function fooBar() {
+	public static function fooBar() {
 		return 1337;
 	}
 
