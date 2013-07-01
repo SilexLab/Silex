@@ -76,8 +76,8 @@ class CoreException extends LoggedException implements IPrintableException {
 	<body>
 		<h1>Fatal Error</h1>';
 		if(Silex::isDebug()) {
-			echo '		<h2>'.StringUtil::encodeHTML($this->_getMessage()).'</h2>
-		<p>'.StringUtil::encodeHTML($this->getDescription()).'</p>
+			echo '		<h2>'.UString::encodeHTML($this->_getMessage()).'</h2>
+		<p>'.UString::encodeHTML($this->getDescription()).'</p>
 		<h3>Information</h3>
 		<p>'.$this->information.'</p>
 		<table>
@@ -87,7 +87,7 @@ class CoreException extends LoggedException implements IPrintableException {
 			</tr>
 			<tr>
 				<td>Error message</td>
-				<td>'.StringUtil::encodeHTML($this->_getMessage()).'</td>
+				<td>'.UString::encodeHTML($this->_getMessage()).'</td>
 			</tr>
 			<tr>
 				<td>Error code</td>
@@ -95,7 +95,7 @@ class CoreException extends LoggedException implements IPrintableException {
 			</tr>
 			<tr>
 				<td>File</td>
-				<td>'.StringUtil::encodeHTML($e->getFile().':'.$e->getLine()).'</td>
+				<td>'.UString::encodeHTML($e->getFile().':'.$e->getLine()).'</td>
 			</tr>
 			<tr>
 				<td>Time</td>
@@ -103,15 +103,15 @@ class CoreException extends LoggedException implements IPrintableException {
 			</tr>
 			<tr>
 				<td>Request</td>
-				<td>'.(isset($_SERVER['REQUEST_URI']) ? StringUtil::encodeHTML($_SERVER['REQUEST_URI']) : '').'</td>
+				<td>'.(isset($_SERVER['REQUEST_URI']) ? UString::encodeHTML($_SERVER['REQUEST_URI']) : '').'</td>
 			</tr>
 			<tr>
 				<td>Referer</td>
-				<td>'.(isset($_SERVER['HTTP_REFERER']) ? StringUtil::encodeHTML($_SERVER['HTTP_REFERER']) : '').'</td>
+				<td>'.(isset($_SERVER['HTTP_REFERER']) ? UString::encodeHTML($_SERVER['HTTP_REFERER']) : '').'</td>
 			</tr>
 		</table>
 		<h3>Stacktrace</h3>
-		<pre>'.StringUtil::encodeHTML($this->__getTraceAsString()).'</pre>';
+		<pre>'.UString::encodeHTML($this->__getTraceAsString()).'</pre>';
 		} else {
 			echo '		<table>
 			<tr>

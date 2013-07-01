@@ -43,7 +43,7 @@ class LoggedException extends Exception {
 	 */
 	protected function logError() {
 		// Logfile
-		$logFilePath = DIR_ROOT.'logs/'.date('d-m-Y', TIME).'.log';
+		$logFilePath = DIR_ROOT.'logs/'.date('Y-m-d', TIME).'.log';
 		@touch($logFilePath);
 
 		// Check file
@@ -65,7 +65,7 @@ class LoggedException extends Exception {
 				'Additional information: '.NL.$this->information.NL.NL.
 				'Stacktrace: '.NL.implode(NL.' ', explode("\n", $e->getTraceAsString())).NL;
 
-		$id = StringUtil::getHash($text);
+		$id = UString::getHash($text);
 		$message = '----- '.$id.' -----'.NL.$text.'----------'.NL.NL;
 
 		return $id;

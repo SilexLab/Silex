@@ -8,7 +8,7 @@
 /**
  * Utility methods for strings
  */
-class StringUtil {
+class UString {
 	/**
 	 * We use SHA1
 	 * @param  string $string
@@ -50,7 +50,7 @@ class StringUtil {
 	 * @param  string $url
 	 * @return string
 	 */
-	public static function rawurlencode_slashes($url) {
+	public static function rawUrlEncodeSlashes($url) {
 		if(preg_match('/^(?<scheme>[a-z][a-z0-9+\-.]*:\/\/)/ix', $url, $m)) {
 			$newURL = $m['scheme'];
 			$url = explode('/', substr($url, strlen($newURL)));
@@ -74,11 +74,11 @@ class StringUtil {
 
 	/**
 	 * Generates a random alphanumeric string
-	 * @param int $length
+	 * @param  int    $length
+	 * @param  string $pool optional
 	 * @return string
 	 */
-	public static function getRandomString($length) {
-		$pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+	public static function getRandomString($length, $pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890') {
 		$rand = '';
 		for($i = 0; $i < $length; $i++) {
 			$rand .= substr(str_shuffle($pool), 0, 1);

@@ -45,7 +45,7 @@ class User {
 	 * @return string The new form token
 	 */
 	public function generateNewFormToken() {
-		$this->formToken = StringUtil::getRandomHash();
+		$this->formToken = UString::getRandomHash();
 		$this->save();
 		return $this->formToken;
 	}
