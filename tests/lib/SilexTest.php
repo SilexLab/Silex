@@ -11,4 +11,8 @@ class SilexTest extends PHPUnit_Framework_TestCase {
 		new Silex(true);
 	}
 
+	public function testUserIsGuestByDefault() {
+		$this->assertInstanceOf('GuestUser', Silex::getUser(), 'User is no Guest by default');
+	}
+
 }

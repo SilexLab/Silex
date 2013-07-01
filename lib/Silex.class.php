@@ -80,6 +80,13 @@ class Silex {
 	}
 
 	/**
+	 * @return User
+	 */
+	public static final function getUser() {
+		return self::$user;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public static final function isDebug() {
