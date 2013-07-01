@@ -3,11 +3,11 @@
 echo "Creating database ..."
 mysql -e 'create database silex_db;'
 echo "Populating database ..."
-mysql silex_db < docs/silex.sql
+mysql silex_db < ../docs/silex.sql
 
 # Setup config
 echo "Generating config file ..."
-touch lib/config.inc.php
+touch ../lib/config.inc.php
 echo "<?php"                               > lib/config.inc.php
 echo "return ["                            >> lib/config.inc.php
 echo "'database.host'     => 'localhost'," >> lib/config.inc.php
