@@ -30,7 +30,7 @@ class Session {
 		}
 
 		// start session if none exists
-		if(self::status() === PHP_SESSION_NONE)
+		if(self::status() === PHP_SESSION_NONE && PHP_SAPI != 'cli')
 			session_start();
 	}
 
