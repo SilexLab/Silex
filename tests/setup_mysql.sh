@@ -1,11 +1,11 @@
 #!/bin/sh
-if [ "$DB" == "mysql" ]; then
-	echo "Creating MySQL database ..."
-	mysql -e 'create database silex_db;'
-	echo "Populating database ..."
-	mysql silex_db < docs/silex.sql
-	echo "Done."
-fi
+echo "Creating MySQL database ..."
+mysql -e 'create database silex_db;'
+echo "Done."
+
+echo "Populating database ..."
+mysql silex_db < docs/silex.sql
+echo "Done."
 
 # Setup config
 echo "Generating config file ..."
