@@ -19,7 +19,10 @@ require_once DIR_LIB.'corefunctions.inc.php';
 require_once DIR_LIB.'Autoloader.class.php';
 Autoloader::register();
 // Load third-party stuff
-require_once DIR_ROOT.'vendor/autoload.php';
+if(is_file(DIR_ROOT.'vendor/autoload.php'))
+	require_once DIR_ROOT.'vendor/autoload.php';
+else
+	die('Please run "composer install".');
 
 // Set default timezone
 // TODO: read from config and prefer user settings
