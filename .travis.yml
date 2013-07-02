@@ -12,3 +12,5 @@ before_script:
     - sh tests/setup_$DB.sh
 
 script: ./vendor/bin/phpunit --configuration tests/phpunit_$DB.xml
+notifications:
+  irc: "irc.skyirc.net#silexlab"
