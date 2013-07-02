@@ -5,7 +5,7 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-abstract class Silex_Tests_DatabaseTestCase extends PHPUnit_Extensions_Database_TestCase
+abstract class SilexDatabaseTestCase extends PHPUnit_Extensions_Database_TestCase
 {
 	// only instantiate pdo once for test clean-up/fixture load
 	static private $pdo = null;
