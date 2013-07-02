@@ -52,6 +52,7 @@ class Config {
 	 * Set the value of a config option
 	 * @param  string $node
 	 * @param  mixed  $value
+	 * @return null
 	 */
 	public function set($node, $value) {
 		if(defined('ACP')) {
@@ -63,8 +64,9 @@ class Config {
 	/**
 	 * Formates the value and returns the right type
 	 * @param string    $node
-	 * @param reference $value
-	 * @param reference $type
+	 * @param mixed     $value
+	 * @param           $type
+	 * @throws CoreException
 	 */
 	private function formatValue($node, &$value, &$type) {
 		preg_match('/^[a-zA-Z]+/', $type, $match);
@@ -99,7 +101,7 @@ class Config {
 
 	/**
 	 * Parse length or range
-	 * @param reference $type
+	 * @param           $type
 	 * @param bool      $onlyLength optional
 	 */
 	private function parseType(&$type, $onlyLength = false) {
@@ -119,7 +121,7 @@ class Config {
 			}
 		} else if(preg_match('/[0-9]+/', $type, $length)) {
 			// Length
-			$type = ['length' => $Length];
+			$type = ['length' => $length];
 		}
 	}
 }
