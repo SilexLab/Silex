@@ -1,5 +1,5 @@
 #!/bin/sh
-if [[ "$DB" == "mysql" ]]; then
+if [ "$DB" == "mysql" ]; then
 	echo "Creating MySQL database ..."
 	mysql -e 'create database silex_db;'
 	echo "Populating database ..."
