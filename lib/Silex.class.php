@@ -18,9 +18,7 @@ class Silex {
 	/**
 	 * Start Silex up!
 	 */
-	public final function __construct() {
-		// We do use this
-		header('Content-Type: text/html; charset=utf-8');
+	public final function __construct($withoutOutput = false) {
 
 		// Read config file
 		if(!is_file(DIR_LIB.'config.inc.php'))
@@ -48,8 +46,11 @@ class Silex {
 
 		self::$template = new Template(DIR_TPL);
 
-		Event::fire('silex.construct.before_display');
-		self::getTemplate()->display('index.tpl');
+		if(!$withoutOutput) {
+			Event::fire('silex.construct.before_display');
+			header('Content-Type: text/html; charset=utf-8');
+			self::getTemplate()->display('index.tpl');
+		}
 		Event::fire('silex.construct.end');
 	}
 
@@ -79,6 +80,13 @@ class Silex {
 	}
 
 	/**
+	 * @return User
+	 */
+	public static final function getUser() {
+		return self::$user;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public static final function isDebug() {
@@ -92,7 +100,7 @@ class Silex {
 	public static final function handleException(Exception $e) {
 		if($e instanceof IPrintableException) {
 			$e->show();
-			exit;
+			exit(1);
 		}
 
 		// Repack Exception

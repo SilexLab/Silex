@@ -5,7 +5,7 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-class ArrayUtil {
+class UArray {
 	/**
 	 * Searches the array for a given value and returns the corresponding key(s) if successful
 	 * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
@@ -14,7 +14,7 @@ class ArrayUtil {
 	 * @param  bool  $strict = false
 	 * @return mixed
 	 */
-	public static function array_search_all($needle, array $haystack, $strict = false) {
+	public static function searchAll($needle, array $haystack, $strict = false) {
 		$founds = [];
 		foreach($haystack as $key => $value) {
 			if(!$strict && $value == $needle)

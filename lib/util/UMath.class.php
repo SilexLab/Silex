@@ -5,7 +5,7 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-class MathUtil {
+class UMath {
 	/**
 	 * clamp the value
 	 * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>

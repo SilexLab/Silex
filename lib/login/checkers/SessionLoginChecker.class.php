@@ -11,7 +11,7 @@ class SessionLoginChecker implements ILoginChecker {
 	 * @return bool
 	 */
 	public function isLoggedIn() {
-		return ($this->getUser() instanceof User && $this->getUser()->isGuest());
+		return ($this->getUser() instanceof User && !$this->getUser()->isGuest());
 	}
 
 	/**

@@ -40,11 +40,15 @@ CREATE TABLE IF NOT EXISTS `session` (
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-	`id` int(255) NOT NULL AUTO_INCREMENT,
-	`name` mediumtext NOT NULL,
-	`mail` mediumtext NOT NULL,
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+INSERT INTO `user` (`id`, `name`, `password`, `mail`) VALUES
+(1, 'admin', '', 'admin@silexlab.org');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
