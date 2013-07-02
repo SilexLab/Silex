@@ -1,9 +1,11 @@
 #!/bin/sh
-# Setup MySQL
-echo "Creating database ..."
+echo "Creating MySQL database ..."
 mysql -e 'create database silex_db;'
+echo "Done."
+
 echo "Populating database ..."
 mysql silex_db < docs/silex.sql
+echo "Done."
 
 # Setup config
 echo "Generating config file ..."
