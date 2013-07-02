@@ -34,8 +34,9 @@ class UserFactory {
 		if($query->getRowCount() == 1) {
 			$user = new User($query->fetchArray(PDO::FETCH_ASSOC));
 			if($user instanceof User) {
-				self::$userBuffer[$user->getID()] = $user;
-				self::$nameToID[$user->getName()] = $user->getID();
+				self::$userBuffer[(int)$user->getID()] = $user;
+				self::$nameToID[$user->getName()] = (int)$user->getID();
+				return $user;
 			}
 		}
 
@@ -59,8 +60,9 @@ class UserFactory {
 		if($query->getRowCount() == 1) {
 			$user = new User($query->fetchArray(PDO::FETCH_ASSOC));
 			if($user instanceof User) {
-				self::$userBuffer[$user->getID()] = $user;
-				self::$nameToID[$user->getName()] = $user->getID();
+				self::$userBuffer[(int)$user->getID()] = $user;
+				self::$nameToID[$user->getName()] = (int)$user->getID();
+				return $user;
 			}
 		}
 
