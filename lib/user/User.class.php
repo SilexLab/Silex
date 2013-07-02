@@ -9,7 +9,6 @@ class User {
 	protected $id = 0;
 	protected $name = '';
 	protected $mail = '';
-	protected $formToken = '';
 	/*
 	 * Here is no password, because the authentication for users will be
 	 * implemented modular to support multiple authentication methods
@@ -20,7 +19,6 @@ class User {
 		$this->id = $dbData['id'];
 		$this->name = $dbData['name'];
 		$this->mail = $dbData['mail'];
-		$this->formToken = $dbData['form_token'];
 	}
 
 	/**
@@ -29,25 +27,13 @@ class User {
 	public function save() {
 		$query = Silex::getDB()->prepare('UPDATE `user` SET
 				`name` = :name,
-				`mail` = :mail,
-				`form_token` = :formToken
+				`mail` = :mail
 				WHERE `id` = :id');
 		$query->execute([
 			':id' => $this->id,
 			':name' => $this->name,
 			':mail' => $this->mail,
-			':formToken' => $this->formToken,
 		]);
-	}
-
-	/**
-	 * Generates a new form token for this user
-	 * @return string The new form token
-	 */
-	public function generateNewFormToken() {
-		$this->formToken = UString::getRandomHash();
-		$this->save();
-		return $this->formToken;
 	}
 
 	/* Setters */
@@ -70,10 +56,6 @@ class User {
 
 	public function getName() {
 		return $this->name;
-	}
-
-	public function getFormToken() {
-		return $this->formToken;
 	}
 
 	public function isGuest() {
