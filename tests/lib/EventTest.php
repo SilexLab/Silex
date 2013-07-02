@@ -20,18 +20,21 @@ class EventTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testEventFiresRightMethod() {
-		$mock = $this->getMock('EventTest', ['fooBar']);
+		$mock = $this->getMock('FooClass', ['fooBar']);
 		$mock->expects($this->once())
 		     ->method('fooBar')
-		     ->with($this->equalTo(1337));
+		     ->with($this->equalTo('testArguments'))
+		     ->will($this->returnValue(1337));
 
 		// Create a listener
-		Event::listen('test.hook.1', [$this, 'fooBar']);
-		Event::fire('test.hook.1');
+		Event::listen('test.hook', [$mock, 'fooBar']);
+		Event::fire('test.hook', ['testArguments']);
 	}
 
-	public static function fooBar() {
+}
+
+class FooClass {
+	public function fooBar() {
 		return 1337;
 	}
-
 }
