@@ -15,7 +15,9 @@ class URL {
 	/**
 	 * just check some url stuff
 	 */
-	public static function check() {
+	public static function check($format = null, $base = null) {
+		self::$format = $format;
+		self::$base = $base;
 		// get url config
 		if(!self::$format)
 			self::$format = Silex::getConfig()->get('url.format');
@@ -31,7 +33,7 @@ class URL {
 			if(preg_match('/[\/]+$/', self::$route) || (self::$format && $url != self::getURL())) {
 				self::$route = preg_replace('/[\/]+$/', '', self::$route);
 				$url = self::$route.self::getParams(true, false);
-				header('location: '.$url);
+				header('Location: '.$url);
 			}
 		}
 	}
