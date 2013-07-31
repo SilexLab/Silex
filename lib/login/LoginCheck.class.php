@@ -58,4 +58,23 @@ class LoginCheck {
 			return self::$checkerInUse->getUser();
 		return UserFactory::getGuest();
 	}
+
+	/**
+	 * @return array|ILoginChecker[]
+	 */
+	public static function getLoginCheckers() {
+		return self::$loginCheckers;
+	}
+
+	/**
+	 * @return ILoginChecker|null
+	 */
+	public static function getLoginCheckerInUse() {
+		return self::$checkerInUse;
+	}
+
+	public static function reset() {
+		self::$loginCheckers = [];
+		self::$checkerInUse = null;
+	}
 }
