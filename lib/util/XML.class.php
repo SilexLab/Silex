@@ -41,4 +41,8 @@ class XML {
 	public function get() {
 		return $this->xmlObj;
 	}
+
+	public function asArray() {
+		return UArray::toArray($this->xmlObj);
+	}
 }

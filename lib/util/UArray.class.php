@@ -24,4 +24,26 @@ class UArray {
 		}
 		return empty($founds) ? false : $founds;
 	}
+
+	public static function toArray($arrObjData, $arrSkipIndices = []) {
+		$arrData = [];
+
+		// if input is object, convert into array
+		if(is_object($arrObjData)) {
+			$arrObjData = get_object_vars($arrObjData);
+		}
+
+		if(is_array($arrObjData)) {
+			foreach ($arrObjData as $index => $value) {
+				if(is_object($value) || is_array($value)) {
+					$value = self::toArray($value, $arrSkipIndices); // recursive call
+				}
+				if(in_array($index, $arrSkipIndices)) {
+					continue;
+				}
+				$arrData[$index] = $value;
+			}
+		}
+		return $arrData;
+	}
 }
