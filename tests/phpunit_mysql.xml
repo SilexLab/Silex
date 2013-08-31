@@ -19,7 +19,7 @@
 
 	<!-- DB connection -->
 	<php>
-		<var name="DB_DSN" value="mysql:dbname=silex;host=localhost" />
+		<var name="DB_DSN" value="mysql:dbname=silex;host=127.0.0.1" />
 		<var name="DB_USER" value="travis" />
 		<var name="DB_PASSWD" value="" />
 		<var name="DB_DBNAME" value="silex" />

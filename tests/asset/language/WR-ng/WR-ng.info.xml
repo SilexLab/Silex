@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+	<!-- Language ID according to ISO 639-1 and ISO 3166 -->
+	<!-- Well, nearly -->
+	<id>WR-ng</id>
+
+	<!-- Info in the language packs's language -->
+	<name>This language pack fails</name>
+	<description>Fails because of wrong naming</description>
+
+	<!-- Info in English -->
+	<name-en>This language pack fails</name-en>
+	<description-en>Fails because of wrong naming</description-en>
+</info>
