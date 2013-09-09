@@ -60,6 +60,7 @@ class Language {
 	}
 
 	/**
+	 * Get language variable directory from this language
 	 * @param string $var Language variable
 	 * @return string|null
 	 */
@@ -82,6 +83,27 @@ class Language {
 		}
 
 		return $tmp;
+	}
+
+	/**
+	 * Get language variable
+	 * Fallback uses default language
+	 * @param string $var Language variable
+	 * @return string|null
+	 */
+	public function get($var) {
+		$output = null;
+
+		// Try to get it in this language
+		$output = $this->getVar($var);
+
+		// If not existent, use the default language. Will return null here when not existent at all
+		// Stop if this is default language
+		if($output === null && $this !== LanguageFactory::getDefaultLanguage()) {
+			$output = LanguageFactory::getDefaultLanguage()->getVar($var);
+		}
+
+		return $output;
 	}
 
 }

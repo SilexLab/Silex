@@ -38,6 +38,7 @@ class Silex {
 		Session::start();
 		LoginCheck::init();
 		self::$user = LoginCheck::getUser();
+		LanguageFactory::init();
 
 		URL::check();
 
@@ -128,5 +129,13 @@ class Silex {
 	 */
 	public static final function isDebug() {
 		return DEBUG;
+	}
+
+	/**
+	 * @return Language
+	 */
+	public static final function getLanguage() {
+		// TODO: Which language does he/she/it want?
+		return LanguageFactory::getDefaultLanguage();
 	}
 }
