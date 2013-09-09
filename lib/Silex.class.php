@@ -55,6 +55,43 @@ class Silex {
 	}
 
 	/**
+	 * Handle our Exceptions
+	 * @param Exception $e
+	 */
+	public static final function handleException(Exception $e) {
+		if($e instanceof IPrintableException) {
+			$e->show();
+			exit(1);
+		}
+
+		// Repack Exception
+		self::handleException(new CoreException($e->getMessage(), $e->getCode(), '', $e));
+	}
+
+	/**
+	 * Catches php errors and throws instead a system exceptions
+	 * @param integer $errorNo
+	 * @param string  $message
+	 * @param string  $filename
+	 * @param integer $lineNo
+	 * @throws CoreException
+	 */
+	public static final function handleError($errorNo, $message, $filename, $lineNo) {
+		if(error_reporting() != 0) {
+			$type = 'errors';
+			switch($errorNo) {
+				case 2:
+					$type = 'warning';
+					break;
+				case 8:
+					$type = 'notice';
+					break;
+			}
+			throw new CoreException('PHP '.$type.' in file '.$filename.' ('.$lineNo.'): '.$message, 0);
+		}
+	}
+
+	/**
 	 * Access to database instance
 	 * @return Database
 	 */
@@ -91,42 +128,5 @@ class Silex {
 	 */
 	public static final function isDebug() {
 		return DEBUG;
-	}
-
-	/**
-	 * Handle our Exceptions
-	 * @param Exception $e
-	 */
-	public static final function handleException(Exception $e) {
-		if($e instanceof IPrintableException) {
-			$e->show();
-			exit(1);
-		}
-
-		// Repack Exception
-		self::handleException(new CoreException($e->getMessage(), $e->getCode(), '', $e));
-	}
-
-	/**
-	 * Catches php errors and throws instead a system exceptions
-	 * @param integer $errorNo
-	 * @param string  $message
-	 * @param string  $filename
-	 * @param integer $lineNo
-	 * @throws CoreException
-	 */
-	public static final function handleError($errorNo, $message, $filename, $lineNo) {
-		if(error_reporting() != 0) {
-			$type = 'errors';
-			switch($errorNo) {
-				case 2:
-					$type = 'warning';
-					break;
-				case 8:
-					$type = 'notice';
-					break;
-			}
-			throw new CoreException('PHP '.$type.' in file '.$filename.' ('.$lineNo.'): '.$message, 0);
-		}
 	}
 }
