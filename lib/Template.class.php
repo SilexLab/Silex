@@ -24,6 +24,9 @@ class Template {
 		$this->smarty->caching = $caching;
 		$this->smarty->setCacheDir(DIR_CACHE);
 		$this->smarty->setCompileDir(DIR_CACHE.'template/');
+
+		// Add our plugins dir
+		$this->smarty->addPluginsDir(DIR_LIB.'smartyPlugins/');
 	}
 
 	/**

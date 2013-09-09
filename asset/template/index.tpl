@@ -5,6 +5,9 @@
 		<title>Silex · Silexframework</title>
 	</head>
 	<body>
-		asdf
+		{* We have some function ... *}
+		{lang node='general.test'}<br>
+		{* ... and a modifier to write it short and spicy *}
+		{'another-test.testception.were-diving-deeper.hurr.durr.text'|lang}
 	</body>
 </html>
