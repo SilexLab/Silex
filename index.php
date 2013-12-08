@@ -7,6 +7,7 @@
 
 // Excuse me, what time is it?
 define('TIME', time());
+define('MICROTIME', microtime(true));
 
 // Where are we?
 define('DIR_ROOT', dirname(__FILE__).'/');

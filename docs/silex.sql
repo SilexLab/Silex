@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `config` (
 
 INSERT INTO `config` (`option`, `value`, `type`, `package`) VALUES
 ('page.title', 'Silex', 'string(255)', 1),
+('page.default_page', 'home', 'string(255)', 1),
 ('session.autologout', '3600', 'int(8)', 1),
 ('session.autologout_probability', '25', 'int(3)', 1),
 ('session.cookie_time', '86400', 'int(8)', 1),

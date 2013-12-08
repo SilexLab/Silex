@@ -14,6 +14,7 @@ class Silex {
 	protected static $modules = null;
 	protected static $template = null;
 	protected static $user = null;
+	protected static $page = null;
 
 	/**
 	 * Start Silex up!
@@ -41,11 +42,17 @@ class Silex {
 		LanguageFactory::init();
 
 		URL::check();
+		PageFactory::init();
+		self::$page = PageFactory::getDefaultPage();
+		Event::listen('silex.construct.before_display', array(self::$page, 'prepare'));
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
 		Event::fire('silex.construct.after_modules');
 
 		self::$template = new Template(DIR_TPL);
+		self::$template->assign([
+			'page' => self::$page->getTemplateArray(),
+		]);
 
 		if(!$withoutOutput) {
 			Event::fire('silex.construct.before_display');
@@ -137,5 +144,12 @@ class Silex {
 	public static final function getLanguage() {
 		// TODO: Which language does he/she/it want?
 		return LanguageFactory::getDefaultLanguage();
+	}
+
+	/**
+	 * @return Page
+	 */
+	public static final function getPage() {
+		return self::$page;
 	}
 }
