@@ -17,3 +17,4 @@ define('DIR_CACHE', DIR_ROOT.'cache/');
 define('DIR_ASSET', DIR_ROOT.'asset/');
 define('DIR_TPL', DIR_ASSET.'template/');
 define('DIR_LANGUAGE', DIR_ASSET.'language/');
+define('DIR_STYLE', DIR_ASSET.'style/');

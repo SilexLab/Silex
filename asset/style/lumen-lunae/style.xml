@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<style>
+	<title>Lumen Lunae</title>
+	<description>
+		<![CDATA[
+			Silex' default theme. Light. Easy. Clear.
+		]]>
+	</description>
+	<css-files>
+		<css-file>css/main.css</css-file>
+	</css-files>
+	<class-file>org.silex.lumenlunae.php</class-file>
+</style>

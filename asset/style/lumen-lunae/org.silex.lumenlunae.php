@@ -1,0 +1,24 @@
+<?php
+/**
+ * @author    SilexLab <labs@silexlab.org>
+ * @copyright Copyright (c) 2013 SilexLab
+ * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
+ */
+
+class org_silex_lumenlunae extends Style {
+
+	/**
+	 * register the style
+	 * @return void
+	 */
+	public function register() {
+		//Nothing
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName() {
+		return 'lumen-lunae';
+	}
+}
