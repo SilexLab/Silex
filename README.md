@@ -1,8 +1,6 @@
 Silex
 =====
 
-[![Build Status](https://travis-ci.org/SilexLab/Silex.png?branch=master)](https://travis-ci.org/SilexLab/Silex)
-
 The Silex Framework is a lightweight PHP framework for creation of websites and community pages. 
 It aims to be a fast and modular alternative to established frameworks.
 
