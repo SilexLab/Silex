@@ -25,7 +25,8 @@ INSERT INTO `config` (`option`, `value`, `type`, `package`) VALUES
 ('session.name', 'silex', 'string(255)', 1),
 ('url.base', '/', 'string(255)', 1),
 ('url.format', '1', 'int(1)', 1),
-('language.default_language', 'en-US', 'string(255)', 1);
+('language.default_language', 'en-US', 'string(255)', 1),
+('style.default_style', 'org.silex.lumenlunae', 'string(255', 1);
 
 DROP TABLE IF EXISTS `session`;
 CREATE TABLE IF NOT EXISTS `session` (

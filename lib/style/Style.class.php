@@ -8,6 +8,7 @@
 abstract class Style {
 	protected $title = '';
 	protected $cssFiles = [];
+	private $name = null;
 
 	/**
 	 * init the style
@@ -21,11 +22,6 @@ abstract class Style {
 	 * @return void
 	 */
 	public abstract function register();
-
-	/**
-	 * @return string
-	 */
-	public abstract function getName();
 
 	/**
 	 * reads the style config and stores values
@@ -45,5 +41,12 @@ abstract class Style {
 	 */
 	protected function getPath() {
 		return DIR_STYLE.$this->getName().'/';
+	}
+
+	public final function getName() {
+		if($this->name === null)
+			$this->name = pathinfo(__FILE__)['filename'];
+
+		return $this->name;
 	}
 } 
