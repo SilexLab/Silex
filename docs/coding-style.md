@@ -23,7 +23,6 @@ Constants are named all upper case and using underscores, e.g. `DEBUG_CONSTANT`.
 <?php
 
 class ExampleClass implements IFooInterface {
-
 	const RANDOM_CONSTANT = 42;
 
 	protected $fooVar = 0;
@@ -34,24 +33,20 @@ class ExampleClass implements IFooInterface {
 	protected $htmlUsesHTTP;
 
 	public function makeItWork($iAmAnArgument) {
-
 		// Hey, do something pretty
 		if($this->fooBool) {
 			$this->array['herp_derp'] .= $fooVar++;
 		}
 
 		return $fooVar;
-
 	}
 
 	public static function staticMethod($value) {
-
 		if($value <= 4) {
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 	
 	public function isFoo() {
