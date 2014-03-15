@@ -7,8 +7,8 @@
 	"authors": [
 		{
 			"name": "Janek Ostendorf",
-			"email": "ozzyfant@gmail.com",
-			"homepage": "http://ozzyfant.me/"
+			"email": "ozzy@ozzyfant.de",
+			"homepage": "http://ozzyfant.de/"
 		},
 		{
 			"name": "Patrick Kleinschmidt",
@@ -24,8 +24,6 @@
 		"smarty/smarty": "3.1.*"
 	},
 	"require-dev": {
-		"php": ">=5.4.7",
-		"phpunit/phpunit": "3.7.*",
-		"phpunit/dbunit": "1.2.*"
+		"php": ">=5.4.7"
 	}
 }
