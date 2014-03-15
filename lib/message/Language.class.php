@@ -41,9 +41,9 @@ class Language {
 		}
 
 		// Try to open the info file
-		if(file_exists($customPath.$languageID) && file_exists($customPath.$languageID.'info.xml') && file_exists($customPath.$languageID.'core.xml')) {
+		if(file_exists($customPath.$languageID) && file_exists($customPath.$languageID.'/info.xml') && file_exists($customPath.$languageID.'/core.xml')) {
 			/* Read info */
-			$infoArray = (array)simplexml_load_file($customPath.$languageID.'info.xml');
+			$infoArray = (array)simplexml_load_file($customPath.$languageID.'/info.xml');
 
 			$this->id =            $infoArray['id'];
 			$this->name =          $infoArray['name'];
@@ -52,7 +52,7 @@ class Language {
 			$this->descriptionEn = $infoArray['description-en'];
 
 			/* Read language */ // TODO: Only read on demand, e.g. only when somebody really gets lang vars
-			$this->languageDump = (new XML($customPath.$languageID.'core.xml'))->asArray();
+			$this->languageDump = (new XML($customPath.$languageID.'/core.xml'))->asArray();
 
 		} else {
 			throw new LanguageNotFoundException();
