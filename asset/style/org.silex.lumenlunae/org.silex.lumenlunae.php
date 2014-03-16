@@ -15,4 +15,7 @@ class org_silex_lumenlunae extends Style {
 		//Nothing
 	}
 
+	public function getName() {
+		return 'org.silex.lumenlunae';
+	}
 }

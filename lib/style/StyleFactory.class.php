@@ -11,7 +11,7 @@ class StyleFactory {
 	public static function init() {
 		// Read all dem data
 		foreach(scandir(DIR_STYLE) as $file) {
-			if(is_dir(DIR_STYLE.$file) && preg_match('/^[a-zA-Z0-9_]+$/', $file)) {
+			if(!in_array($file, ['.', '..']) && is_dir(DIR_STYLE.$file) && preg_match('/^[a-zA-Z0-9_\.]+$/', $file)) {
 				try {
 					@include_once(DIR_STYLE.$file.'/'.$file.'.php');
 					$class = preg_replace('/\./', '_', $file);
@@ -20,6 +20,15 @@ class StyleFactory {
 					unset(self::$styleObjects[$file]);
 				}
 			}
+		}
+	}
+
+	public static function getDefaultStyle() {
+		$defaultStyleName = Silex::getConfig()->get('style.default_style');
+		if(isset(self::$styleObjects[$defaultStyleName]) && self::$styleObjects[$defaultStyleName] instanceof Style) {
+			return self::$styleObjects[$defaultStyleName];
+		} else {
+			throw new StyleNotFoundException("The default style could not be found.");
 		}
 	}
 

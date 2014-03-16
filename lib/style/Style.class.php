@@ -5,10 +5,9 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-abstract class Style {
+abstract class Style implements ITemplatable {
 	protected $title = '';
 	protected $cssFiles = [];
-	private $name = null;
 
 	/**
 	 * init the style
@@ -24,6 +23,12 @@ abstract class Style {
 	public abstract function register();
 
 	/**
+	 * get the dotted template name
+	 * @return string
+	 */
+	public abstract function getName();
+
+	/**
 	 * reads the style config and stores values
 	 */
 	public function readConfig() {
@@ -33,20 +38,37 @@ abstract class Style {
 		$this->title = (string)$xml->title;
 
 		foreach($xml->{'css-files'} as $cssFile)
-			$this->cssFiles[] = (string)$cssFile->{'css-file'};
+			if(!empty((string)$cssFile->{'css-file'}))
+				$this->cssFiles[] = (string)$cssFile->{'css-file'};
+
+}
+
+	/**
+	 * @return string
+	 */
+	protected final function getPath() {
+		return DIR_STYLE.$this->getName().'/';
 	}
 
 	/**
 	 * @return string
 	 */
-	protected function getPath() {
-		return DIR_STYLE.$this->getName().'/';
+	protected final function getRelativePath() {
+		return REL_STYLE.$this->getName().'/';
 	}
 
-	public final function getName() {
-		if($this->name === null)
-			$this->name = pathinfo(__FILE__)['filename'];
-
-		return $this->name;
+	public final function getTitle() {
+		return $this->title;
 	}
-} 
+
+	public final function getTemplateArray() {
+		return [
+			'title' => $this->getTitle(),
+			'name' => $this->getName(),
+			'path' => $this->getPath(),
+			'relative_path' => $this->getRelativePath(),
+			'css_files' => $this->cssFiles,
+			'object' => $this,
+		];
+	}
+}

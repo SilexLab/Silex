@@ -15,6 +15,7 @@ class Silex {
 	protected static $template = null;
 	protected static $user = null;
 	protected static $page = null;
+	protected static $style = null;
 
 	/**
 	 * Start Silex up!
@@ -44,6 +45,9 @@ class Silex {
 		URL::check();
 		PageFactory::init();
 		self::$page = PageFactory::getDefaultPage();
+		StyleFactory::init();
+		// Default style for now
+		self::$style = StyleFactory::getDefaultStyle();
 		Event::listen('silex.construct.before_display', array(self::$page, 'prepare'));
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
@@ -52,6 +56,7 @@ class Silex {
 		self::$template = new Template(DIR_TPL);
 		self::$template->assign([
 			'page' => self::$page->getTemplateArray(),
+			'style' => self::$style->getTemplateArray(),
 		]);
 
 		if(!$withoutOutput) {
