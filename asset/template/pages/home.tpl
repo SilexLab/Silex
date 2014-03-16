@@ -1,1 +1,1 @@
-oajegfuqief
+{'general.test'|lang}
