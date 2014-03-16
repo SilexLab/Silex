@@ -9,12 +9,20 @@ define('SILEX_VERSION', '0.1.0-DEV');
 define('DEBUG', true);
 
 // New line
-define('NL', "\n");
+define('NL', PHP_EOL);
+
+// Relative directories
+define('REL_LIB', 'lib/');
+define('REL_CACHE', 'cache/');
+define('REL_ASSET', 'asset/');
+define('REL_TPL', REL_ASSET.'template/');
+define('REL_LANGUAGE', REL_ASSET.'language/');
+define('REL_STYLE', REL_ASSET.'style/');
 
 // Directories
-define('DIR_LIB', DIR_ROOT.'lib/');
-define('DIR_CACHE', DIR_ROOT.'cache/');
-define('DIR_ASSET', DIR_ROOT.'asset/');
-define('DIR_TPL', DIR_ASSET.'template/');
-define('DIR_LANGUAGE', DIR_ASSET.'language/');
-define('DIR_STYLE', DIR_ASSET.'style/');
+define('DIR_LIB', DIR_ROOT.REL_LIB);
+define('DIR_CACHE', DIR_ROOT.REL_CACHE);
+define('DIR_ASSET', DIR_ROOT.REL_ASSET);
+define('DIR_TPL', DIR_ROOT.REL_TPL);
+define('DIR_LANGUAGE', DIR_ROOT.REL_LANGUAGE);
+define('DIR_STYLE', DIR_ROOT.REL_STYLE);
