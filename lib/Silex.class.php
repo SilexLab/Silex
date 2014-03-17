@@ -21,7 +21,6 @@ class Silex {
 	 * Start Silex up!
 	 */
 	public final function __construct($withoutOutput = false) {
-
 		// Read config file
 		if(!is_file(DIR_LIB.'config.inc.php'))
 			throw new CoreException('Y U NO HAVE A CONFIG FILE?!', 0, 'Your config file can\'t be found.');

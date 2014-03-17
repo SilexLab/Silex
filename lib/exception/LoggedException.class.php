@@ -43,13 +43,19 @@ class LoggedException extends Exception {
 	 */
 	protected function logError() {
 		// Logfile
-		$logFilePath = DIR_ROOT.'logs/'.date('Y-m-d', TIME).'.log';
+		$logDir = DIR_ROOT.'logs/';
+		$logFilePath = $logDir.date('Y-m-d', TIME).'.log';
+
+		// Check if logs directory exists, if not create
+		if(!is_dir($logDir))
+			mkdir($logDir, 0755, true);
+
 		@touch($logFilePath);
 
 		// Check file
 		if(!is_file($logFilePath) || !is_writable($logFilePath)) {
 			// Hey server admin, you need to fix this
-			return '1337';
+			return 'unable to write to logs directory';
 		}
 
 		// Do we have a repacked exception?
@@ -67,6 +73,9 @@ class LoggedException extends Exception {
 
 		$id = UString::getHash($text);
 		$message = '----- '.$id.' -----'.NL.$text.'----------'.NL.NL;
+
+		// actually write something to the log file
+		file_put_contents($logFilePath, $message, FILE_APPEND);
 
 		return $id;
 	}
