@@ -52,7 +52,7 @@ class Language {
 			$this->descriptionEn = $info->{'description-en'};
 
 			/* Read language and generate heap */ // TODO: Only read on demand, e.g. only when somebody really gets lang vars
-			$this->heap = array_node((new XML($customPath.$languageID.'/core.xml'))->asArray());
+			$this->heap = UArray::toNode((new XML($customPath.$languageID.'/core.xml'))->asArray());
 
 		} else {
 			throw new LanguageNotFoundException();

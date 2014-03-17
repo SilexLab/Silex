@@ -46,4 +46,25 @@ class UArray {
 		}
 		return $arrData;
 	}
+
+	/**
+	 * Flatten a multi-dimensional associative array with dots.
+	 * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
+	 * @param  array   $array
+	 * @param  string  $prepend
+	 * @return array
+	 */
+	public static function toNode(array $array, $prepend = '') {
+		$heap = [];
+		foreach($array as $key => $value) {
+			if(is_array($value)) {
+				foreach(self::toNode($value) as $nodeKey => $nodeValue) {
+					$heap[$prepend.$key.'.'.$nodeKey] = $nodeValue;
+				}
+				//$heap = array_merge($heap, self::toNode($value, $prepend.$key.'.'));
+			} else
+				$heap[$prepend.$key] = $value;
+		}
+		return $heap;
+	}
 }
