@@ -42,6 +42,10 @@ class LoggedException extends Exception {
 	 * @return string
 	 */
 	protected function logError() {
+		// You don't need no logfile
+		if(Silex::isDebug())
+			return '<b>Error logging disabled</b>';
+
 		// Logfile
 		$logDir = DIR_ROOT.'logs/';
 		$logFilePath = $logDir.date('Y-m-d', TIME).'.log';
