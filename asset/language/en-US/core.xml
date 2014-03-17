@@ -2,6 +2,7 @@
 <language>
 	<general>
 		<test>This is the first test!</test>
+		<test2>This is the second test :D</test2>
 	</general>
 	<another-test>
 		<testception>

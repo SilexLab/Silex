@@ -1,1 +1,2 @@
-{'general.test'|lang}
+{'general.test'|lang}<br>
+{'general.test2'|lang}

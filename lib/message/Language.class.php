@@ -1,7 +1,7 @@
 <?php
 /**
  * @author    SilexLab <labs@silexlab.org>
- * @copyright Copyright (c) 2013 SilexLab
+ * @copyright Copyright (c) 2014 SilexLab
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
@@ -24,7 +24,7 @@ class Language {
 	 * The array holding all language data
 	 * @var array
 	 */
-	protected $languageDump = [];
+	protected $heap = [];
 
 	/**
 	 * @param string $languageID Language ID
@@ -43,16 +43,16 @@ class Language {
 		// Try to open the info file
 		if(file_exists($customPath.$languageID) && file_exists($customPath.$languageID.'/info.xml') && file_exists($customPath.$languageID.'/core.xml')) {
 			/* Read info */
-			$infoArray = (array)simplexml_load_file($customPath.$languageID.'/info.xml');
+			$info = new XML($customPath.$languageID.'/info.xml');
 
-			$this->id =            $infoArray['id'];
-			$this->name =          $infoArray['name'];
-			$this->description =   $infoArray['description'];
-			$this->nameEn =        $infoArray['name-en'];
-			$this->descriptionEn = $infoArray['description-en'];
+			$this->id =            $info->id;
+			$this->name =          $info->name;
+			$this->description =   $info->description;
+			$this->nameEn =        $info->{'name-en'};
+			$this->descriptionEn = $info->{'description-en'};
 
-			/* Read language */ // TODO: Only read on demand, e.g. only when somebody really gets lang vars
-			$this->languageDump = (new XML($customPath.$languageID.'/core.xml'))->asArray();
+			/* Read language and generate heap */ // TODO: Only read on demand, e.g. only when somebody really gets lang vars
+			$this->heap = array_node((new XML($customPath.$languageID.'/core.xml'))->asArray());
 
 		} else {
 			throw new LanguageNotFoundException();
@@ -64,25 +64,8 @@ class Language {
 	 * @param string $var Language variable
 	 * @return string|null
 	 */
-	public function getVar($var) {
-		// Explode
-		$var_arr = explode('.', $var);
-
-		// temporary array
-		$tmp = $this->languageDump;
-
-		// Try to get the string, recurse deeper and deeper ...
-		foreach($var_arr as $cur) {
-			if(isset($tmp[$cur])) {
-				$tmp = $tmp[$cur];
-			}
-			else {
-				$tmp = null;
-				break;
-			}
-		}
-
-		return $tmp;
+	public function getVar($node) {
+		return array_key_exists($node, $this->heap) ? $this->heap[$node] : null;
 	}
 
 	/**
@@ -92,18 +75,13 @@ class Language {
 	 * @return string|null
 	 */
 	public function get($var) {
-		$output = null;
-
-		// Try to get it in this language
-		$output = $this->getVar($var);
+		$result = $this->getVar($var);
 
 		// If not existent, use the default language. Will return null here when not existent at all
 		// Stop if this is default language
-		if($output === null && $this !== LanguageFactory::getDefaultLanguage()) {
-			$output = LanguageFactory::getDefaultLanguage()->getVar($var);
-		}
+		if($result === null && $this !== LanguageFactory::getDefaultLanguage())
+			$result = LanguageFactory::getDefaultLanguage()->getVar($var);
 
-		return $output;
+		return $result;
 	}
-
 }
