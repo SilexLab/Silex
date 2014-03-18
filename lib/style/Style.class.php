@@ -32,7 +32,7 @@ abstract class Style implements ITemplatable {
 	 * reads the style config and stores values
 	 */
 	public function readConfig() {
-		$xml = simplexml_load_file($this->getPath().'style.xml');
+		$xml = new XML($this->getPath().'style.xml');
 
 		// Read values
 		$this->title = (string)$xml->title;
@@ -68,7 +68,7 @@ abstract class Style implements ITemplatable {
 			'path' => $this->getPath(),
 			'relative_path' => $this->getRelativePath(),
 			'css_files' => $this->cssFiles,
-			'object' => $this,
+			'object' => $this
 		];
 	}
 }

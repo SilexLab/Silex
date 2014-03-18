@@ -45,9 +45,8 @@ class Silex {
 		PageFactory::init();
 		self::$page = PageFactory::getDefaultPage();
 		StyleFactory::init();
-		// Default style for now
-		self::$style = StyleFactory::getDefaultStyle();
-		Event::listen('silex.construct.before_display', array(self::$page, 'prepare'));
+		self::$style = StyleFactory::getStyle();
+		Event::listen('silex.construct.before_display', [self::$page, 'prepare']);
 
 		self::$modules = new Modules(DIR_LIB.'modules/');
 		Event::fire('silex.construct.after_modules');
