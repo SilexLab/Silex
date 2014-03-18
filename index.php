@@ -35,3 +35,5 @@ set_exception_handler(['Silex', 'handleException']);
 set_error_handler(['Silex', 'handleError'], E_ALL);
 
 new Silex();
+
+//echo '<br>'.round((microtime(true) - MICROTIME) * 1000, 4).' ms';

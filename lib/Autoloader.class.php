@@ -55,14 +55,15 @@ class Autoloader {
 	protected static function indexClasses($dir) {
 		foreach(scandir($dir) as $file) {
 			// is this a php class?
-			if(is_file($dir.'/'.$file) && preg_match('/([a-zA-Z0-9_]+)\.class\.php/', $file, $fileMatches)) {
+			if(is_file($dir.'/'.$file) && preg_match('/^([a-zA-Z0-9_\-]+)\.class\.php$/', $file, $fileMatches)) {
 				// Add this file
 				if(!isset(self::$index[$fileMatches[1]]))
 					self::$index[$fileMatches[1]] = $dir.'/'.$file;
 
 			// is this a not-ignored directory?
 			// ignore '.', '..' and all other directories wich start with a dot
-			} else if(is_dir($dir.'/'.$file) && !preg_match('/(^\.{1,2}$)|(^\.(.*))/', $file)) {
+			} else if(is_dir($dir.'/'.$file) && !preg_match('/^\.(.*)/', $file)) {
+				// check ignore list
 				if(!in_array($dir.'/'.$file, self::$ignoreList))
 					self::indexClasses($dir.'/'.$file);
 			}
