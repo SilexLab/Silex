@@ -24,17 +24,16 @@ class Autoloader {
 			// Tell PHP to use us
 			spl_autoload_register(['self', 'autoload']);
 
-			// Index all directories, but ignore some
-			self::$directories = [
-				'*'
-			];
+			// Ignore these directories
 			self::$ignoreList = [
-				'modules',
-				'smarty\/(.*)\/'
+				'lib/modules',
+				// no more wildcards
+				'lib/smarty/plugins',
+				'lib/smarty/sysplugins'
 			];
 
-			// Index files
-			self::indexFiles();
+			// Index php classes
+			self::indexClasses(preg_replace('/(.*)\/$/', '$1', REL_LIB));
 		}
 	}
 
@@ -45,50 +44,27 @@ class Autoloader {
 	public static function autoload($className) {
 		if(defined('SILEX_AUTOLOADER')) {
 			if(isset(self::$index[$className]))
-				require_once(DIR_LIB.self::$index[$className]);
+				require_once(DIR_ROOT.self::$index[$className]);
 		}
 	}
 
 	/**
-	 * Indexes all files in the specified directories
+	 * Indexes all php classes in the specified directory
+	 * @param string $dir
 	 */
-	protected static function indexFiles() {
-		// Go through the directories
-		foreach(self::$directories as $curDir) {
-			// Wildcard?
-			if(preg_match('/^(.*)\*$/', $curDir, $matches)) {
-				$curDir = $matches[1];
+	protected static function indexClasses($dir) {
+		foreach(scandir($dir) as $file) {
+			// is this a php class?
+			if(is_file($dir.'/'.$file) && preg_match('/([a-zA-Z0-9_]+)\.class\.php/', $file, $fileMatches)) {
+				// Add this file
+				if(!isset(self::$index[$fileMatches[1]]))
+					self::$index[$fileMatches[1]] = $dir.'/'.$file;
 
-				// Add trailing slash if necessary
-				if(!empty($curDir) && !preg_match('/^(.*)\/$/', $curDir))
-					$curDir .= '/';
-
-				// Search for files
-				foreach(scandirr(DIR_LIB.$curDir) as $curFile) {
-					if(is_file(DIR_LIB.$curDir.$curFile) && preg_match('/([a-zA-Z0-9_]+)\.class\.php/', $curFile, $fileMatches)) {
-						// Is ignored?
-						foreach(self::$ignoreList as $i) { // TODO: Do this better
-							if(preg_match('/^'.$i.'/', $curDir.$curFile))
-								continue 2;
-						}
-						// Add file
-						if(!isset(self::$index[$fileMatches[1]]))
-							self::$index[$fileMatches[1]] = $curDir.$curFile;
-					}
-				}
-			} else {
-				// Search for files
-				foreach(scandir(DIR_LIB.$curDir) as $curFile) {
-					// Add trailing slash if necessary
-					if(!preg_match('/^(.+)\/$/', $curDir))
-						$curDir .= '/';
-
-					if(is_file(DIR_LIB.$curDir.$curFile) && preg_match('/([a-zA-Z0-9_]+)\.class\.php/', $curFile, $fileMatches)) {
-						// Add file
-						if(!isset(self::$index[$fileMatches[1]]))
-							self::$index[$fileMatches[1]] = $curDir.$curFile;
-					}
-				}
+			// is this a not-ignored directory?
+			// ignore '.', '..' and all other directories wich start with a dot
+			} else if(is_dir($dir.'/'.$file) && !preg_match('/(^\.{1,2}$)|(^\.(.*))/', $file)) {
+				if(!in_array($dir.'/'.$file, self::$ignoreList))
+					self::indexClasses($dir.'/'.$file);
 			}
 		}
 	}
