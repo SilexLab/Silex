@@ -9,6 +9,13 @@
 			<link rel="stylesheet" type="text/css" href="{$style.relative_path}{$css_file}">
 		{/foreach}
 	{/if}
+
+	{* JS *}
+	{if !empty($style.js_files)}
+		{foreach $style.js_files as $js_file}
+			<script type="text/javascript" src="{$style.relative_path}{$js_file}"></script>
+		{/foreach}
+	{/if}
 </head>
 <body>
 	{include file=$page.template}

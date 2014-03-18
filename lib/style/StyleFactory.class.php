@@ -28,7 +28,7 @@ class StyleFactory {
 		if(isset(self::$styleObjects[$defaultStyleName]) && self::$styleObjects[$defaultStyleName] instanceof Style) {
 			return self::$styleObjects[$defaultStyleName];
 		} else {
-			throw new StyleNotFoundException("The default style could not be found.");
+			throw new StyleNotFoundException('The default style \''.$defaultStyleName.'\' could not be found.');
 		}
 	}
 

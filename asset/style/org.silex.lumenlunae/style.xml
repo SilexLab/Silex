@@ -7,7 +7,10 @@
 		]]>
 	</description>
 	<css-files>
-		<!--<css-file>css/main.css</css-file>-->
+		<css-file>css/main.css</css-file>
 	</css-files>
+	<js-files>
+		<js-file>js/main.js</js-file>
+	</js-files>
 	<class-file>org.silex.lumenlunae.php</class-file>
 </style>

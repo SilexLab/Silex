@@ -8,6 +8,7 @@
 abstract class Style implements ITemplatable {
 	protected $title = '';
 	protected $cssFiles = [];
+	protected $jsFiles = [];
 
 	/**
 	 * init the style
@@ -31,17 +32,24 @@ abstract class Style implements ITemplatable {
 	/**
 	 * reads the style config and stores values
 	 */
-	public function readConfig() {
-		$xml = simplexml_load_file($this->getPath().'style.xml');
+	public final function readConfig() {
+		$xml = new XML($this->getPath().'style.xml', false);
+		$xmlArray = $xml->asArray();
 
 		// Read values
-		$this->title = (string)$xml->title;
+		$this->title = (string)$xmlArray['title'];
 
-		foreach($xml->{'css-files'} as $cssFile)
-			if(!empty((string)$cssFile->{'css-file'}))
-				$this->cssFiles[] = (string)$cssFile->{'css-file'};
+		// CSS
+		foreach($xmlArray['css-files'] as $cssFile)
+			if(!empty((string)$cssFile))
+				$this->cssFiles[] = (string)$cssFile;
 
-}
+		// JS
+		foreach($xmlArray['js-files'] as $cssFile)
+			if(!empty((string)$cssFile))
+				$this->cssFiles[] = (string)$cssFile;
+
+	}
 
 	/**
 	 * @return string
@@ -68,6 +76,7 @@ abstract class Style implements ITemplatable {
 			'path' => $this->getPath(),
 			'relative_path' => $this->getRelativePath(),
 			'css_files' => $this->cssFiles,
+			'js_files' => $this->jsFiles,
 			'object' => $this,
 		];
 	}
