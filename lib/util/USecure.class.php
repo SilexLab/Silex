@@ -16,18 +16,18 @@ class USecure {
 	public static function encryptPassword($password, $email, $rounds = '08') {
 		$hash = hash_hmac('whirlpool', str_pad($password, strlen($password) * 4, sha1($email), STR_PAD_BOTH), Silex::getConfig()->get('password.salt'), true);
 		$salt = substr(str_shuffle('./0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 22); // TODO: replace str_shuffle with something more random
-		return crypt($hash, '$2a$'.$rounds.'$'.$salt);
+		return crypt($hash, '$2a$'.$rounds.'$'.$salt.'$');
 	}
 
 	/**
-	 * Compare the password and e-mail with the encrypted
-	 * @param   string  $password
+	 * Compare the e-mail and entered password with the encrypted from the database
+	 * @param   string  $password   The users entered password
 	 * @param   string  $email
-	 * @param   string  $Stored     The encrypted password
+	 * @param   string  $stored     The encrypted password from database
 	 * @return  bool
 	 */
-	public static function checkPassword($password, $email, $Stored) {
+	public static function checkPassword($password, $email, $stored) {
 		$hash = hash_hmac('whirlpool', str_pad($password, strlen($password) * 4, sha1($email), STR_PAD_BOTH), Silex::getConfig()->get('password.salt'), true);
-		return crypt($hash, substr($Stored, 0, 30)) == $Stored;
+		return crypt($hash, $stored) == $stored;
 	}
 }
