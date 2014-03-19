@@ -5,7 +5,7 @@
 <title>Silex Flavored Markdown markup syntax</title>
 <style type="text/css">
 body,td,th {
-	font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
+	font-family: Helvetica, "Droid Sans", "Trebuchet MS", Arial, sans-serif;
 	font-size: 14px;
 	color: #333;
 }
@@ -24,21 +24,68 @@ header {
 	margin: -15px -15px 10px -15px;
 	padding: 10px 15px 10px 15px;
 }
+#silex-logo {
+	display: inline-block;
+	height: 45px;
+	width: 50px;
+	float: left;
+}
+#headline {
+	display: inline-block;
+	float: left;
+	padding-left: 10px;
+}
+nav {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 20px;
+	float: right;
+}
+nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+nav li {
+	padding: 0;
+	padding-right: 10px;
+	margin: 0;
+	display: inline-block;
+}
+nav a, nav a:link, nav a:visited {
+	color: #fff;
+	padding: 0 10px 18px 10px;
+	border-bottom: 3px solid transparent;
+}
+nav a:hover {
+	color: #65c7ff;
+	border-bottom: 3px solid #65c7ff;
+}
 p {
 	margin: 0px;
+	margin-bottom: 3px;
+	margin-top: 2px;
 	padding: 7px 0px 3px 0px;
 }
 ul {
 	margin: 0px;
 	padding: 10px 0px 0px 20px;
 }
+li {
+	padding: 5px 0px;
+}
+ul#main-content {
+	list-style: none;
+}
+ul#main-content > li > h2 {
+	margin-left: -20px;
+}
 pre {
-	font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
-	font-size: 12px;
-	color: #eee;
-	background: #333;
-	border-left: 10px solid #222;
-	box-shadow: 0 0 0 1px rgba(0, 0, 0, .1) inset;
+	font-family: Consolas, Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+	font-size: 13px;
+	color: #fff;
+	background: #272822;
+	border-left: 10px solid #161713;
 	border-radius: 2px;
 	padding: 10px;
 	margin: 0px;
@@ -46,17 +93,13 @@ pre {
 	tab-size: 4;
 }
 code {
-	font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+	font-family: Consolas, Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
 	font-size: 12px;
 	color: #333;
 }
 h1 {
 	color: #000;
 	font-size: 32px;
-	/*background-color: #eef4f7;
-	margin: -15px -15px 10px -15px;
-	padding: 15px;
-	border-bottom: 1px solid #cedce1;*/
 }
 h2 {
 	margin: 0px;
@@ -66,42 +109,63 @@ h2 {
 h3 {
 	margin: 20px 0 4px 0;
 }
-li {
-	padding: 5px 0px;
-}
 footer {
 	text-align: right;
 	padding-top: 25px;
+	padding-bottom: 10px;
 	margin-top: 15px;
 	border-top: 1px solid #cacaca;
 }
 a {
 	color: inherit;
+	transition: all 0.25s;
 }
 a:link, a:visited {
 	color: #232323;
 	text-decoration: none;
 }
-a:hover {
+a:hover, .index a:hover {
 	color: #0363F3;
 }
-a:active {
+a:active, .index a:active {
 	color: #024282;
 }
 .index {
-	font-size: 14px;
-	background: #FAFAFB;
-	border: 1px solid #cacaca;
-	border-radius: 3px;
-	padding: 16px;
-	padding-top: 12px;
-	margin: 20px;
+	font-size: 10px;
+	background: rgba(50, 50, 50, .5);
+	border: none;
+	border-top: 25px solid rgba(34, 34, 34, .6);
+	border-bottom: 15px solid rgba(34, 34, 34, .6);
+	border-radius: 3px 0 0 3px;
+	padding: 4px 25px 10px 10px;
 	margin-right: 0;
-	float: right;
+	right: -120px;
+	top: calc(50% - 115px);
+	position: fixed;
+	transition: all 0.5s;
+}
+.index:hover {
+	right: 0px;
+	background: rgba(50, 50, 50, .95);
+	border-top: 25px solid rgba(34, 34, 34, 1);
+	border-bottom: 15px solid rgba(34, 34, 34, 1);
+}
+.index legend {
+	background: rgba(34, 34, 34, .6);
+	height: 25px;
+	line-height: 25px;
+	color: #fff;
+	transition: all 0.5s;
+}
+.index:hover legend {
+	background: rgba(34, 34, 34, 1);
+}
+.index a {
+	color: #fff;
 }
 .index ul {
 	margin: 0;
-	padding: 6px 0 0 10px;
+	padding: 6px 0 0 0px;
 }
 .index li {
 	margin: 0;
@@ -118,12 +182,23 @@ a:active {
 <body>
 <a id="#top"></a>
 <header>
-	<svg version="1.1" width="45" height="45" id="silex_logo_single" style="margin-bottom: -14px;"><path d="M 22.5,0 C 15.178827,0 7.8606446,1.5749 4.7163868,4.7191 c -6.2885157,6.2881 -6.2885157,29.2767 0,35.5649 6.2885152,6.288 29.2787112,6.288 35.5672262,0 6.288516,-6.2882 6.288516,-29.2768 0,-35.5649 C 37.139355,1.5749 29.821173,0 22.5,0 z m 0.90637,6.0317 c 1.80046,0.044 3.575716,0.2254 5.219444,0.5313 0.237352,1.1894 0.37505,2.4243 0.37505,3.6877 0,10.5297 -8.472136,19.0012 -19.0025253,19.0012 -1.1524432,0 -2.2839735,-0.1138 -3.3754486,-0.3124 -0.3421355,-1.7316 -0.5470827,-3.6156 -0.5938289,-5.5317 1.2582172,0.3783 2.5930946,0.5938 3.9692775,0.5938 7.6975233,0 14.0018603,-6.3039 14.0018603,-14.001 0,-1.3726 -0.215038,-2.7139 -0.593829,-3.9689 z m -6.25083,0.3751 c 0.541302,1.0775 0.843862,2.289 0.843862,3.5938 0,4.4542 -3.546611,8.0006 -8.0010633,8.0006 -1.3005129,0 -2.5159044,-0.309 -3.5942277,-0.8437 C 6.9215398,13.8511 7.9452458,10.9911 9.4670181,9.4695 10.98879,7.9478 13.84903,6.9271 17.15554,6.4068 z m 17.814867,2.5938 c 0.199697,0.1561 0.394233,0.3005 0.562575,0.4689 4.611573,4.6112 4.611573,21.4528 0,26.0641 -4.611573,4.6113 -21.454391,4.6113 -26.0659639,0 -0.092912,-0.093 -0.1608714,-0.2099 -0.2500333,-0.3124 0.2618648,0.01 0.5176488,0.031 0.7813539,0.031 13.7734503,0 25.0033223,-11.2291 25.0033223,-25.0016 0,-0.4225 -0.0116,-0.8319 -0.0312,-1.2501 z" id="silex-logo" style="fill:#ffffff;fill-opacity:1;stroke:none" /></svg>
-	Silex Flavored Markdown <span style="font-weight: normal; font-size: 20px;">(SFM)</span>
+	<div id="silex-logo">
+		<svg version="1.1" width="45" height="45" id="silex_logo_single"><path d="M 22.5,0 C 15.178827,0 7.8606446,1.5749 4.7163868,4.7191 c -6.2885157,6.2881 -6.2885157,29.2767 0,35.5649 6.2885152,6.288 29.2787112,6.288 35.5672262,0 6.288516,-6.2882 6.288516,-29.2768 0,-35.5649 C 37.139355,1.5749 29.821173,0 22.5,0 z m 0.90637,6.0317 c 1.80046,0.044 3.575716,0.2254 5.219444,0.5313 0.237352,1.1894 0.37505,2.4243 0.37505,3.6877 0,10.5297 -8.472136,19.0012 -19.0025253,19.0012 -1.1524432,0 -2.2839735,-0.1138 -3.3754486,-0.3124 -0.3421355,-1.7316 -0.5470827,-3.6156 -0.5938289,-5.5317 1.2582172,0.3783 2.5930946,0.5938 3.9692775,0.5938 7.6975233,0 14.0018603,-6.3039 14.0018603,-14.001 0,-1.3726 -0.215038,-2.7139 -0.593829,-3.9689 z m -6.25083,0.3751 c 0.541302,1.0775 0.843862,2.289 0.843862,3.5938 0,4.4542 -3.546611,8.0006 -8.0010633,8.0006 -1.3005129,0 -2.5159044,-0.309 -3.5942277,-0.8437 C 6.9215398,13.8511 7.9452458,10.9911 9.4670181,9.4695 10.98879,7.9478 13.84903,6.9271 17.15554,6.4068 z m 17.814867,2.5938 c 0.199697,0.1561 0.394233,0.3005 0.562575,0.4689 4.611573,4.6112 4.611573,21.4528 0,26.0641 -4.611573,4.6113 -21.454391,4.6113 -26.0659639,0 -0.092912,-0.093 -0.1608714,-0.2099 -0.2500333,-0.3124 0.2618648,0.01 0.5176488,0.031 0.7813539,0.031 13.7734503,0 25.0033223,-11.2291 25.0033223,-25.0016 0,-0.4225 -0.0116,-0.8319 -0.0312,-1.2501 z" style="fill:#ffffff;fill-opacity:1;stroke:none" /></svg>
+	</div>
+	<div id="headline">
+		Silex Flavored Markdown <span style="font-weight: normal; font-size: 20px;">(SFM)</span>
+	</div>
+	<nav>
+		<ul>
+			<li><a href="http://silexlab.org">Silex Lab</a></li>
+			<li><a href="http://silexboard.org">Silex Board</a></li>
+		</ul>
+	</nav>
 </header>
 <fieldset class="index">
 	<legend><strong>Inhaltsverzeichnis</strong></legend>
 	<ul>
+		<li><a href="#top" style="font-weight: bold;">Top</a></li>
 		<li><a href="#Überschriften">Überschrift</a></li>
 		<li><a href="#Blockzitate">Blockzitate</a></li>
 		<li><a href="#Listen">Listen</a></li>
@@ -138,11 +213,11 @@ a:active {
 		<li><a href="#Social">Sozial</a></li>
 	</ul>
 </fieldset>
-<p>Silex Flavored Markdown (SFM) ist eine auf Markdown basierende erweiterte Markupsprache, für das Silex Bulletin Board (SBB, Silex Board) und somit auch Silex entworfen.</p>
+<p>Silex Flavored Markdown (SFM) ist eine auf Markdown basierende erweiterte Markupsprache, entworfen für das <span style="font-style: italic;">Silex</span> Framework und die darauf basierende Bulletin Board Software <span style="font-style: italic;">Silex Bulletin Board</span>.</p>
 <p>Diese Markupsprache besitzt folgende Syntax:</p>
-<ul>
+<ul id="main-content">
 	<li>
-		<h2><a id="Überschriften">Überschriften</a></h2>
+		<h2><a id="Überschriften" href="#Überschriften">Überschriften</a></h2>
 		<p>Überschriften sind in den 2 Stilen von Markdown und einer veränderten Form von atx möglich, Setext und atx.</p>
 		<p>Überschriften im Setextstil werden unterstrichen:</p>
 		<pre>Überschrift Ebene 1 &lt;h1&gt;
@@ -171,11 +246,11 @@ a:active {
 #3 Überschrift Ebene 3 &lt;h3&gt;
 
 #6 Überschrift Ebene 6 &lt;h6&gt;</pre>
-		<p>Bei dieser Methode wird am Anfang der Zeile eine Raute geschrieben, gefolgt von der Zahl (1-6), welche die Überschriftebene wiederspiegelt.</p>
+		<p>Bei dieser Methode wird am Anfang der Zeile eine Raute geschrieben, gefolgt von der Zahl (1-6), welche die Überschriftebene wiederspiegelt (wobei Ebene 1 - 2 keinen verkürzenden Nutzen im vergleich zu atx bringen).</p>
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="Blockzitate">Blockzitate</a></h2>
+		<h2><a id="Blockzitate" href="#Blockzitate">Blockzitate</a></h2>
 		<p>Silex Flavored Markdown benutzt den in Markdown benutzten &quot;email-style&quot; für Zitate:</p>
 		<pre>&gt; Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
 &gt; sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
@@ -206,7 +281,7 @@ sed diam voluptua.
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="Listen">Listen</a></h2>
+		<h2><a id="Listen" href="#Listen">Listen</a></h2>
 		<p>Unterstützt werden wie in Markdown geordnete und ungeordnete Listen. Als Auflistungszeichen für unsortierte Listen können '*', '+' und '-' verwendet werden. Verschiedene Zeichen können jedoch nicht in einer einzigen Liste gemischt verwendet werden, es würde immer eine neue Liste entstehen.</p>
 		<pre>* Rot
 * Grün
@@ -259,22 +334,30 @@ A. Blau</pre>
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="Code">Code(blöcke)</a></h2>
+		<h2><a id="Code" href="#Code">Code(blöcke)</a></h2>
 		<p>Codeblöcke werden mit zwei eckigen Klammern geöffnet vor und geschlossen nach dem eigentlichen Code geschrieben:</p>
 		<pre>[[
 &lt;?php
-		echo 'Hello world!';
+public function hello() {
+	echo 'Hello world!';
+}
 ?&gt;
 ]]</pre>
 		<p>4 Zeichen im Codeblock sind ein Tab. Um ein Syntaxhighlighting durchzuführen, muss vor die zwei eckigen Klammern die hervorzuhebende Sprache in eckige Klammern geschrieben werden:</p>
 		<pre>[PHP][[
 &lt;?php
-		echo 'Hello world!';
+// Comment
+public function hello() {
+	echo 'Hello world!'.CONST;
+}
 ?&gt;
 ]]</pre>
 		<p>wird dann zu:</p>
 		<pre><span style="color: #ddd;">&lt;?php</span>
-		<span style="color: #5df;">echo</span> <span style="color: #fa0;">'Hello world!'</span>;
+<span style="color: #75715e;">// Comment</span>
+<span style="color: #f92672;">public</span> <span style="color: #66d9ef; font-style: italic;">function</span> <span style="color: #a6e22e">hello</span>() {
+	<span style="color: #66d9ef;">echo</span> <span style="color: #e6db74;">'Hello world!'</span>.<span style="color: #ae81ff;">CONST</span>;
+}
 <span style="color: #ddd;">?&gt;</span></pre>
 		<p>Über dem Codeblock kann dann die gewählte Syntax stehen.</p>
 		<p>Vorformatierte Texte in einer Zeile (zwischen normalem Text) (inline) wird folgendermaßen erzeugt:</p>
@@ -289,7 +372,7 @@ A. Blau</pre>
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="hr">Horizontale Linie</a></h2>
+		<h2><a id="hr" href="#hr">Horizontale Linie</a></h2>
 		<p>Eine Horizontale Linie (<code>&lt;hr&gt;</code>) kann mit folgenden Zeilen erzeugt werden:</p>
 		<pre>* * *
 
@@ -304,7 +387,7 @@ A. Blau</pre>
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="Hyperlinks">Hyperlinks</a></h2>
+		<h2><a id="Hyperlinks" href="#Hyperlinks">Hyperlinks</a></h2>
 		<p>Hyperlinks werden wie in Markdown mit einem eckigen Klammernpaar, in dem der klickbare Text des Hyperlinks steht gefolgt von einem runden Klammernpaar, in dem der Hyperlink steht erzeugt:</p>
 		<pre>[Dies ist der Hyperlinktext](http://example.com/ &quot;Linkbeschreibung&quot;)</pre>
 		<p>Die Linkbeschreibung und der Hyperlinktext sind beide optional, ist der Hyperlinktext nicht gesetzt, wird als Text das Ziel des Links genommen:</p>
@@ -313,7 +396,7 @@ A. Blau</pre>
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="Bilder">Bilder</a></h2>
+		<h2><a id="Bilder" href="#Bilder">Bilder</a></h2>
 		<p>Auch das einbinden von Bildern funktioniert ähnlich wie in Markdown:</p>
 		<pre>![Alternativer Text](http://exampe.com/image.png &quot;Titel&quot; 256x128px)</pre>
 		<p>Der Alternative Text, Titel - welcher beim hovern angezeigt wird - und die Größe sind optional.<br>
@@ -324,7 +407,7 @@ A. Blau</pre>
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="Textformatierungen">Textformatierungen</a></h2>
+		<h2><a id="Textformatierungen" href="#Textformatierungen">Textformatierungen</a></h2>
 		<h3>Standardformatierungen</h3>
 		<p>Diese Markupsprache bietet verschiedene Möglichkeiten den Text hervorzuheben. Das '<code>*</code>'-Zeichen und das '<code>_</code>'-Zeichen kommen dabei zum Einsatz:</p>
 		<pre>*Einfaches Sternchen*
@@ -367,14 +450,14 @@ Ref,(Tiefgestellt),</pre>
 		<p>Textgrößen können ebenfalls nicht geschachtelt werden.</p>
 		<h3>Schriftart</h3>
 		<p>Die Schriftart kann wie folgt festgelegt werden:</p>
-		<pre>Normale und [font:Comic Sans][andere Schriftart]. [f:Comic Sans][Shortcut]</pre>
+		<pre>Normale und [font:Comic Sans][eine hässliche Schriftart]. [f:Comic Sans][Shortcut]</pre>
 		<p>Wird zu:</p>
-		<p>Normale und <span style="font-family:'Comic Sans MS'">andere Schriftart</span>. <span style="font-family:'Comic Sans MS'">Shortcut</span></p>
+		<p>Normale und <span style="font-family:'Comic Sans MS'">eine hässliche Schriftart</span>. <span style="font-family:'Comic Sans MS'">Shortcut</span></p>
 		<h3>Zusammenfassen</h3>
 		<p>Das aneinanderreihen, der Attribute ist ebenfalls möglich:</p>
-		<pre>[color:blue,s:18px][Aneinandergereiht]</pre>
+		<pre>[color:blue,s:18px,f:Comic Sans][Aneinandergereiht]</pre>
 		<p>wird zu geparst:</p>
-		<p><span style="color: blue; font-size: 18px">Aneinandergereiht</span></p>
+		<p><span style="color: blue; font-size: 18px; font-family:'Comic Sans MS'">Aneinandergereiht</span></p>
 		<span class="top"><a href="#top">Top</a></span>  </li>
 	<li>
 		<h2>Textformatierungen in Wörtern <span style="font-size: 14px">(trivial)</span></h2>
@@ -394,13 +477,13 @@ Lorem[*]ipsum[*]dolor[***]sit[***]amet.</pre>
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="Spoiler">Spoiler</a></h2>
+		<h2><a id="Spoiler" href="#Spoiler">Spoiler</a></h2>
 		<p>Spoiler können wie folgt erzeugt werden:</p>
 		<pre>[spoiler][Verborgener Plot]</pre>
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="Escape">Backslash escape</a></h2>
+		<h2><a id="Escape" href="#Escape">Backslash escape</a></h2>
 		<p>Um Zeichen, die in dieser Markupsprache eine Funktion haben trotzdem schreiben zu können, müssen diese per Backslash escaped werden:</p>
 		<pre>Lorem *ipsum \*dolor\* sit* amet.</pre>
 		<p>Dies weist dem Parser an, diese Textstellen zu ignorieren. Aus dem obigen Beispiel wird folgender Text:</p>
@@ -408,7 +491,7 @@ Lorem[*]ipsum[*]dolor[***]sit[***]amet.</pre>
 		<span class="top"><a href="#top">Top</a></span>
 	</li> 
 	<li>
-		<h2><a id="NewLine">Neue Zeile</a></h2>
+		<h2><a id="NewLine" href="#NewLine">Neue Zeile</a></h2>
 		<pre>Lorem ipsum dolor sit amet,
 consetetur sadipscing elitr.</pre>
 		<p>wird zu:</p>
@@ -417,16 +500,17 @@ consetetur sadipscing elitr.</pre>
 		<span class="top"><a href="#top">Top</a></span>
 	</li>
 	<li>
-		<h2><a id="Social">Sozial</a></h2>
+		<h2><a id="Social" href="#Social">Sozial</a></h2>
 		<p>Eine soziale Anbindung an Benutzer der Software und andere Netzwerke kann wie folgt erreicht werden:</p>
-		<pre>@Nox *(Andere Benutzer)*
-@t@NoxiFoxi *(Twitter)*
-@adn@noxnebula *(App.net)*</pre>
-		<span style="font-style: italic; font-size: 11px;">(Weitere folgen)</span>
+		<pre>@Nox *(Anderer Benutzer auf dieser Seite)*
+@t:NoxiFoxi *(Twitter)*
+@adn:noxnebula *(App.net)*</pre>
+		<span style="font-style: italic; font-size: 11px;">(Weitere können folgen)</span>
 		<p>wird zu:</p>
-		<p><a href="#LinkToUser"><span style="color: #666;">@</span>Nox</a> <span style="font-style: italic;">(Andere Benutzer)</span><br>
+		<p><a href="#users/Nox"><span style="color: #666;">@</span>Nox</a> <span style="font-style: italic;">(Anderer Benutzer auf dieser Seite)</span><br>
 		<a href="https://twitter.com/NoxiFoxi" target="_blank"><span style="color: #666;">@</span>NoxiFoxi</a> <span style="font-style: italic;">(Twitter)</span><br>
 		<a href="https://alpha.app.net/noxnebula" target="_blank"><span style="color: #666;">@</span>noxnebula</a> <span style="font-style: italic;">(App.net)</span></p>
+		<span class="top"><a href="#top">Top</a></span>
 	</li>
 </ul>
 <footer>
