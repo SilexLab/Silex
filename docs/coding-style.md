@@ -67,7 +67,8 @@ class ExampleClass implements IFooInterface {
 ## HTML / TPL
 
 Indent with tabs and keep everything lower case!
-Multiple-word identifiers are separated by hyphens (classes, ids).  
+For classes and IDs, multiple-word identifiers are separated by hyphens.
+Template variable names are separated by underscores.  
 
 #### Example 
 
