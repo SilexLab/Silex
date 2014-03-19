@@ -33,21 +33,14 @@ abstract class Style implements ITemplatable {
 	 * reads the style config and stores values
 	 */
 	public function readConfig() {
-		$xml = new XML($this->getPath().'style.xml');
+		$config = new XML($this->getPath().'style.xml');
 
 		// Read values
-		$this->title = (string)$xml->title;
+		$this->title = (string)$config->title;
 
-		// CSS
-		foreach($xml->{'css-files'} as $cssFile)
-			if(!empty((string)$cssFile))
-				$this->cssFiles[] = (string)$cssFile;
-
-		// JS
-		foreach($xml->{'js-files'} as $jsFile)
-			if(!empty((string)$jsFile))
-				$this->jsFiles[] = (string)$jsFile;
-
+		// CSS and JS
+		$this->cssFiles = (array)$config->{'css-files'}->{'css-file'};
+		$this->jsFiles = (array)$config->{'js-files'}->{'js-file'};
 	}
 
 	/**
@@ -73,10 +66,10 @@ abstract class Style implements ITemplatable {
 			'title' => $this->getTitle(),
 			'name' => $this->getName(),
 			'path' => $this->getPath(),
-			'relative_path' => $this->getRelativePath(),
+			'url_path' => Silex::getConfig()->get('url.base').$this->getRelativePath(),
 			'css_files' => $this->cssFiles,
 			'js_files' => $this->jsFiles,
-			'object' => $this,
+			'object' => $this
 		];
 	}
 }
