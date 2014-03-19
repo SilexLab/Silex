@@ -27,7 +27,7 @@ Silex' developers are open for criticism, collaborators or any assistive help yo
 ### Contact
 * __IRC__: [#SilexLab](http://chat.skyirc.net/?nick=silex_...&channels=SilexLab&prompt=1) at [SkyIrc](http://skyirc.net)
 * __[Homepage](https://silexlab.org/)__ (Not finished yet)
-* __[Github repository](https://github.com/SilexLab/Silex)__ - [Issues]()
+* __[Github repository](https://github.com/SilexLab/Silex)__ - [Issues](https://github.com/SilexLab/Silex/issues)
 
 #### Notes
 __<sup>[1]</sup>__ Silex is developed primarily under nginx<br>
