@@ -17,16 +17,17 @@ CREATE TABLE IF NOT EXISTS `config` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `config` (`option`, `value`, `type`, `package`) VALUES
+('language.default', 'en-US', 'string(255)', 1),
+('page.default', 'home', 'string(255)', 1),
 ('page.title', 'Silex', 'string(255)', 1),
-('page.default_page', 'home', 'string(255)', 1),
 ('session.autologout', '3600', 'int(8)', 1),
 ('session.autologout_probability', '25', 'int(3)', 1),
 ('session.cookie_time', '86400', 'int(8)', 1),
 ('session.name', 'silex', 'string(255)', 1),
+('style.default', 'org.silex.lumenlunae', 'string(255)', 1),
+('time.timezone', 'Europe/Berlin', 'string(255)', 1),
 ('url.base', '/', 'string(255)', 1),
-('url.format', '1', 'int(1)', 1),
-('language.default_language', 'en-US', 'string(255)', 1),
-('style.default', 'org.silex.lumenlunae', 'string(255)', 1);
+('url.format', '1', 'int(1)', 1);
 
 DROP TABLE IF EXISTS `session`;
 CREATE TABLE IF NOT EXISTS `session` (

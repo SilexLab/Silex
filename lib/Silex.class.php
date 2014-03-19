@@ -35,6 +35,9 @@ class Silex {
 			$config['database.port']);
 		self::$config = new Config($config);
 
+		// Set default timezone
+		date_default_timezone_set(self::$config->get('time.timezone')); // TODO: prefer user settings
+
 		// User and session stuff
 		Session::start();
 		LoginCheck::init();

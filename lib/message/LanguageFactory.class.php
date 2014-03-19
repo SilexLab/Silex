@@ -32,7 +32,7 @@ class LanguageFactory {
 
 		// Try to find the default language
 		// By now this is done only via the global config. User or location specific stuff is to come
-		$defaultLangID = Silex::getConfig()->get('language.default_language');
+		$defaultLangID = Silex::getConfig()->get('language.default');
 
 		if(isset(self::$languageObjects[$defaultLangID])) {
 			self::$defaultLanguage = self::$languageObjects[$defaultLangID];

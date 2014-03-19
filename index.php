@@ -26,10 +26,6 @@ if(!is_file(DIR_ROOT.'lib/smarty/Smarty.class.php')) {
   git submodule foreach git pull');
 }
 
-// Set default timezone
-// TODO: read from config and prefer user settings
-date_default_timezone_set('Europe/Berlin');
-
 // Set exception handler
 set_exception_handler(['Silex', 'handleException']);
 set_error_handler(['Silex', 'handleError'], E_ALL);
