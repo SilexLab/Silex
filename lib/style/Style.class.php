@@ -15,13 +15,14 @@ abstract class Style implements ITemplatable {
 	 */
 	public function __construct() {
 		$this->readConfig();
+		Event::listen('silex.construct.before_modules', [$this, 'prepare']);
 	}
 
 	/**
-	 * register the style
+	 * do some stuff before loading
 	 * @return void
 	 */
-	public abstract function register();
+	public abstract function prepare();
 
 	/**
 	 * get the dotted template name

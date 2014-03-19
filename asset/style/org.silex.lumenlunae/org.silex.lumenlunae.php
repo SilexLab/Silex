@@ -11,7 +11,7 @@ class org_silex_lumenlunae extends Style {
 	 * register the style
 	 * @return void
 	 */
-	public function register() {
+	public function prepare() {
 		//Nothing
 	}
 
