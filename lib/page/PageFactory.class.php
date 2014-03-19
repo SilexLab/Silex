@@ -26,7 +26,6 @@ class PageFactory {
 	}
 
 	public static function getPage() {
-		$page = null;
 		// Try to get the page by url
 		if(isset(self::$pages[URL::getRoute(0)]))
 			return self::$pages[URL::getRoute(0)];
