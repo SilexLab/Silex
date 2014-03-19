@@ -5,6 +5,9 @@ Throughout all our projects we aim to use one unified coding style for best read
 
 ## PHP (and JavaScript)
 
+Pure PHP-scripts starts with the __<?php__ tag in line 1 but never closing it at the end.
+This prevents an inadvertent output of whitespaces.
+
 **Indentation and Brace Style**  
 The brace style follows the 1TBS, the one true brace style. Tabulators are used to indent subordinated code.
 
@@ -63,10 +66,13 @@ class ExampleClass implements IFooInterface {
 
 ## HTML / TPL
 
-Indent with tabs and keep everything lower case!  
-**Example:**   
+Indent with tabs and keep everything lower case!
+Multiple-word identifiers are separated by hyphens (classes, ids).  
+
+#### Example 
+
 ```html
-<div class="i_am_a_class">
+<div class="i-am-a-class">
 	<span id="hurr">{$variable_with_underscores}</span>
 	<br>
 	{if $var_name > 10}
@@ -76,21 +82,27 @@ Indent with tabs and keep everything lower case!
 ```
 
 ## CSS
-IDs, classes and fairly everything else is lower case. Descendants may be indented.  
-**Example:**  
+IDs, classes and fairly everything else is lower case. Descendants may be indented.
+Multiple-word identifiers are separated by hyphens (classes, ids).  
+
+#### Example
+
 ```css
-.i_am_a_class {
+.i-am-a-class {
 	position: absolute;
 	top: 0;
 }
 
-	.i_am_a_class #hurr {
+	.i-am-a-class #hurr {
 		height: 20px;
 		background: #fff;
 		padding: 10px 5px;
 	}
 
-	.i_am_a_class .useless {
+	.i-am-a-class .useless {
 		display: none;
 	}
+#i-am-an-id {
+	content: "Hi";
+}
 ```
