@@ -29,16 +29,13 @@ class PageFactory {
 		$page = null;
 		// Try to get the page by url
 		if(isset(self::$pages[URL::getRoute(0)]))
-			$page = self::$pages[URL::getRoute(0)];
+			return self::$pages[URL::getRoute(0)];
 		// Try to get the default page
-		else if(isset(self::$pages[Silex::getConfig()->get('page.default_page')]))
-			$page = self::$pages[Silex::getConfig()->get('page.default_page')];
-
-		return $page;
+		if(isset(self::$pages[Silex::getConfig()->get('page.default_page')]))
+			return self::$pages[Silex::getConfig()->get('page.default_page')];
 
 		// Dude... something is wrong.
-		if($page == null)
-			throw new CoreException('Default page couldn\'t be loaded.', 0, 'The default page wasn\'t loaded.');
+		throw new CoreException('Default page couldn\'t be loaded.', 0, 'The default page wasn\'t loaded.');
 	}
 
 	public static function getDefaultPage() {
