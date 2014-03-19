@@ -43,7 +43,7 @@ class Silex {
 
 		URL::check();
 		PageFactory::init();
-		self::$page = PageFactory::getDefaultPage();
+		self::$page = PageFactory::getPage();
 		StyleFactory::init();
 		self::$style = StyleFactory::getStyle();
 		Event::listen('silex.construct.before_display', [self::$page, 'prepare']);

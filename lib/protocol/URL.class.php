@@ -11,6 +11,7 @@ class URL {
 	private static $format = '';
 	private static $base = '';
 	private static $route = '/';
+	private static $aRoute = [];
 
 	/**
 	 * just check some url stuff
@@ -27,6 +28,7 @@ class URL {
 		// get route
 		if(isset($_GET[self::ROUTE_PARAM])) {
 			self::$route = $_GET[self::ROUTE_PARAM];
+			self::$aRoute = explode('/', trim(self::$route, '/'));
 
 			// redirect to fix the url format if it's wrong
 			$url = self::$route.self::getParams(true, false);
@@ -80,10 +82,10 @@ class URL {
 
 	/**
 	 * get the route
-	 * @return string
+	 * @return mixed
 	 */
-	public static function getRoute() {
-		return self::$route;
+	public static function getRoute($position = -1) {
+		return ($position <= -1) ? self::$route : (isset(self::$aRoute[$position]) ? self::$aRoute[$position] : false);
 	}
 
 	/**
@@ -121,5 +123,24 @@ class URL {
 	 */
 	public static function get($param) {
 		return isset($_GET[$param]) ? $_GET[$param] : null;
+	}
+
+	/**
+	 * Compare route on position
+	 * @param  int    $routePosition
+	 * @param  string $expected
+	 * @param  bool   $redirect   optional
+	 * @param  string $redirectTo optional
+	 * @return mixed
+	 */
+	public static function comparePos($routePosition, $expected, $redirect = false, $redirectTo = '') {
+		if(isset(self::$aRoute[$routePosition])) {
+			if(self::$aRoute[$routePosition] == $expected)
+				return true;
+			if($redirect)
+				header('Location: '.($redirectTo ? $redirectTo : $expected));
+			return false;
+		}
+		return null;
 	}
 }
