@@ -1,6 +1,7 @@
 <?php
 /**
- * Recursive scandir
+ * Recursive scandir. No longer used
+ * @deprecated
  * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
  * @param  string $directory
  * @param  int    $sorting_order

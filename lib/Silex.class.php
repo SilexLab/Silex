@@ -51,7 +51,7 @@ class Silex {
 		self::$modules = new Modules(DIR_LIB.'modules/');
 		Event::fire('silex.construct.after_modules');
 
-		self::$template = new Template(DIR_TPL);
+		self::$template = new Template(DIR_TPL, !self::isDebug());
 		self::$template->assign([
 			'page' => self::$page->getTemplateArray(),
 			'style' => self::$style->getTemplateArray(),
