@@ -33,6 +33,8 @@ class Silex {
 			$config['database.password'],
 			$config['database.name'],
 			$config['database.port']);
+		// just remove these entries
+		UArray::removeElements($config, ['database.host', 'database.user', 'database.password', 'database.name', 'database.port', 'database.wrapper']);
 		self::$config = new Config($config);
 
 		// Set default timezone
@@ -49,16 +51,17 @@ class Silex {
 		self::$page = PageFactory::getPage();
 		StyleFactory::init();
 		self::$style = StyleFactory::getStyle();
-		Event::listen('silex.construct.before_display', [self::$page, 'prepare']);
 
 		Event::fire('silex.construct.before_modules');
 		self::$modules = new Modules(DIR_LIB.'modules/');
 		Event::fire('silex.construct.after_modules');
 
 		self::$template = new Template(DIR_TPL, !self::isDebug());
+		self::$page->prepare();
+		Event::fire('silex.construct.before_template_assign');
 		self::$template->assign([
 			'page' => self::$page->getTemplateArray(),
-			'style' => self::$style->getTemplateArray(),
+			'style' => self::$style->getTemplateArray()
 		]);
 
 		if(!$withoutOutput) {

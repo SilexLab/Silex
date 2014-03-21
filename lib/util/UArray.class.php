@@ -67,4 +67,16 @@ class UArray {
 		}
 		return $heap;
 	}
+
+	/**
+	 * Removes multiple elements of an array
+	 * @param array &$array
+	 * @param array $keys
+	 */
+	public static function removeElements(&$array, array $keys) {
+		foreach($keys as $key) {
+			if(isset($array[$key]))
+				unset($array[$key]);
+		}
+	}
 }

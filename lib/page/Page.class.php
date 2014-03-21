@@ -47,7 +47,7 @@ abstract class Page implements ITemplatable {
 			'name' => $this->getName(),
 			'title' => $this->getTitle(),
 			'template' => $this->getTemplateName(),
-			'isActive' => $this->isActive(),
+			'is_active' => $this->isActive(),
 			'object' => $this
 		];
 	}

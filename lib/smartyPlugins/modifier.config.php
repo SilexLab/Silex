@@ -5,6 +5,6 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-function smarty_function_lang($params, Smarty_Internal_Template $template) {
-	return Silex::getLanguage()->get($params['node']);
+function smarty_modifier_config($node) {
+	return Silex::getConfig()->get($node);
 }

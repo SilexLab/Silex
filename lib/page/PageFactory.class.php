@@ -30,11 +30,14 @@ class PageFactory {
 		if(isset(self::$pages[URL::getRoute(0)]))
 			return self::$pages[URL::getRoute(0)];
 		// Try to get the default page
-		if(isset(self::$pages[Silex::getConfig()->get('page.default')]))
+		if(URL::getRoute() == Silex::getConfig()->get('url.base') && isset(self::$pages[Silex::getConfig()->get('page.default')]))
 			return self::$pages[Silex::getConfig()->get('page.default')];
+		// Try to get the error page (because requested site wasn't found)
+		if(isset(self::$pages['error']))
+			return self::$pages['error'];
 
 		// Dude... something is wrong.
-		throw new CoreException('Default page couldn\'t be loaded.', 0, 'The default page wasn\'t loaded.');
+		throw new CoreException('Default and error page couldn\'t be loaded.', 0, 'The default page wasn\'t loaded.');
 	}
 
 	public static function getDefaultPage() {

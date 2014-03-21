@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Silex · Silexframework</title>
+	<title>{$page.title} · Silexframework</title>
 {foreach $style.css_files as $css_file}
 	<link rel="stylesheet" type="text/css" href="{$style.url_path}{$css_file}">
 {/foreach}

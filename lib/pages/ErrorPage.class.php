@@ -5,13 +5,15 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-class HomePage extends Page {
+class ErrorPage extends Page {
+	protected $errorCode;
+
 	/**
 	 * Get the pages short name. Has to be unique
 	 * @return string
 	 */
 	public function getName() {
-		return 'home';
+		return 'error';
 	}
 
 	/**
@@ -19,7 +21,7 @@ class HomePage extends Page {
 	 * @return string
 	 */
 	public function getTitle() {
-		return 'Home';
+		return 'Error '.$this->errorCode;
 	}
 
 	/**
@@ -27,7 +29,7 @@ class HomePage extends Page {
 	 * @return string
 	 */
 	public function getTemplateName() {
-		return 'pages/home.tpl';
+		return 'pages/error.tpl';
 	}
 
 	/**
@@ -35,9 +37,10 @@ class HomePage extends Page {
 	 * @return void
 	 */
 	public function prepare() {
-		// Check URL
-		URL::comparePos(0, (PageFactory::GetDefaultPage() == $this->getName() ? Silex::getConfig()->get('url.base') : $this->getName()), true);
+		$this->errorCode = 404;
 
-		// assign template vars and stuff
+		Silex::getTemplate()->assign(['error' => [
+			'code' => $this->errorCode
+		]]);
 	}
 }
