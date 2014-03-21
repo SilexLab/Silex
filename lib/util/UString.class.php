@@ -30,18 +30,15 @@ class UString {
 	/**
 	 * urlencode without touching the slashes
 	 * @author Patrick Kleinschmidt (NoxNebula) <noxifoxi@gmail.com>
-	 * @param string $string
+	 * @param  string $url
 	 * @return string
 	 */
-	public static function urlEncodeSlashes($string) {
-		if(preg_match('/^(?<scheme>[a-z][a-z0-9+\-.]*:\/\/)/ix', $url, $m)) {
-			$newURL = $m['scheme'];
-			$url = explode('/', substr($url, strlen($newURL)));
-			for($i = 0; $i < sizeof($url); $i++)
-				$newURL .= urlencode($url[$i]).(($i < sizeof($url) - 1) ? '/' : '');
-			return $newURL;
-		}
-		return urlencode($url);
+	public static function urlEncodeSlashes($url) {
+		$newURL = '';
+		$url = explode('/', $url);
+		for($i = 0; $i < sizeof($url); $i++)
+			$newURL .= urlencode($url[$i]).(($i < sizeof($url) - 1) ? '/' : '');
+		return $newURL;
 	}
 
 	/**
@@ -51,14 +48,11 @@ class UString {
 	 * @return string
 	 */
 	public static function rawUrlEncodeSlashes($url) {
-		if(preg_match('/^(?<scheme>[a-z][a-z0-9+\-.]*:\/\/)/ix', $url, $m)) {
-			$newURL = $m['scheme'];
-			$url = explode('/', substr($url, strlen($newURL)));
-			for($i = 0; $i < sizeof($url); $i++)
-				$newURL .= rawurlencode($url[$i]).(($i < sizeof($url) - 1) ? '/' : '');
-			return $newURL;
-		}
-		return rawurlencode($url);
+		$newURL = '';
+		$url = explode('/', $url);
+		for($i = 0; $i < sizeof($url); $i++)
+			$newURL .= rawurlencode($url[$i]).(($i < sizeof($url) - 1) ? '/' : '');
+		return $newURL;
 	}
 
 	/**

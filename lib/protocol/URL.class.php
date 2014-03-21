@@ -27,7 +27,7 @@ class URL {
 
 		// get route
 		if(isset($_GET[self::ROUTE_PARAM])) {
-			self::$route = $_GET[self::ROUTE_PARAM];
+			self::$route = UString::urlEncodeSlashes($_GET[self::ROUTE_PARAM]);
 			self::$aRoute = explode('/', trim(self::$route, '/'));
 
 			// redirect to fix the url format if it's wrong
@@ -46,7 +46,7 @@ class URL {
 	 * @param  array  $params
 	 * @return string
 	 */
-	public static function to($route, array $params = []) {
+	public static function to($route, array $params = [], $asHTML = true) {
 		// check if route is valid
 		if(!is_string($route))
 			return false;
@@ -65,7 +65,7 @@ class URL {
 		// attach parameters
 		if(!empty($params)) {
 			if(!self::$format)
-				$url .= '&amp;';
+				$url .= ($asHTML ? '&amp;' : '&');
 			else
 				$url .= '?';
 
@@ -73,7 +73,7 @@ class URL {
 			foreach($params as $key => $value) {
 				$url .= $key.'='.$value;
 				if(++$i < sizeof($params))
-					$url .= '&amp;';
+					$url .= ($asHTML ? '&amp;' : '&');
 			}
 		}
 
