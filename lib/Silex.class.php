@@ -16,6 +16,7 @@ class Silex {
 	protected static $user = null;
 	protected static $page = null;
 	protected static $style = null;
+	protected static $crumbs = null;
 
 	/**
 	 * Start Silex up!
@@ -33,7 +34,7 @@ class Silex {
 			$config['database.password'],
 			$config['database.name'],
 			$config['database.port']);
-		// just remove these entries
+		// Just remove these entries
 		UArray::removeElements($config, ['database.host', 'database.user', 'database.password', 'database.name', 'database.port', 'database.wrapper']);
 		self::$config = new Config($config);
 
@@ -44,26 +45,39 @@ class Silex {
 		Session::start();
 		LoginCheck::init();
 		self::$user = LoginCheck::getUser();
+		// Initiate language
 		LanguageFactory::init();
 
+		// Check URL
 		URL::check();
+
+		// Navigation
+		self::$crumbs = new Breadcrumbs();
+
+		// Initiate page
 		PageFactory::init();
 		self::$page = PageFactory::getPage();
+
+		// Style
 		StyleFactory::init();
 		self::$style = StyleFactory::getStyle();
 
+		// Modules
 		Event::fire('silex.construct.before_modules');
 		self::$modules = new Modules(DIR_LIB.'modules/');
 		Event::fire('silex.construct.after_modules');
 
+		// Initiate templates
 		self::$template = new Template(DIR_TPL, !self::isDebug());
 		self::$page->prepare();
+		// Assign some default template variables
 		Event::fire('silex.construct.before_template_assign');
 		self::$template->assign([
 			'page' => self::$page->getTemplateArray(),
 			'style' => self::$style->getTemplateArray()
 		]);
 
+		// Display template
 		if(!$withoutOutput) {
 			Event::fire('silex.construct.before_display');
 			header('Content-Type: text/html; charset=utf-8');
@@ -142,13 +156,6 @@ class Silex {
 	}
 
 	/**
-	 * @return bool
-	 */
-	public static final function isDebug() {
-		return DEBUG;
-	}
-
-	/**
 	 * @return Language
 	 */
 	public static final function getLanguage() {
@@ -161,5 +168,19 @@ class Silex {
 	 */
 	public static final function getPage() {
 		return self::$page;
+	}
+
+	/**
+	 * @return Breadcrumbs
+	 */
+	public static final function getCrumbs() {
+		return self::$crumbs;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static final function isDebug() {
+		return DEBUG;
 	}
 }
