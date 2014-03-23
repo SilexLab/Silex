@@ -4,15 +4,7 @@
 		<test>This is the first test!</test>
 		<test2>This is the second test :D</test2>
 	</general>
-	<another-test>
-		<testception>
-			<were-diving-deeper>
-				<hurr>
-					<durr>
-						<text>asdf</text>
-					</durr>
-				</hurr>
-			</were-diving-deeper>
-		</testception>
-	</another-test>
+	<page>
+		<home>Home</home>
+	</page>
 </language>

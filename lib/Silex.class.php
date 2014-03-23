@@ -16,7 +16,7 @@ class Silex {
 	protected static $user = null;
 	protected static $page = null;
 	protected static $style = null;
-	protected static $crumbs = null;
+	protected static $navigation = null;
 
 	/**
 	 * Start Silex up!
@@ -52,7 +52,7 @@ class Silex {
 		URL::check();
 
 		// Navigation
-		self::$crumbs = new Breadcrumbs();
+		self::$navigation = new NavigationFactory();
 
 		// Initiate page
 		PageFactory::init();
@@ -70,11 +70,13 @@ class Silex {
 		// Initiate templates
 		self::$template = new Template(DIR_TPL, !self::isDebug());
 		self::$page->prepare();
+		self::$navigation->prepare();
 		// Assign some default template variables
 		Event::fire('silex.construct.before_template_assign');
 		self::$template->assign([
-			'page' => self::$page->getTemplateArray(),
-			'style' => self::$style->getTemplateArray()
+			'page'  => self::$page->getTemplateArray(),
+			'style' => self::$style->getTemplateArray(),
+			'nav'   => self::$navigation->getTemplateArray()
 		]);
 
 		// Display template
@@ -173,8 +175,8 @@ class Silex {
 	/**
 	 * @return Breadcrumbs
 	 */
-	public static final function getCrumbs() {
-		return self::$crumbs;
+	public static final function getNav() {
+		return self::$navigation;
 	}
 
 	/**

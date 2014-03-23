@@ -11,6 +11,12 @@
 {/foreach}
 </head>
 <body>
+Main navigation:<br>
+{print_r($nav.main)}<br>
+<br>
+Breadcrumbs:<br>
+{print_r($nav.crumbs)}<br>
+<br>
 {include file=$page.template}
 </body>
 </html>

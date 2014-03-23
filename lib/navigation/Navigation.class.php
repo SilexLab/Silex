@@ -5,44 +5,46 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-class Breadcrumbs {
-	protected $crumbs = [];
+class Navigation {
+	protected $entries = [];
 
-	public function __construct() {}
+	public function __construct() {
+		//
+	}
 
 	/**
-	 * Add a crumb to the breadcrumbs
+	 * Add a entry to the entries
 	 * @param  mixed  $title
 	 * @param  string $link
 	 * @return bool   success
 	 */
-	public function add($title, $link = '') {
-		// add multiple breadcrumbs
+	public function add($title, $link = '', $active = false) {
+		// add multiple entries
 		if(is_array($title)) {
 			$success = true;
-			foreach($title as $crumb)
-				$success = $this->add($crumb['title'], $crumb['link']);
+			foreach($title as $entry)
+				$success = $this->add($entry['title'], $entry['link'], isset($entry['active']) ? $entry['active'] : false);
 			return $success;
 		}
-		// add a single breadcrumb
-		if($link && $this->crumbs[] = ['title' => Silex::getLanguage()->get($title), 'link' => $link])
+		// add a single entry
+		if($link && $this->entries[] = ['title' => Silex::getLanguage()->get($title), 'link' => $link, 'active' => $active])
 			return true;
 		return false;
 	}
 
 	/**
-	 * remove a crumb from breadcrumbs
+	 * remove a entry from entries
 	 * @param  mixed $id     title or id
 	 * @return bool  success
 	 */
 	public function remove($id) {
 		// remove by id
 		if(is_int($id)) {
-			if(isset($this->crumbs[$id])) {
+			if(isset($this->entries[$id])) {
 				// remove this entry
-				unset($this->crumbs[$id]);
+				unset($this->entries[$id]);
 				// re-index array
-				$this->crumbs = array_values($this->crumbs);
+				$this->entries = array_values($this->entries);
 				return true;
 			}
 			return false;
@@ -53,20 +55,20 @@ class Breadcrumbs {
 	}
 
 	/**
-	 * get the whole breadcrumbs-list
+	 * get the whole entries
 	 * @param  mixed $id title or id
 	 * @return array
 	 */
 	public function get($id = -1) {
 		if(is_int($id)) {
 			if($id == -1)
-				return $this->crumbs;
-			if(isset($this->crumbs[$id]))
-				return $this->crumbs[$id];
+				return $this->entries;
+			if(isset($this->entries[$id]))
+				return $this->entries[$id];
 		} else if(is_string($id)) {
 			$id = $this->getID($id);
 			if($id !== false)
-				return $this->crumbs[$id];
+				return $this->entries[$id];
 		}
 		return false;
 	}
@@ -77,8 +79,8 @@ class Breadcrumbs {
 	 * @return mixed  int if success false if not
 	 */
 	public function getID($title) {
-		for($i = 0; $i < sizeof($this->crumbs); $i++) { 
-			if($this->crumbs[$i]['title'] == $title)
+		for($i = 0; $i < sizeof($this->entries); $i++) { 
+			if($this->entries[$i]['title'] == $title)
 				return $i;
 		}
 		return false;

@@ -39,5 +39,6 @@ class HomePage extends Page {
 		URL::comparePos(0, (PageFactory::GetDefaultPage() == $this->getName() ? Silex::getConfig()->get('url.base') : $this->getName()), true);
 
 		// assign template vars and stuff
+		Silex::getNav()->getCrumbs()->add('page.home', 'home');
 	}
 }
