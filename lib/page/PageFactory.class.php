@@ -14,7 +14,6 @@ class PageFactory {
 		foreach(scandir(DIR_LIB.'pages/') as $pageFile) {
 			if(is_file(DIR_LIB.'pages/'.$pageFile) && preg_match('/^(([a-zA-Z0-9]+)Page).class.php$/', $pageFile, $pageMatch)) {
 				$class = $pageMatch[1];
-
 				$page = new $class();
 				if($page instanceof Page)
 					self::$pages[$page->getName()] = $page;
