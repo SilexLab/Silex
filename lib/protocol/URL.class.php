@@ -56,6 +56,10 @@ class URL {
 		// make everything ok
 		$route = preg_replace('/(^[\/]+)|([\/]+$)/', '', $route);
 
+		// is it the default page? if yes, remove route
+		if($route == PageFactory::getDefaultPage())
+			$route = '';
+
 		// url route
 		$url = '';
 		if(!self::$format)

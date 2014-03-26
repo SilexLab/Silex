@@ -29,8 +29,8 @@ class PageFactory {
 		if(isset(self::$pages[URL::getRoute(0)]))
 			return self::$pages[URL::getRoute(0)];
 		// Try to get the default page
-		if(URL::getRoute() == Silex::getConfig()->get('url.base') && isset(self::$pages[Silex::getConfig()->get('page.default')]))
-			return self::$pages[Silex::getConfig()->get('page.default')];
+		if(URL::getRoute() == Silex::getConfig()->get('url.base') && isset(self::$pages[self::getDefaultPage()]))
+			return self::$pages[self::getDefaultPage()];
 		// Try to get the error page (because requested site wasn't found)
 		if(isset(self::$pages['error']))
 			return self::$pages['error'];

@@ -25,7 +25,7 @@ class DatabaseFactory {
 	 * @return Database
 	 */
 	public static function initDatabase($dbWrapper, $dbHost, $dbUser, $dbPassword, $dbName, $dbPort) {
-		if(defined('CLASS_DATABASE_FACTORY')) {
+		if(!defined('CLASS_DATABASE_FACTORY')) {
 			define('CLASS_DATABASE_FACTORY', true);
 			// Find available wrappers
 			foreach(scandir(DIR_LIB.'database/wrapper/') as $wrapper) {

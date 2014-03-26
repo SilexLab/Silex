@@ -61,26 +61,29 @@ class Language {
 
 	/**
 	 * Get language variable directory from this language
-	 * @param string $var Language variable
-	 * @return string|null
+	 * @param string $noed Language variable
+	 * @return string
 	 */
 	public function getVar($node) {
-		return array_key_exists($node, $this->heap) ? $this->heap[$node] : null;
+		return array_key_exists($node, $this->heap) ? $this->heap[$node] : $node;
 	}
 
 	/**
 	 * Get language variable
 	 * Fallback uses default language
-	 * @param string $var Language variable
-	 * @return string|null
+	 * @param string $node Language variable
+	 * @return string
 	 */
-	public function get($var) {
-		$result = $this->getVar($var);
+	public function get($node) {
+		// won't search for the value at all if it's not a node
+		if(!UString::strfind($node, '.') || UString::strfind($node, ' '))
+			return $node;
 
-		// If not existent, use the default language. Will return null here when not existent at all
-		// Stop if this is default language
-		if($result === null && $this !== LanguageFactory::getDefaultLanguage())
-			$result = LanguageFactory::getDefaultLanguage()->getVar($var);
+		$result = $this->getVar($node);
+
+		// If not existent, use the default language. Will return the value of $node here when not existent at all
+		if($result == $node && $this !== LanguageFactory::getDefaultLanguage())
+			$result = LanguageFactory::getDefaultLanguage()->getVar($node);
 
 		return $result;
 	}

@@ -19,7 +19,7 @@ class NavigationFactory {
 		foreach ($mainNav as $entry) {
 			$this->main->add(
 				$entry->title, // title
-				$entry->target, // link
+				URL::to($entry->target), // link
 				$entry->target == Silex::getPage()->getName() // is active?
 			);
 		}
