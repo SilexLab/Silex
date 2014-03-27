@@ -9,6 +9,7 @@ class User {
 	protected $id = 0;
 	protected $name = '';
 	protected $mail = '';
+	protected $group = null;
 	/*
 	 * Here is no password, because the authentication for users will be
 	 * implemented modular to support multiple authentication methods
@@ -19,6 +20,7 @@ class User {
 		$this->id = $dbData['id'];
 		$this->name = $dbData['name'];
 		$this->mail = $dbData['mail'];
+		$this->group = new Group((int)$dbData['group']); // TODO: -> Group.class.php:8
 	}
 
 	/**
@@ -32,7 +34,7 @@ class User {
 		$query->execute([
 			':id' => $this->id,
 			':name' => $this->name,
-			':mail' => $this->mail,
+			':mail' => $this->mail
 		]);
 	}
 
@@ -60,5 +62,10 @@ class User {
 
 	public function isGuest() {
 		return false;
+	}
+
+	public function getPermission() {
+		// TODO: inhire permission from group
+		return true;
 	}
 }
