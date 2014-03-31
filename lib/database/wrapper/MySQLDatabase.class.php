@@ -9,39 +9,35 @@
  * MySQL PDO wrapper and driver
  */
 class MySQLDatabase extends Database {
-	/**
-	 * Connect to the SQL server
-	 * @throws DatabaseException
-	 * @return void
-	 */
-	public function connect() {
-		// Default port
-		if(!$this->port)
-			$this->port = 3306;
+	public function connect($host = '', $username = '', $password = '', $database = '', $port = 0) {
+		// Store information
+		$this->database = $database;
 
-		$dsn = 'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->database.';';
+		// Default port
+		if(!$port)
+			$port = 3306;
+
+		$dsn = 'mysql:host='.$host.';port='.$port.';dbname='.$database.';';
 		$options = [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'];
 
 		try {
 			// Create PDO
-			$this->pdo = new PDO($dsn, $this->username, $this->password, $options);
+			$this->pdo = new PDO($dsn, $username, $password, $options);
 		} catch(PDOException $e) {
-			throw new DatabaseException('Failed to connect to MySQL server '.$this->host, $this);
+			throw new DatabaseException('Failed to connect to MySQL server '.$host, $this);
 		}
 	}
 
-	/**
-	 * Is this database type supported?
-	 * @return bool
-	 */
+	public function exists($table, $where) {
+		return (bool)$this->query('SELECT 1 FROM `'.$table.'` WHERE '.$where.' LIMIT 1')->rowCount();
+	}
+
+	// database information
+
 	public function isSupported() {
 		return (extension_loaded('PDO') && extension_loaded('pdo_mysql'));
 	}
 
-	/**
-	 * What's the id of the wrapper?
-	 * @return string
-	 */
 	public function getID() {
 		return 'mysql';
 	}

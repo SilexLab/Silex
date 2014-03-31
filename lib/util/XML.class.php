@@ -31,7 +31,7 @@ class XML {
 	}
 
 	public function __call($name, $arguments) {
-		return call_user_func_array([$this->xmlObj, $name], $arguments);
+		return call_user_func_array([$this->xmlObj, $name], empty($arguments) ? null : $arguments);
 	}
 
 	/**

@@ -31,7 +31,7 @@ class DatabaseFactory {
 			foreach(scandir(DIR_LIB.'database/wrapper/') as $wrapper) {
 				if(is_file(DIR_LIB.'database/wrapper/'.$wrapper) && preg_match('/^(([a-zA-Z0-9]+)Database).class.php$/', $wrapper, $databaseMatch)) {
 					$class = $databaseMatch[1];
-					$db = new $class($dbHost, $dbUser, $dbPassword, $dbName, $dbPort);
+					$db = new $class();
 					if($db instanceof Database)
 						self::$databaseWrapper[$db->getID()] = $db;
 	
@@ -47,7 +47,7 @@ class DatabaseFactory {
 		
 		// Connect to database
 		$db = self::$databaseWrapper[$dbWrapper];
-		$db->connect();
+		$db->connect($dbHost, $dbUser, $dbPassword, $dbName, $dbPort);
 
 		// Does it work?
 		if(!($db instanceof Database) || !$db->isSupported())
