@@ -5,17 +5,19 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-// TODO: GroupFactory: Speichert alle Gruppenobjekte in einem Pool (erstell Objekt bei Bedarf und verwendet dieses wieder).
-//       Ein Gruppenobjekt wird über die ID der Gruppe zurückgegeben (GroupFactory::getGroup($id) { return Group; }),
-//       dies verhindert, dass bei mehreren Nutzer die zu einer Gruppe gehören jedes mal ein neues Gruppenobjekt angelegt wird.
-
 class Group {
+	// 0 = guests
 	protected $id = 0;
+	protected $name = 'group.guest';
+	protected $permission = null;
+
 	/**
 	 * @param int $id
 	 */
 	public function __construct($id) {
-		//
+		// get datanbase info
+		$info = Silex::getDB()->query('SELECT * FROM `group` WHERE `id` = '.(int)$id.' LIMIT 1')->fetchObject();
+		$this->name = $info->name;
 	}
 
 	/**
@@ -28,5 +30,9 @@ class Group {
 
 	public function getID() {
 		return $this->id;
+	}
+
+	public function getName() {
+		return $this->name;
 	}
 }

@@ -7,4 +7,14 @@
 	<page>
 		<home>Home</home>
 	</page>
+	<group>
+		<guest>Guest</guest>
+		<guests>Guests</guests>
+		<user>User</user>
+		<users>Users</users>
+		<moderator>Moderator</moderator>
+		<moderators>Moderators</moderators>
+		<administrator>Administrator</administrator>
+		<administrators>Administrators</administrators>
+	</group>
 </language>

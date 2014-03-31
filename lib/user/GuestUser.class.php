@@ -26,7 +26,7 @@ class GuestUser extends User {
 	}
 
 	public function getName() {
-		return 'Guest';
+		return Silex::getLanguage()->get('group.guest');
 	}
 
 	public function isGuest() {

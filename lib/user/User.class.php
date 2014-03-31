@@ -10,6 +10,7 @@ class User {
 	protected $name = '';
 	protected $mail = '';
 	protected $group = null;
+	protected $permission = null;
 	/*
 	 * Here is no password, because the authentication for users will be
 	 * implemented modular to support multiple authentication methods
@@ -20,7 +21,7 @@ class User {
 		$this->id = $dbData['id'];
 		$this->name = $dbData['name'];
 		$this->mail = $dbData['mail'];
-		$this->group = new Group((int)$dbData['group']); // TODO: -> Group.class.php:8
+		$this->group = GroupFactory::get((int)$dbData['group']);
 	}
 
 	/**
@@ -29,12 +30,14 @@ class User {
 	public function save() {
 		$query = Silex::getDB()->prepare('UPDATE `user` SET
 				`name` = :name,
-				`mail` = :mail
+				`mail` = :mail,
+				`group` = :group
 				WHERE `id` = :id');
 		$query->execute([
 			':id' => $this->id,
 			':name' => $this->name,
-			':mail' => $this->mail
+			':mail' => $this->mail,
+			':group' => $this->group->getID();
 		]);
 	}
 

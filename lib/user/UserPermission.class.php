@@ -5,7 +5,7 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-class Permission {
+class UserPermission extends Permission {
 	public function __construct($id) {
 		// Nothing to do yet
 	}

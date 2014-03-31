@@ -31,7 +31,7 @@ class UserFactory {
 
 		// Create new
 		$query = Silex::getDB()->prepare('SELECT * FROM `user` WHERE `id` = :id')->execute([':id' => $userID]);
-		if($query->getRowCount() == 1) {
+		if($query->rowCount() == 1) {
 			$user = new User($query->fetchArray(PDO::FETCH_ASSOC));
 			if($user instanceof User) {
 				self::$userBuffer[(int)$user->getID()] = $user;
@@ -57,7 +57,7 @@ class UserFactory {
 
 		// Create new
 		$query = Silex::getDB()->prepare('SELECT * FROM `user` WHERE `name` = :name')->execute([':name' => $userName]);
-		if($query->getRowCount() == 1) {
+		if($query->rowCount() == 1) {
 			$user = new User($query->fetchArray(PDO::FETCH_ASSOC));
 			if($user instanceof User) {
 				self::$userBuffer[(int)$user->getID()] = $user;

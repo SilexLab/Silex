@@ -83,7 +83,7 @@ class Silex {
 		if(!$withoutOutput) {
 			Event::fire('silex.construct.before_display');
 			header('Content-Type: text/html; charset=utf-8');
-			self::getTemplate()->display('index.tpl');
+			self::$template->display('index.tpl');
 		}
 		Event::fire('silex.construct.end');
 	}
