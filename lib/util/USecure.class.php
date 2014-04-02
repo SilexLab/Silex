@@ -15,7 +15,7 @@ class USecure {
 	 */
 	public static function encryptPassword($password, $email, $rounds = '08') {
 		$hash = hash_hmac('whirlpool', str_pad($password, strlen($password) * 4, sha1($email), STR_PAD_BOTH), Silex::getConfig()->get('password.salt'), true);
-		$salt = substr(str_shuffle('./0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 22); // TODO: replace str_shuffle with something more random
+		$salt = UString::getRandomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ./');
 		return crypt($hash, '$2a$'.$rounds.'$'.$salt.'$');
 	}
 
