@@ -22,6 +22,7 @@ class User {
 		$this->name = $dbData['name'];
 		$this->mail = $dbData['mail'];
 		$this->group = GroupFactory::get((int)$dbData['group']);
+		$this->permission = new UserPermission($this->id);
 	}
 
 	/**
@@ -37,7 +38,7 @@ class User {
 			':id' => $this->id,
 			':name' => $this->name,
 			':mail' => $this->mail,
-			':group' => $this->group->getID();
+			':group' => $this->group->getID()
 		]);
 	}
 
@@ -69,6 +70,7 @@ class User {
 
 	public function getPermission() {
 		// TODO: inhire permission from group
+		// try user permission, if failed try group permission
 		return true;
 	}
 }

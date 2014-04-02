@@ -18,6 +18,7 @@ class Group {
 		// get datanbase info
 		$info = Silex::getDB()->query('SELECT * FROM `group` WHERE `id` = '.(int)$id.' LIMIT 1')->fetchObject();
 		$this->name = $info->name;
+		$this->permission = new GroupPermission($id);
 	}
 
 	/**
