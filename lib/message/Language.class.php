@@ -76,7 +76,7 @@ class Language {
 	 */
 	public function get($node) {
 		// won't search for the value at all if it's not a node
-		if(!UString::strfind($node, '.') || UString::strfind($node, ' '))
+		if(!UString::find($node, '.') || UString::find($node, ' '))
 			return $node;
 
 		$result = $this->getVar($node);

@@ -62,22 +62,22 @@ class UString {
 	 * @param string $needle
 	 * @return bool
 	 */
-	public static function strfind($haystack, $needle) {
+	public static function find($haystack, $needle) {
 		return strpos($haystack, $needle) !== false;
 	}
 
 	/**
-	 * Generates a random alphanumeric string
+	 * Generates a random string
 	 * @param  int    $length
 	 * @param  string $pool optional
 	 * @return string
 	 */
-	public static function getRandomString($length, $pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890') {
-		$rand = '';
-		for($i = 0; $i < $length; $i++) {
-			$rand .= substr(str_shuffle($pool), 0, 1);
-		}
-		return $rand;
+	public static function getRandomString($length,
+		$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!?@(){}[]\/=~$%&#*-+.,_') {
+		$result = '';
+		for($i = 0; $i < $length; $i++)
+			$result .= $pool{rand(0, strlen($pool) - 1)};
+		return $result;
 	}
 
 	/**
