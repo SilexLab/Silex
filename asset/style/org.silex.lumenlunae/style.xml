@@ -8,8 +8,10 @@
 	</description>
 	<css-files>
 		<css-file>main.css</css-file>
+		<css-file>input.css</css-file>
 	</css-files>
 	<js-files>
+		<js-file>js/jquery-2.1.0.min.js</js-file>
 		<js-file>js/main.js</js-file>
 	</js-files>
 	<class-file>org.silex.lumenlunae.php</class-file>

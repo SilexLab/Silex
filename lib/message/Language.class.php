@@ -87,4 +87,14 @@ class Language {
 
 		return $result;
 	}
+
+	public function getTemplateArray() {
+		return [
+			'id' => $this->id,
+			'name' => $this->name,
+			'description' => $this->description,
+			'name-en' => $this->nameEn,
+			'description-en' => $this->descriptionEn
+		];
+	}
 }

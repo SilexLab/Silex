@@ -16,13 +16,16 @@ class NavigationFactory {
 
 	public function prepare() {
 		$mainNav = Silex::getDB()->query('SELECT * FROM `navigation` ORDER BY `position`')->fetchAllObject();
+		$main = [];
 		foreach ($mainNav as $entry) {
-			$this->main->add(
-				$entry->title, // title
-				URL::to($entry->target), // link
-				$entry->target == Silex::getPage()->getName() // is active?
-			);
+			$main[] = [
+				'title' => $entry->title, // title
+				'link' => URL::to($entry->target), // link
+				'active' => $entry->target == Silex::getPage()->getName() // is active?
+			];
 		}
+
+		$this->main->prepend($main);
 	}
 
 	public function getTemplateArray() {

@@ -10,6 +10,7 @@
  */
 class GuestUser extends User {
 	public function __construct() {
+		$this->name = 'group.guest';
 		return; // Leave default values on properties
 	}
 
@@ -17,16 +18,12 @@ class GuestUser extends User {
 		return;
 	}
 
-	public function getID() {
-		return 0;
+	public function getName() {
+		return Silex::getLanguage()->get($this->name);
 	}
 
 	public function getMail() {
 		return null;
-	}
-
-	public function getName() {
-		return Silex::getLanguage()->get('group.guest');
 	}
 
 	public function isGuest() {

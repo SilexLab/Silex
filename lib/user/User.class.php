@@ -73,4 +73,13 @@ class User {
 		// try user permission, if failed try group permission
 		return true;
 	}
+
+	public function getTemplateArray() {
+		return [
+			'name' => $this->getName(),
+			'id' => $this->id,
+			'mail' => $this->getMail(),
+			'is_guest' => $this->isGuest()
+		];
+	}
 }

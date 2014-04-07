@@ -40,6 +40,5 @@ class HomePage extends Page {
 
 		// assign template vars and stuff
 		Silex::getNav()->getCrumbs()->add('page.home', URL::to('home'));
-		Silex::getNav()->getCrumbs()->add('Asdf', 'husuhasa');
 	}
 }

@@ -3,9 +3,13 @@
 	<general>
 		<test>This is the first test!</test>
 		<test2>This is the second test :D</test2>
+		<search>Search</search>
+		<login>Login</login>
+		<logout>Logout</logout>
 	</general>
 	<page>
 		<home>Home</home>
+		<design>Design</design>
 	</page>
 	<group>
 		<guest>Guest</guest>
@@ -17,4 +21,13 @@
 		<administrator>Administrator</administrator>
 		<administrators>Administrators</administrators>
 	</group>
+	<notification>
+		<javascript>Please enable your javascript in order to view this site.</javascript>
+	</notification>
+	<input>
+		<username>Username</username>
+		<email>E-Mail</email>
+		<password>Password</password>
+		<show-password>Show Password</show-password>
+	</input>
 </language>

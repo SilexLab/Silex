@@ -12,11 +12,14 @@ class Navigation {
 		//
 	}
 
+	// TODO: merge add and prepend (similarities)
+
 	/**
-	 * Add a entry to the entries
-	 * @param  mixed  $title
-	 * @param  string $link
-	 * @return bool   success
+	 * Append an entry to the entries
+	 * @param  string|array $title
+	 * @param  string       $link
+	 * @param  bool         $active
+	 * @return bool         success
 	 */
 	public function add($title, $link = '', $active = false) {
 		// add multiple entries
@@ -29,6 +32,32 @@ class Navigation {
 		// add a single entry
 		if($link && $this->entries[] = ['title' => Silex::getLanguage()->get($title), 'link' => $link, 'active' => $active])
 			return true;
+		return false;
+	}
+
+	/**
+	 * Prepend an entry to the entries
+	 * @param  string|array $title
+	 * @param  string       $link
+	 * @param  bool         $active
+	 * @return bool         success
+	 */
+	public function prepend($title, $link = '', $active = false) {
+		$entries = [];
+
+		if(is_array($title)) {
+			$success = true;
+			foreach($title as $entry) {
+				$entries[] = ['title' => Silex::getLanguage()->get($entry['title']),
+					'link' => $entry['link'],
+					'active' => isset($entry['active']) ? $entry['active'] : false];
+			}
+			$this->entries = array_merge($entries, $this->entries);
+			return true;
+		} else if($link && $entries[] = ['title' => Silex::getLanguage()->get($title), 'link' => $link, 'active' => $active]) {
+			$this->entries = array_merge($entries, $this->entries);
+			return true;
+		}
 		return false;
 	}
 
@@ -84,5 +113,32 @@ class Navigation {
 				return $i;
 		}
 		return false;
+	}
+
+	/**
+	 * toggle the active status of an entry
+	 * @param string|int $title  title or id of an entry
+	 * @param int        $active optional (-1 = toggle, 0 = not active, 1 = active)
+	 */
+	public function toggleActive($title, $active = -1) {
+		$id = false;
+
+		// get id
+		if(is_int($title) && isset($this->entries[$title]))
+			$id = $title;
+		else
+			$id = $this->getID($title);
+
+		// no id?
+		if($id === false)
+			return false;
+
+		// toggle active
+		if($active >= 0)
+			$this->entries[$id]['active'] = (bool)$active;
+		else
+			$this->entries[$id]['active'] ^= true;
+
+		return true;
 	}
 }

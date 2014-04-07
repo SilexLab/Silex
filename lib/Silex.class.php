@@ -76,7 +76,10 @@ class Silex {
 		self::$template->assign([
 			'page'  => self::$page->getTemplateArray(),
 			'style' => self::$style->getTemplateArray(),
-			'nav'   => self::$navigation->getTemplateArray()
+			'nav'   => self::$navigation->getTemplateArray(),
+			'url'   => ['base' => self::$config->get('url.base')],
+			'user'  => self::$user->getTemplateArray(),
+			'lang'  => self::getLanguage()->getTemplateArray()
 		]);
 
 		// Display template

@@ -6,6 +6,10 @@
  */
 
 class DesignPage extends Page {
+	public function __construct() {
+		Silex::getNav()->getMain()->add($this->getTitle(), URL::to($this->getName()));
+	}
+
 	/**
 	 * Get the pages short name. Has to be unique
 	 * @return string
@@ -35,6 +39,10 @@ class DesignPage extends Page {
 	 * @return void
 	 */
 	public function prepare() {
+		Silex::getNav()->getMain()->toggleActive($this->getTitle(), 1);
 		Silex::getNav()->getCrumbs()->add('page.design', URL::to('design'));
+		Silex::getNav()->getCrumbs()->add('Test', URL::to('design/test'));
+		Silex::getNav()->getCrumbs()->add('Some', URL::to('design/some'));
+		Silex::getNav()->getCrumbs()->add('Breadcrumbs', URL::to('design/crumbs'));
 	}
 }

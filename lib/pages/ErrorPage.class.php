@@ -42,5 +42,7 @@ class ErrorPage extends Page {
 		Silex::getTemplate()->assign(['error' => [
 			'code' => $this->errorCode
 		]]);
+
+		Silex::getNav()->getCrumbs()->add('page.'.PageFactory::GetDefaultPage(), URL::to(PageFactory::GetDefaultPage()));
 	}
 }
