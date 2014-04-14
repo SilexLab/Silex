@@ -34,16 +34,23 @@
 			<div class="content-box right">
 				<nav class="user">
 					<ul>
-						<li><a href="/search" title="{'general.search'|lang}"><img src="{$style.url_path}images/icon-magnifying-glass-w.svg" alt="{'general.search'|lang}" class="search"></a></li>
-						<li><a href="/login" title="{'general.login'|lang}"><img src="{$style.url_path}images/icon-logout-w.svg" alt="{'general.login'|lang}" class="loginout"></a></li>
+						<li><a href="/search" title="{'general.search'|lang}" id="user-search"><img src="{$style.url_path}images/icon-magnifying-glass-b.svg" alt="{'general.search'|lang}" class="search"></a></li>
+						<li><a href="/login" title="{'general.login'|lang}" id="user-login"><img src="{$style.url_path}images/icon-logout-b.svg" alt="{'general.login'|lang}" class="loginout"></a></li>
 						<li><a href="/user/{$user.name}">{$user.name}</a></li>
-						<li class="avatar"><a href="/user/{$user.name}"><img src="{$style.url_path}images/icon-user-w.svg" alt="avatar" class="avatar"></a></li>
+						<li class="avatar"><a href="/user/{$user.name}"><img src="{$style.url_path}images/icon-user-b.svg" alt="avatar" class="avatar"></a></li>
 					</ul>
 				</nav>
 			</div>
 		</div>
 	</div>
 </header>
+<section id="user-panel">
+	<div class="w-size">
+		<div class="w-content">
+			User Panel
+		</div>
+	</div>
+</section>
 <section class="content-container">
 	<div class="notification">
 		<noscript>

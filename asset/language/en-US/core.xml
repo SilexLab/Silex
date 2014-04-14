@@ -29,5 +29,6 @@
 		<email>E-Mail</email>
 		<password>Password</password>
 		<show-password>Show Password</show-password>
+		<search>Search</search>
 	</input>
 </language>

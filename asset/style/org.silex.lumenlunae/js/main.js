@@ -1,4 +1,68 @@
+function updateUserPanel(e, action, ajaxSource, ajaxData) {
+	// optional ajaxData value
+	ajaxData = typeof ajaxData !== 'undefined' ? ajaxData : {};
+
+	// prevent hyperlink
+	e.preventDefault();
+
+	var defObj = $.Deferred();
+
+	// user panel
+	var panel = $('#user-panel');
+
+	function openPanel() {
+		panel.css('height', panel.children('.w-size').outerHeight());
+		if(!panel.hasClass('opened'))
+			panel.addClass('opened');
+	}
+
+	function closePanel() {
+		panel.css('height', 0);
+		panel.removeClass('opened');
+	}
+
+	function getContent() {
+		$.ajax({
+			url: ajaxSource,
+			data: ajaxData,
+			async: false}).done(function(data) {
+			panel.find('.w-content').html(data);
+		});
+	}
+
+	if(panel.hasClass('opened')) {
+		if(action.hasClass('active')) {
+			closePanel();
+			action.removeClass('active');
+		} else {
+			getContent();
+			$('nav.user').find('.active').removeClass('active');
+			action.addClass('active');
+			openPanel();
+		}
+	} else {
+		getContent();
+		action.addClass('active');
+		openPanel();
+	}
+
+	// function done
+	return defObj.resolve();
+	// function promise to be done soon
+	//return defObj.promise();
+}
+
 $(document).ready(function() {
+	// user panel
+	$('#user-search').on('click', function(e) {
+		updateUserPanel(e, $(this), 'api/user-panel/searchbar.html').done(function() {
+			$('#user-search-bar').focus();
+		});
+	});
+	$('#user-login').on('click', function(e) {
+		updateUserPanel(e, $(this), 'api/user-panel/login.html');
+	});
+
 	/* Style */
 	// $('#user_panel_toggle').on('click', function(e) {
 	// 	e.preventDefault();

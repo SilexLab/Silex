@@ -13,4 +13,7 @@ Big Input
 		<input type="password" placeholder="{'input.password'|lang}">
 		<span class="switch" title="{'input.show-password'|lang}"></span>
 	</div>
+	<div class="input search big">
+		<input type="search" placeholder="{'input.search'|lang}">
+	</div>
 </div>

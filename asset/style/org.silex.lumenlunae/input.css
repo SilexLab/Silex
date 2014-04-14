@@ -7,7 +7,7 @@
 	display: block;
 	box-sizing: border-box;
 	margin-top: -5px;
-	width: 400px;
+	width: 100%;
 	height: 6px;
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
@@ -32,22 +32,35 @@
 	background-size: 20px;
 	text-align: center;
 	font-size: 18px;
+	transition: background 0.5s linear;
 }
 .input.big.email input {
-	background-image: url(images/icon-mail-2e2e2e.svg);
+	background-image: url(images/icon-mail-d.svg);
 }
 .input.big.user input {
-	background-image: url(images/icon-user-2e2e2e.svg);
+	background-image: url(images/icon-user-d.svg);
+}
+.input.big.search input {
+	background-image: url(images/icon-magnifying-glass-d.svg);
+}
+.input.big input:focus {
+	background-image: none;
 }
 .input.big.password .switch {
+	position: relative;
 	display: block;
 	float: right;
-	width: 20px;
-	height: 20px;
-	margin-top: -25px;
-	margin-right: 5px;
-	position: relative;
-	background: url(images/icon-preview-2e2e2e.svg) 50% 50% no-repeat;
+	margin-top: -27px;
+	margin-right: 3px;
+	width: 24px;
+	height: 24px;
+	border-radius: 2px;
+	background: url(images/icon-preview-d.svg) 50% 50% no-repeat;
 	background-size: 20px;
 	cursor: pointer;
+	transition: all .75s;
+}
+.input.big.password .switch:hover {
+	background-color: rgba(127, 127, 127, .25);
+	transition: all .25s;
 }
