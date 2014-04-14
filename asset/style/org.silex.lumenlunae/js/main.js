@@ -56,7 +56,14 @@ $(document).ready(function() {
 	// user panel
 	$('#user-search').on('click', function(e) {
 		updateUserPanel(e, $(this), 'api/user-panel/searchbar.html').done(function() {
-			$('#user-search-bar').focus();
+			// update input focus
+			$('#user-search-bar input').on('focus', function(e) {
+				$(this).closest('.input').addClass('focus');
+			}).on('blur', function(e) {
+				$(this).closest('.input').removeClass('focus');
+			});
+			
+			$('#user-search-bar input').focus();
 		});
 	});
 	$('#user-login').on('click', function(e) {

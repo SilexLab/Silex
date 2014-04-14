@@ -64,3 +64,7 @@
 	background-color: rgba(127, 127, 127, .25);
 	transition: all .25s;
 }
+
+#user-search-bar {
+	width: 60%;
+}
