@@ -72,7 +72,7 @@ header a {
 nav.main li {
 	display: block;
 	float: left;
-	margin-right: 5px;
+	margin-left: 5px;
 }
 nav.main li a {
 	display: block;
@@ -92,7 +92,7 @@ nav.main li a:hover, nav.main li.active a {
 nav.user li {
 	display: block;
 	float: left;
-	margin-left: 5px;
+	margin-right: 5px;
 	height: 45px;
 	text-align: center;
 	font-size: 13px;
@@ -183,7 +183,6 @@ nav.breadcrumbs .crust:last-child::before, nav.breadcrumbs .crust:last-child .cr
 
 #page-logo {
 	margin-right: 15px;
-	margin-left: -5px;
 	padding: 0 5px 5px 5px;
 	height: 45px;
 	border-bottom: 3px solid transparent;

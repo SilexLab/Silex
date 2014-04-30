@@ -147,4 +147,10 @@ class URL {
 		}
 		return null;
 	}
+
+	public static function modify() {
+		//return new URLModify(); // modify current url
+		// -> add(key, value), remove(key), changeValue(key, newValue)
+		// URL::modify()->remove('test');
+	}
 }

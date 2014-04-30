@@ -24,7 +24,7 @@
 
 .input.big input {
 	box-sizing: border-box;
-	padding: 0 5px;
+	padding: 0 28px 0 5px;
 	width: 100%;
 	height: 30px;
 	border: 0;
@@ -34,6 +34,9 @@
 	font-size: 18px;
 	transition: background 0.5s linear;
 }
+.input.big.text input {
+	padding-right: 5px;
+}
 .input.big.email input {
 	background-image: url(images/icon-mail-d.svg);
 }
@@ -42,9 +45,6 @@
 }
 .input.big.search input {
 	background-image: url(images/icon-magnifying-glass-d.svg);
-}
-.input.big input:focus {
-	background-image: none;
 }
 .input.big.password .switch {
 	position: relative;

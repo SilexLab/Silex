@@ -21,6 +21,16 @@
 				<a href="{$url.base}"><img src="{$style.url_path}images/logo-single.svg" alt="Silex logo" title="Silex" id="page-logo"></a>
 			</div>
 			<div class="content-box">
+				<nav class="user">
+					<ul>
+						<li><a href="/search" title="{'general.search'|lang}" id="user-search"><img src="{$style.url_path}images/icon-magnifying-glass-b.svg" alt="{'general.search'|lang}" class="search"></a></li>
+						<li><a href="/login" title="{'general.login'|lang}" id="user-login"><img src="{$style.url_path}images/icon-logout-b.svg" alt="{'general.login'|lang}" class="loginout"></a></li>
+						<li><a href="/user/{$user.id}-{$user.name}">{$user.name}</a></li>
+						<li class="avatar"><a href="/user/{$user.id}-{$user.name}"><img src="{$style.url_path}images/icon-user-b.svg" alt="avatar" class="avatar"></a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="content-box right">
 				<nav class="main">
 					<ul>
 {foreach $nav.main as $entry}
@@ -28,16 +38,6 @@
 							<a href="{$entry.link}">{$entry.title}</a>
 						</li>
 {/foreach}
-					</ul>
-				</nav>
-			</div>
-			<div class="content-box right">
-				<nav class="user">
-					<ul>
-						<li><a href="/search" title="{'general.search'|lang}" id="user-search"><img src="{$style.url_path}images/icon-magnifying-glass-b.svg" alt="{'general.search'|lang}" class="search"></a></li>
-						<li><a href="/login" title="{'general.login'|lang}" id="user-login"><img src="{$style.url_path}images/icon-logout-b.svg" alt="{'general.login'|lang}" class="loginout"></a></li>
-						<li><a href="/user/{$user.name}">{$user.name}</a></li>
-						<li class="avatar"><a href="/user/{$user.name}"><img src="{$style.url_path}images/icon-user-b.svg" alt="avatar" class="avatar"></a></li>
 					</ul>
 				</nav>
 			</div>
