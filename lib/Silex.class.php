@@ -114,6 +114,13 @@ class Silex {
 	}
 
 	/**
+	 * @return Modules
+	 */
+	public static final function getModule() {
+		return self::$modules;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public static final function isDebug() {

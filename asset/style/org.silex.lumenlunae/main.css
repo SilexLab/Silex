@@ -212,6 +212,13 @@ nav.breadcrumbs .crust:last-child::before, nav.breadcrumbs .crust:last-child .cr
 .content-container {
 	background: #fff;
 }
+.content-container.main-content {
+	color: #555;
+}
+.content-container.main-content p {
+	margin: 15px 0;
+	text-align: justify;
+}
 
 #user-panel {
 	position: absolute;
@@ -246,6 +253,15 @@ footer.main .table {
 	flex-direction: row;
 }
 
-footer.main .table div {
+footer.main .table > div {
 	flex: 1 1 auto;
+}
+footer.main .table > div:first-child {
+	text-align: left;
+}
+footer.main .table > div:nth-child(2) {
+	text-align: center;
+}
+footer.main .table > div:last-child {
+	text-align: right;
 }

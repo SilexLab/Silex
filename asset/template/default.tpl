@@ -35,7 +35,7 @@
 		</div>
 	</div>
 </section>
-<section class="content-container">
+<section class="content-container main-content">
 	<div class="notification">
 		<noscript>
 			<div class="info">
