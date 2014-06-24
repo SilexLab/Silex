@@ -45,11 +45,30 @@ class Modules {
 	}
 
 	/**
+	 * Get the status of a module
+	 *  1 = enabled
+	 *  0 = disabled
+	 * -1 = not installed
+	 * @param  string $module module name
+	 * @return int
+	 */
+	public function status($module) {
+		if(array_key_exists($module, $this->modules)) {
+			// TODO: check in database if module is enabled or disabled
+			if(true)
+				return 1;
+			return 0;
+		}
+		return -1;
+	}
+
+	/**
 	 * Register a modul
 	 * @param string $module
 	 * @param string $source
 	 */
 	public function register($module = '', $source = '') {
+		// TODO: don't register disabled modules (database)
 		if(empty($module)) {
 			foreach($this->prioritySort($this->modules) as $module => $n) {
 				$this->register($module, $module);
@@ -99,7 +118,7 @@ class Modules {
 		// Get priority
 		foreach($modules as $name => $object) {
 			$priority = $object->getPriority();
-			if($priority === -1)
+			if($priority <= -1)
 				$holdDefault[$name] = $priority;
 			else
 				$hold[$name] = $priority;
