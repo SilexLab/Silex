@@ -19,6 +19,14 @@ abstract class Page implements ITemplatable {
 	abstract public function getTitle();
 
 	/**
+	 * Get the file name of the template (base "framework")
+	 * @return string
+	 */
+	public function getTemplateBase() {
+		return 'default.tpl';
+	}
+
+	/**
 	 * Get the file name of the page's template
 	 * @return string
 	 */
@@ -46,6 +54,7 @@ abstract class Page implements ITemplatable {
 		return [
 			'name' => $this->getName(),
 			'title' => $this->getTitle(),
+			'base_tpl' => $this->getTemplateBase(),
 			'template' => $this->getTemplateName(),
 			'is_active' => $this->isActive(),
 			'object' => $this

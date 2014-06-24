@@ -24,6 +24,7 @@ class Modules {
 				$obj = new $class;
 				if($obj instanceof IModule)
 					$this->modules[$module] = $obj;
+				unset($obj);
 			}
 		}
 
@@ -53,6 +54,8 @@ class Modules {
 					}
 				}
 			}
+
+			// TODO: sort by priority
 
 			if(!in_array($module, $this->registered)) {
 				$m->register();

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
 	<general>
-		<test>This is the first test!</test>
-		<test2>This is the second test :D</test2>
 		<search>Search</search>
 		<login>Login</login>
 		<logout>Logout</logout>

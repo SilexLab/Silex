@@ -68,6 +68,10 @@ class Template {
 			$this->templateDirs = array_merge($this->templateDirs, (array)$directory);
 	}
 
+	public function getVars($var = null) {
+		return $this->smarty->getTemplateVars($var);
+	}
+
 	private function makeSettings() {
 		$this->smarty->setTemplateDir($this->templateDirs);
 	}

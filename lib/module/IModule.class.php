@@ -17,4 +17,12 @@ interface IModule {
 	 * @return array
 	 */
 	public function getParents();
+
+	/**
+	 * just get the module priority (positive int)
+	 * low number = high priority
+	 * -1         = default priority
+	 * @return int
+	 */
+	public function getPriority();
 }

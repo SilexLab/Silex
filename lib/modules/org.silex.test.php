@@ -14,6 +14,10 @@ class org_silex_test implements IModule {
 		];
 	}
 
+	public function getPriority() {
+		return -1;
+	}
+
 
 	public function testest($v = null) {
 		// we are testing stuff

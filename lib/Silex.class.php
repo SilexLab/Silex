@@ -74,6 +74,7 @@ class Silex {
 		// Assign some default template variables
 		Event::fire('silex.construct.before_template_assign');
 		self::$template->assign([
+			'DEBUG' => DEBUG,
 			'page'  => self::$page->getTemplateArray(),
 			'style' => self::$style->getTemplateArray(),
 			'nav'   => self::$navigation->getTemplateArray(),

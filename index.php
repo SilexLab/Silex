@@ -32,4 +32,5 @@ set_error_handler(['Silex', 'handleError'], E_ALL);
 
 new Silex();
 
-//echo '<br>'.round((microtime(true) - MICROTIME) * 1000, 4).' ms';
+if(DEBUG)
+	echo '<p style="text-align: center; color: #aaa; font-size: 12px;">'.round((microtime(true) - MICROTIME) * 1000, 4).' ms'.'</p>';

@@ -183,8 +183,8 @@ nav.breadcrumbs .crust:last-child::before, nav.breadcrumbs .crust:last-child .cr
 
 #page-logo {
 	margin-right: 15px;
-	padding: 0 5px 5px 5px;
-	height: 45px;
+	padding: 2px 5px 8px 5px;
+	height: 40px;
 	border-bottom: 3px solid transparent;
 	transition: all .75s;
 }
