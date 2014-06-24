@@ -51,8 +51,8 @@ class Modules {
 	 */
 	public function register($module = '', $source = '') {
 		if(empty($module)) {
-			foreach($this->modules as $m => $n) {
-				$this->register($m, $m);
+			foreach($this->prioritySort($this->modules) as $module => $n) {
+				$this->register($module, $module);
 			}
 		} else {
 			$m = $this->modules[$module];
@@ -67,6 +67,7 @@ class Modules {
 				}
 			}
 
+			// Get parents
 			if($m->getParents()) {
 				foreach($m->getParents() as $parent => $importance) {
 					if(!in_array($parent, $this->registered)) {
@@ -78,12 +79,36 @@ class Modules {
 				}
 			}
 
-			// TODO: sort by priority
-
 			if(!in_array($module, $this->registered)) {
 				$m->register();
 				$this->registered[] = $module;
 			}
 		}
+	}
+
+	/**
+	 * Sort by priority
+	 * (the output array contains no more the objects)
+	 * @param  array $modules
+	 * @return array
+	 */
+	private function prioritySort(array $modules) {
+		$hold = [];
+		$holdDefault = [];
+
+		// Get priority
+		foreach($modules as $name => $object) {
+			$priority = $object->getPriority();
+			if($priority === -1)
+				$holdDefault[$name] = $priority;
+			else
+				$hold[$name] = $priority;
+		}
+
+		// Sort by priority
+		asort($hold);
+
+		// Add default priorities at the end
+		return array_merge($hold, $holdDefault);
 	}
 }
