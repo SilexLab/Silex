@@ -20,8 +20,11 @@ class Config {
 	 */
 	public function __construct(array $config = []) {
 		// Fetch config
-		if($config)
+		if($config) {
+			// Just remove these entries
+			UArray::removeElements($config, ['database.host', 'database.user', 'database.password', 'database.name', 'database.port', 'database.wrapper']);
 			$this->config = $config;
+		}
 		$config = Silex::getDB()->query('SELECT * FROM `config`')->fetchAllObject();
 
 		// Now work with that stuff you got

@@ -12,16 +12,11 @@ class Silex {
 	protected static $db = null;
 	protected static $config = null;
 	protected static $modules = null;
-	protected static $template = null;
-	protected static $user = null;
-	protected static $page = null;
-	protected static $style = null;
-	protected static $navigation = null;
 
 	/**
 	 * Start Silex up!
 	 */
-	public final function __construct($withoutOutput = false) {
+	public final function __construct() {
 		// Read config file
 		if(!is_file(DIR_LIB.'config.inc.php'))
 			throw new CoreException('Y U NO HAVE A CONFIG FILE?!', 0, 'Your config file can\'t be found.');
@@ -34,62 +29,26 @@ class Silex {
 			$config['database.password'],
 			$config['database.name'],
 			$config['database.port']);
-		// Just remove these entries
-		UArray::removeElements($config, ['database.host', 'database.user', 'database.password', 'database.name', 'database.port', 'database.wrapper']);
 		self::$config = new Config($config);
 
 		// Set default timezone
 		date_default_timezone_set(self::$config->get('time.timezone')); // TODO: prefer user settings
 
-		// User and session stuff
-		Session::start();
-		LoginCheck::init();
-		self::$user = LoginCheck::getUser();
-		// Initiate language
-		LanguageFactory::init();
-
-		// Check URL
-		URL::check();
-
-		// Navigation
-		self::$navigation = new NavigationFactory();
-
-		// Initiate page
-		PageFactory::init();
-		self::$page = PageFactory::getPage();
-
-		// Style
-		StyleFactory::init();
-		self::$style = StyleFactory::getStyle();
-
 		// Modules
-		Event::fire('silex.construct.before_modules');
 		self::$modules = new Modules(DIR_LIB.'modules/');
-		Event::fire('silex.construct.after_modules');
+		Event::fire('silex.construct.before_modules_register');
+		self::$modules->register();
+		Event::fire('silex.construct.after_modules_register');
 
-		// Initiate templates
-		self::$template = new Template(DIR_TPL, !self::isDebug());
-		self::$page->prepare();
-		self::$navigation->prepare();
-		// Assign some default template variables
-		Event::fire('silex.construct.before_template_assign');
-		self::$template->assign([
-			'DEBUG' => DEBUG,
-			'page'  => self::$page->getTemplateArray(),
-			'style' => self::$style->getTemplateArray(),
-			'nav'   => self::$navigation->getTemplateArray(),
-			'url'   => ['base' => self::$config->get('url.base')],
-			'user'  => self::$user->getTemplateArray(),
-			'lang'  => self::getLanguage()->getTemplateArray()
-		]);
-
-		// Display template
-		if(!$withoutOutput) {
-			Event::fire('silex.construct.before_display');
-			header('Content-Type: text/html; charset=utf-8');
-			self::$template->display('index.tpl');
-		}
 		Event::fire('silex.construct.end');
+	}
+
+	/**
+	 * Call module provided methods
+	 * @return mixed
+	 */
+	public static final function __callStatic($name, $args) {
+		return self::$modules->callMethod($name, $args);
 	}
 
 	/**
@@ -147,40 +106,11 @@ class Silex {
 	}
 
 	/**
-	 * Get template instance
-	 * @return Template
-	 */
-	public static final function getTemplate() {
-		return self::$template;
-	}
-
-	/**
-	 * @return User
-	 */
-	public static final function getUser() {
-		return self::$user;
-	}
-
-	/**
 	 * @return Language
 	 */
 	public static final function getLanguage() {
 		// TODO: Which language does he/she/it want?
 		return LanguageFactory::getDefaultLanguage();
-	}
-
-	/**
-	 * @return Page
-	 */
-	public static final function getPage() {
-		return self::$page;
-	}
-
-	/**
-	 * @return Breadcrumbs
-	 */
-	public static final function getNav() {
-		return self::$navigation;
 	}
 
 	/**

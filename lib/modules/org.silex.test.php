@@ -22,4 +22,8 @@ class org_silex_test implements IModule {
 	public function testest($v = null) {
 		// we are testing stuff
 	}
+
+	public function getMethods() {}
+
+	public function callMethod($name, $args) {}
 }

@@ -25,4 +25,19 @@ interface IModule {
 	 * @return int
 	 */
 	public function getPriority();
+
+	/**
+	 * Get the methods wich are called in Silex provided by this module
+	 * called by __callStatic() in Silex (Silex::MethodName()->[...])
+	 * @return array or nothing when no methods are provided
+	 */
+	public function getMethods();
+
+	/**
+	 * This handle and call requested methods
+	 * @param  string $name
+	 * @param  array  $args
+	 * @return mixed or nothing when no methods are provided
+	 */
+	public function callMethod($name, $args);
 }

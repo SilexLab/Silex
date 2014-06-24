@@ -8,6 +8,7 @@
 class Modules {
 	private $modules = [];
 	private $registered = [];
+	private $methods = [];
 
 	/**
 	 * Initialize modules
@@ -27,9 +28,20 @@ class Modules {
 				unset($obj);
 			}
 		}
+	}
 
-		// register modules
-		$this->register();
+	/**
+	 * Get a method registered by a module
+	 * @param  string $method
+	 * @param  array  $args
+	 * @return mixed
+	 */
+	public function callMethod($method, $args) {
+		return isset($this->methods[$method]) ? $this->modules[$this->methods[$method]]->callMethod($method, $args) : null;
+	}
+
+	public function get($module) {
+		return isset($this->modules[$module]) ? $this->modules[$module] : null;
 	}
 
 	/**
@@ -37,13 +49,24 @@ class Modules {
 	 * @param string $module
 	 * @param string $source
 	 */
-	private function register($module = '', $source = '') {
+	public function register($module = '', $source = '') {
 		if(empty($module)) {
 			foreach($this->modules as $m => $n) {
 				$this->register($m, $m);
 			}
 		} else {
 			$m = $this->modules[$module];
+
+			// Register methods
+			$methods = $m->getMethods();
+			if($methods) {
+				foreach($methods as $method) {
+					if(isset($this->methods[$method]))
+						continue;
+					$this->methods[$method] = $module;
+				}
+			}
+
 			if($m->getParents()) {
 				foreach($m->getParents() as $parent => $importance) {
 					if(!in_array($parent, $this->registered)) {

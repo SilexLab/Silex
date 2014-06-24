@@ -7,4 +7,7 @@
 
 class MessageParser {
 	// Ah yea... message parser...
+	public function test($text = 'foo bar') {
+		return 'Message: '.$text.'.';
+	}
 }
