@@ -1,3 +1,6 @@
 [submodule "lib/smarty"]
 	path = lib/smarty
-	url = git@github.com:SilexLab/Smarty.git
+	url = https://github.com/SilexLab/Smarty.git
+[submodule "lib/message/parser"]
+	path = lib/message/parser
+	url = https://github.com/SilexLab/Markdown.git
