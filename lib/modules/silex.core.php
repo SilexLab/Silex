@@ -1,5 +1,5 @@
 <?php
-class org_silex_core implements IModule {
+class silex_core implements IModule {
 	protected $template = null;
 	protected $user = null;
 	protected $page = null;
@@ -63,7 +63,7 @@ class org_silex_core implements IModule {
 	}
 
 	public function getPriority() {
-		return 0;
+		return 1;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 <?php
-class org_silex_test implements IModule {
+class silex_test implements IModule {
 	public function __construct() {
 		Event::listen('silex.construct.end', [$this, 'testest']);
 	}
@@ -9,8 +9,8 @@ class org_silex_test implements IModule {
 
 	public function getParents() {
 		return [
-			'org.silex.core' => 'required',
-			'org.silex.test2' => 'optional'
+			'silex.core' => 'required',
+			'silex.test2' => 'optional'
 		];
 	}
 
