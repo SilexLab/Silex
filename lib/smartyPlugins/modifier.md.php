@@ -6,5 +6,7 @@
  */
 
 function smarty_modifier_md($text) {
-	return Silex::getMarkdown()->parse($text);
+	if(Silex::getModule()->status('silex.markdown') == 1)
+		return Silex::getParser()->parse($text);
+	return $text;
 }

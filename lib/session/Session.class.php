@@ -26,7 +26,26 @@ class Session {
 			session_set_cookie_params(Silex::getConfig()->get('session.cookie_time'), '/', null, false, true);
 
 			// session handler | TODO: support more
-			session_set_save_handler(new SessionDatabaseHandler(Silex::getDB(), 'session'), true);
+			if(Silex::getConfig()->get('session.separate.database')) {
+				session_set_save_handler(new SessionDatabaseHandler(DatabaseFactory::initDatabase(
+					Silex::getConfig()->get('session.database.wrapper'),
+					Silex::getConfig()->get('session.database.host'),
+					Silex::getConfig()->get('session.database.user'),
+					Silex::getConfig()->get('session.database.password'),
+					Silex::getConfig()->get('session.database.name'),
+					Silex::getConfig()->get('session.database.port')
+				), 'session'), true);
+			} else
+				session_set_save_handler(new SessionDatabaseHandler(Silex::getDB(), 'session'), true);
+
+			// Safety
+			Silex::getConfig()->remove(['session.separate.database',
+				'session.database.wrapper',
+				'session.database.host',
+				'session.database.user',
+				'session.database.password',
+				'session.database.name',
+				'session.database.port']);
 		}
 
 		// start session if none exists

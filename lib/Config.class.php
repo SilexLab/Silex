@@ -64,6 +64,16 @@ class Config {
 		return null;
 	}
 
+	public function remove($node) {
+		if(is_array($node))
+			UArray::removeElements($this->config, $node);
+		else if(isset($this->config[$node]))
+			unset($this->config[$node]);
+		else
+			return false;
+		return true;
+	}
+
 	/**
 	 * Formates the value and returns the right type
 	 * @param string    $node

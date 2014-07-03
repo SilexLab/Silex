@@ -15,11 +15,11 @@ class silex_markdown implements IModule {
 	}
 
 	public function getMethods() {
-		return ['getMarkdown'];
+		return ['getParser'];
 	}
 
 	public function callMethod($name, $args) {
-		if($name == 'getMarkdown') {
+		if($name == 'getParser') {
 			if($this->markdown === null)
 				$this->markdown = new Markdown();
 			return $this->markdown;
