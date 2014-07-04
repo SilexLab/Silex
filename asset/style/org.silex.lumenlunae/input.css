@@ -1,56 +1,46 @@
+.input {
+	display: inline-block;
+	margin: 4px;
+	width: 250px;
+}
+.input input {
+	box-sizing: border-box;
+	padding: 0 5px;
+	width: 100%;
+	height: 25px;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	background: #fff;
+	transition: all .75s;
+}
 .input.big {
 	display: block;
 	margin: 5px auto;
 	width: 400px;
 }
-.input.big::after {
-	display: block;
-	box-sizing: border-box;
-	margin-top: -5px;
-	width: 100%;
-	height: 6px;
-	border-right: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	border-left: 1px solid #ddd;
-	content: "";
-	transition: all .25s;
-}
-.input.big:hover::after {
-	border-color: #ccc;
-}
-.input.big.focus::after {
-	border-color: #17a7df;
-}
 
 .input.big input {
-	box-sizing: border-box;
-	padding: 0 5px 0 28px;
-	width: 100%;
 	height: 30px;
 	border: 0;
-	background: transparent 5px 50% no-repeat;
-	background-size: 20px;
+	border-radius: 0;
+	border-bottom: 2px solid #ddd;
+	background: transparent;
 	text-align: center;
 	font-size: 18px;
-	transition: background 0.5s linear;
 }
-.input.big.text input {
-	padding-left: 5px;
+.input input:hover {
+	border-color: #ccc;
+	transition: all .25s;
 }
-.input.big.email input {
-	background-image: url(images/icon-mail-d.svg);
+.input input:focus, .input input.focus {
+	border-color: #17a7df;
+	transition: all .25s;
 }
-.input.big.user input {
-	background-image: url(images/icon-user-d.svg);
-}
-.input.big.search input {
-	background-image: url(images/icon-magnifying-glass-d.svg);
-}
-.input.big.password .switch {
+.input.password .switch {
 	position: relative;
 	display: block;
 	float: right;
-	margin-top: -27px;
+	margin-top: -25px;
 	margin-right: 3px;
 	width: 24px;
 	height: 24px;
@@ -60,9 +50,15 @@
 	cursor: pointer;
 	transition: all .75s;
 }
-.input.big.password .switch:hover {
+.input.big.password .switch {
+	margin-top: -29px;
+}
+.input.password .switch:hover {
 	background-color: rgba(127, 127, 127, .25);
 	transition: all .25s;
+}
+.input.password::after {
+	content: "";
 }
 
 #user-search-bar {

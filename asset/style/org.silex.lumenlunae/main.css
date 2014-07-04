@@ -48,6 +48,16 @@ a:hover {
 	color: #095d8d;
 	transition: all .25s;
 }
+h1, h2, h3, h4, h5, h6 {
+	text-transform: uppercase;
+	margin: 5px 0 10px 0;
+}
+h1 { font-size: 30px; }
+h2 { font-size: 27px; }
+h3 { font-size: 23px; }
+h4 { font-size: 20px; }
+h5 { font-size: 17px; }
+h6 { font-size: 13px; }
 
 header {
 	padding: 5px 0;

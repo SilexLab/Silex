@@ -24,6 +24,10 @@ class ErrorPage extends Page {
 		return 'Error '.$this->errorCode;
 	}
 
+	// public function getTemplateBase() {
+	// 	return $this->getTemplateName();
+	// }
+
 	/**
 	 * Get the file name of the page's template
 	 * @return string
@@ -38,6 +42,7 @@ class ErrorPage extends Page {
 	 */
 	public function prepare() {
 		$this->errorCode = 404;
+		header('Status: 404 Not Found');
 
 		Silex::getTemplate()->assign(['error' => [
 			'code' => $this->errorCode

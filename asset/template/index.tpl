@@ -14,7 +14,6 @@
 {/foreach}
 </head>
 <body>
-<header>
 {include file=$page.base_tpl}
 {if !$DEBUG}
 </body>

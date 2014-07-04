@@ -65,19 +65,11 @@ $(document).ready(function() {
 		updateUserPanel(e, $(this), 'api/user-panel/login.html');
 	});
 
-	// input focus
-	$('body').on('focus', '.input input', function(e) {
-		$(this).closest('.input').addClass('focus');
-	}).on('blur', '.input input', function(e) {
-		$(this).closest('.input').removeClass('focus');
-	});
-
-
 	/* Functions */
 	// Passwordswitch behavior
 	$('body').on('mousedown', '.switch', function(e) {
-		$(this).prev('[type="password"]').attr('type', 'text');
+		$(this).prev('[type="password"]').addClass('focus').attr('type', 'text');
 	}).on('mouseup mouseleave', '.switch', function(e) {
-		$(this).prev('[type="text"]').attr('type', 'password').focus();
+		$(this).prev('[type="text"]').attr('type', 'password').focus().removeClass('focus');
 	});
 });

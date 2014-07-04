@@ -1,4 +1,5 @@
 {* Default Base Template *}
+<header>
 	<div class="w-size">
 		<div class="w-content-h">
 			<div class="content-box">
