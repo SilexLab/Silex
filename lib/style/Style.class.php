@@ -8,6 +8,7 @@
 abstract class Style implements ITemplatable {
 	protected $title = '';
 	protected $cssFiles = [];
+	protected $cssAsync = [];
 	protected $jsFiles = [];
 
 	/**
@@ -40,8 +41,9 @@ abstract class Style implements ITemplatable {
 		$this->title = (string)$config->title;
 
 		// CSS and JS
-		$this->cssFiles = (array)$config->{'css-files'}->{'css-file'};
-		$this->jsFiles = (array)$config->{'js-files'}->{'js-file'};
+		$this->cssFiles = (array)$config->{'css-files'}->file;
+		$this->cssAsync = (array)$config->{'css-async'}->file;
+		$this->jsFiles = (array)$config->{'js-files'}->file;
 	}
 
 	/**
@@ -69,6 +71,7 @@ abstract class Style implements ITemplatable {
 			'path' => $this->getPath(),
 			'url_path' => Silex::getConfig()->get('url.base').$this->getRelativePath(),
 			'css_files' => $this->cssFiles,
+			'css_async' => $this->cssAsync,
 			'js_files' => $this->jsFiles,
 			'object' => $this
 		];

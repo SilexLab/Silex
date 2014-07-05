@@ -7,12 +7,16 @@
 		]]>
 	</description>
 	<css-files>
-		<css-file>main.css</css-file>
-		<css-file>input.css</css-file>
+		<file>main.css</file>
+		<file>input.css</file>
 	</css-files>
+	<css-async>
+		<file>font.css</file>
+	</css-async>
 	<js-files>
-		<js-file>js/jquery.min.js</js-file>
-		<js-file>js/main.js</js-file>
+		<file>js/jquery.min.js</file>
+		<file>js/loadCSS.min.js</file>
+		<file>js/main.js</file>
 	</js-files>
 	<class-file>org.silex.lumenlunae.php</class-file>
 </style>

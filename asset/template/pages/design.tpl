@@ -39,3 +39,10 @@ Big Input
 		<input type="search" placeholder="{'input.search'|lang}">
 	</span>
 </div>
+Button
+<div class="w-content">
+	<span class="button flat">Flat Button</span>
+	<span class="button flat highlight">Flat Button 2</span>
+	<span class="button">Button</span>
+	<span class="button highlight">Button 2</span>
+</div>

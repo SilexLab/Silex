@@ -13,7 +13,7 @@ html, body {
 	background: #eee;
 	color: #2e2e2e;
 	font-size: 13px;
-	font-family: Helvetica, "Droid Sans", "Open Sans", "Trebuchet MS", Arial, sans-serif;
+	font-family: Roboto, Helvetica, 'Open Sans', 'Droid Sans', Arial, sans-serif;
 }
 
 .w-size { margin: auto; min-width: 900px; max-width: 90%; }
@@ -49,8 +49,8 @@ a:hover {
 	transition: all .25s;
 }
 h1, h2, h3, h4, h5, h6 {
-	text-transform: uppercase;
 	margin: 5px 0 10px 0;
+	text-transform: uppercase;
 }
 h1 { font-size: 30px; }
 h2 { font-size: 27px; }
@@ -237,17 +237,17 @@ nav.breadcrumbs .crust:last-child::before, nav.breadcrumbs .crust:last-child .cr
 	min-width: 900px;
 	width: 100%;
 	height: 0;
-	border-bottom: 0px solid #47ade8;
 	background: #fff;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
 	opacity: 0;
-	transition: all .75s;
+	transition: all .5s ease-in;
 }
 #user-panel.opened {
 	position: absolute;
 	height: auto;
-	border-bottom: 3px solid #47ade8;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
 	opacity: 1;
-	transition: all .25s;
+	transition: all .25s ease-out;
 }
 
 footer.main {
