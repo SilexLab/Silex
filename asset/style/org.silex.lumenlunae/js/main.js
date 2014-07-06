@@ -72,4 +72,9 @@ $(document).ready(function() {
 	}).on('mouseup mouseleave', '.switch', function(e) {
 		$(this).prev('[type="text"]').attr('type', 'password').focus().removeClass('focus');
 	});
+	$('body').on('focus', '[type="password"]', function(e) {
+		$(this).next('.switch').addClass('focus');
+	}).on('blur', '[type="password"]', function(e) {
+		$(this).next('.switch').removeClass('focus');
+	});
 });
