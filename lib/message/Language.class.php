@@ -45,11 +45,11 @@ class Language {
 			/* Read info */
 			$info = new XML($customPath.$languageID.'/info.xml');
 
-			$this->id =            $info->id;
-			$this->name =          $info->name;
-			$this->description =   $info->description;
-			$this->nameEn =        $info->{'name-en'};
-			$this->descriptionEn = $info->{'description-en'};
+			$this->id            = (string)$info->id;
+			$this->name          = (string)$info->name;
+			$this->description   = (string)$info->description;
+			$this->nameEn        = (string)$info->{'name-en'};
+			$this->descriptionEn = (string)$info->{'description-en'};
 
 			/* Read language and generate heap */ // TODO: Only read on demand, e.g. only when somebody really gets lang vars
 			$this->heap = UArray::toNode((new XML($customPath.$languageID.'/core.xml'))->asArray());

@@ -57,12 +57,12 @@ function updateUserPanel(e, action, ajaxSource, ajaxData) {
 $(document).ready(function() {
 	// user panel
 	$('#user-search').on('click', function(e) {
-		updateUserPanel(e, $(this), 'api/user-panel/searchbar.html').done(function() {
+		updateUserPanel(e, $(this), baseURL + 'api/user-panel/searchbar.html').done(function() {
 			$('#user-search-bar input').focus();
 		});
 	});
 	$('#user-login').on('click', function(e) {
-		updateUserPanel(e, $(this), 'api/user-panel/login.html');
+		updateUserPanel(e, $(this), baseURL + 'api/user-panel/login.html');
 	});
 
 	/* Functions */

@@ -5,6 +5,11 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
+ini_set('default_charset', 'UTF-8');
+ini_set('php.input_encoding', 'UTF-8');
+ini_set('php.internal_encoding', 'UTF-8');
+ini_set('php.output_encoding', 'UTF-8');
+
 define('SILEX_VERSION', '0.1.0-DEV');
 define('DEBUG', true);
 

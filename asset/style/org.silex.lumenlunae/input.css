@@ -1,63 +1,71 @@
 .input {
 	display: inline-block;
-	margin: 4px;
 	width: 250px;
 }
-.input input {
+input[type=text],
+input[type=date],
+input[type=email],
+input[type=number],
+input[type=search],
+input[type=time],
+input[type=password] {
 	box-sizing: border-box;
+	margin: 4px;
 	padding: 0 5px;
 	width: 100%;
 	height: 25px;
-	border: 1px solid #ddd;
-	border-radius: 2px;
-	background: #fff;
-	transition: all .75s;
+	border: 0;
+	border-bottom: 1px solid #ddd;
+	color: #2e2e2e;
+	transition: all .75s;;
 }
 .input.big {
 	display: block;
-	margin: 5px auto;
+	margin: 0 auto;
 	width: 400px;
 }
 
-.input.big input {
+input.big {
+	display: block;
+	margin: 5px auto;
+	width: 400px;
 	height: 30px;
-	border: 0;
 	border-bottom: 2px solid #ddd;
-	border-radius: 0;
 	background: transparent;
 	text-align: center;
+	font-weight: bold;
 	font-size: 18px;
 }
-.input input:hover {
+input:hover {
 	border-color: #ccc;
 	transition: all .25s;
 }
-.input input:focus, .input input.focus {
+input:focus, input.focus {
 	border-color: #17a7df;
 	transition: all .25s;
 }
-.input.password .switch {
+input[type=password] + .switch, input[type=text] + .switch {
 	position: relative;
 	display: block;
 	float: right;
-	margin-top: -25px;
-	margin-right: 3px;
+	margin-top: -29px;
 	width: 24px;
 	height: 24px;
 	border-radius: 2px;
 	background: url(images/icon-preview.svg) 50% 50% no-repeat;
 	background-size: 20px;
 	cursor: pointer;
-	transition: all .75s;
+	transition: background-color .75s;
 }
-.input.big.password .switch {
-	margin-top: -29px;
+input[type=password].big + .switch, input[type=text].big + .switch {
+	margin-top: -33px;
+	margin-right: 3px;
 }
-.input.password .switch:hover {
+input[type=password] + .switch:hover, input[type=text] + .switch:hover {
 	background-color: rgba(127, 127, 127, .25);
-	transition: all .25s;
+	transition: background-color .25s;
 }
-.input.password .switch.focus {
+input[type=password] + .switch.focus, input[type=text] + .switch.focus {
 	background-image: url(images/icon-preview-f.svg);
 }
 .input.password::after {
@@ -69,169 +77,132 @@
 }
 
 /* Buttons */
-.button {
-	display: inline-block;
-	/*float: left;*/
-	box-sizing: border-box;
-	margin: 0 7px;
-	padding: 0 10px;
-	min-width: 120px;
-	height: 36px;
-	border-radius: 2px;
-	background: #dfdfdf;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, .2);
-	color: #4d4d4d;
-	text-align: center;
-	text-transform: uppercase;
-	font-weight: bold;
-	line-height: 36px;
-	cursor: pointer;
-	transition: all .3s;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-.button:hover {
-	background: #d6d6d6;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, .2);
-}
-.button:active {
-	background: #cecece;
-	box-shadow: 0px 6px 6px rgba(0, 0, 0, .2);
-}
-.button.highlight {
-	background: #2196f3;
-	color: #fff;
-}
-.button.highlight:hover {
-	background: #1e88e5;
-}
-.button.highlight:active {
-	background: #1976d2;
-}
-.button.flat {
-	margin: 0;
-	background: none;
-	box-shadow: none;
-}
-.button.flat.highlight {
-	color: #2196f3;
-}
-.button.flat:hover {
-	background: rgba(153, 153, 153, .2);
-	/*box-shadow: 0px 0px 3px rgba(0, 0, 0, .3);*/
-}
-.button.flat:active {
-	background: rgba(153, 153, 153, .4);
-	/*box-shadow: 0px 7px 7px rgba(0, 0, 0, .3);*/
-}
-
-/* old silex buttons */
-/*.button_bar::after {
+.button-bar::after {
 	display: block;
 	clear: both;
 	height: 0;
 	content: "";
 }
 
+.button,
 button,
 input[type=button],
 input[type=submit],
 input[type=file] {
-	display: block;
-	float: left;
+	display: inline-block;
 	box-sizing: border-box;
 	margin: 0 5px;
 	padding: 0 13px;
-	min-width: 30px;
+	min-width: 120x;
 	height: 30px;
-	border: 1px solid #d1d1d3;
-	border-bottom: 1px solid #c1c1c3;
+	border: 1px solid #d6d6d6;
 	border-radius: 2px;
-	background-image: linear-gradient(#f6f6f6 5%, #efefef 50%, #ddd);
-	box-shadow: inset 0 1px 0 #fff;
+	background: #f6f6f6;
 	color: #666;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+	text-align: center;
+	text-transform: uppercase;
 	font-weight: bold;
+	line-height: 30px;
+	cursor: pointer;
 	transition: all .25s;
 	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
-
+.button:hover,
 button:hover,
 input[type=button]:hover,
 input[type=submit]:hover,
 input[type=file]:hover {
-	border-color: #c0c0c0;
-	background-image: linear-gradient(#f9f9f9 5%, #f0f0f0 50%, #e6e6e6);
+	background: rgba(153, 153, 153, .2);
 }
-
+.button:active,
 button:active,
 input[type=button]:active,
 input[type=submit]:active,
 input[type=file]:active {
-	border-color: #ccc;
-	background-image: linear-gradient(#eee, #e0e0e0);
-	box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
+	background: rgba(153, 153, 153, .4);
 }
-
+.button.highlight,
 button.highlight,
 input[type=button].highlight,
 input[type=submit].highlight,
 input[type=file].highlight {
 	border: 1px solid #5187df;
-	border-bottom: 1px solid #3870cf;
-	background-image: linear-gradient(#5499f4 5%, #5294f2 50%, #4b85f1);
-	box-shadow: inset 0 1px 0 #5fa8f7;
+	background: #2196f3;
 	color: #fff;
-	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
-
+.button.highlight:hover,
 button.highlight:hover,
 input[type=button].highlight:hover,
 input[type=submit].highlight:hover,
 input[type=file].highlight:hover {
-	border-color: #2f5bb7;
-	background-image: linear-gradient(#4d90fe, #357ae8);
+	background: #1e88e5;
 }
-
+.button.highlight:active,
 button.highlight:active,
 input[type=button].highlight:active,
 input[type=submit].highlight:active,
 input[type=file].highlight:active {
 	border-color: #2f5bb7;
-	background-image: linear-gradient(#4d90fe, #4787ed);
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset;
+	background: #1976d2;
+}
+.button.flat {
+	margin: 0;
+	border: 0;
+	background: none;
+	box-shadow: none;
+	color: #4d4d4d;
+}
+.button.flat.highlight {
+	color: #2196f3;
+}
+.button.flat:hover {
+	background: rgba(153, 153, 153, .2);
+}
+.button.flat:active {
+	background: rgba(153, 153, 153, .4);
 }
 
-button.inline,
-input[type=button].inline,
-input[type=submit].inline,
-input[type=file].inline {
-	display: inline-block;
-	float: none;
+.button.float,
+button.float,
+input[type=button].float,
+input[type=submit].float,
+input[type=file].float {
+	display: block;
+	float: left;
 }
 
-.button_group > button,
-.button_group > input[type=button],
-.button_group > input[type=submit],
-.button_group > input[type=file] {
+.button-group::after {
+	display: block;
+	clear: both;
+	height: 0;
+	content: "";
+}
+
+.button-group > .button,
+.button-group > button,
+.button-group > input[type=button],
+.button-group > input[type=submit],
+.button-group > input[type=file] {
+	display: block;
+	float: left;
 	margin-right: 0;
 	margin-left: 0;
 }
 
-.button_group > :nth-child(n+2) {
+.button-group > :nth-child(n+2) {
 	border-left: none;
 	border-radius: 0;
 }
 
-.button_group > :first-child {
+.button-group > :first-child {
 	margin-left: 5px;
 	border-radius: 2px 0 0 2px;
 }
 
-.button_group > :last-child {
+.button-group > :last-child {
 	margin-right: 5px;
 	border-radius: 0 2px 2px 0;
 }
-*/

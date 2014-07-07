@@ -11,10 +11,10 @@
 	<link rel="stylesheet" type="text/css" href="{$style.url_path}{$css_file}">
 {/foreach}
 {* Javascripts *}
+	<script type="text/javascript">var baseURL = '{$url.base}';</script>
 {foreach $style.js_files as $js_file}
 	<script type="text/javascript" src="{$style.url_path}{$js_file}"></script>
 {/foreach}
-{* Asynchronous CSSs *}
 	<script type="text/javascript">
 {foreach $style.css_async as $css_file}
 loadCSS('{$style.url_path}{$css_file}');
