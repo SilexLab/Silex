@@ -2,6 +2,12 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="application-name" content="Silex">
+	<meta name="author" content="Silex Lab">
+	<meta name="description" content="The Silex Framework">
+	<meta name="keywords" content="silex, program, html, php, free, open, open source">
+	<meta name="viewport" content="width=device-width">
 	<title>{$page.title} · Silexframework</title>
 	<link rel="icon" type="image/png" sizes="16x16" href="{$style.url_path}images/favicon-small.png">
 	<link rel="icon" type="image/png" sizes="32x32 64x64" href="{$style.url_path}images/favicon.png">
