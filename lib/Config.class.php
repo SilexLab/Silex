@@ -74,6 +74,23 @@ class Config {
 		return true;
 	}
 
+	public function asXML() {
+		$xml = new XML('<config> </config>', true);
+		foreach ($this->config as $node => $value) {
+			$splitted = explode('.',$node);
+			$curXML = $xml;
+			for($i = 0; $i < count($splitted); $i++) {
+				if(!$curXML->{$splitted[$i]})
+					// TODO: use xml attribute for type and <![CDATA[ ... ]]> for content instead of serialize
+					$curXML->addChild($splitted[$i], ($i == count($splitted) - 1) ? serialize($value) : null);
+				if($i < count($splitted) - 1)
+					$curXML = $curXML->{$splitted[$i]};
+			}
+		}
+		// TODO: format XML
+		return $xml->asXML();
+	}
+
 	/**
 	 * Formates the value and returns the right type
 	 * @param string    $node

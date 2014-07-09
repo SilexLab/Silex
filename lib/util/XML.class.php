@@ -16,12 +16,8 @@ class XML {
 	 * @param string $xml
 	 * @param bool   $isString optional
 	 */
-	public function __construct($xml, $isString = false) {
-		if($isString)
-			$this->xmlObj = simplexml_load_string($xml);
-		else
-			$this->xmlObj = simplexml_load_file($xml);
-
+	public function __construct($data, $isString = false, $options = 0, $ns = '', $isPrefix = false) {
+		$this->xmlObj = new SimpleXMLElement($data, $options, !$isString, $ns, $isPrefix);
 		if(!$this->xmlObj)
 			throw new CoreException('Failed to load XML');
 	}
@@ -31,7 +27,7 @@ class XML {
 	}
 
 	public function __call($name, $arguments) {
-		return call_user_func_array([$this->xmlObj, $name], empty($arguments) ? null : $arguments);
+		return call_user_func_array([$this->xmlObj, $name], (array)$arguments);
 	}
 
 	/**
