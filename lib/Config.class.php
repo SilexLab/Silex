@@ -77,12 +77,26 @@ class Config {
 	public function asXML() {
 		$xml = new XML('<config> </config>', true);
 		foreach ($this->config as $node => $value) {
-			$splitted = explode('.',$node);
+			$splitted = explode('.', $node);
 			$curXML = $xml;
 			for($i = 0; $i < count($splitted); $i++) {
-				if(!$curXML->{$splitted[$i]})
-					// TODO: use xml attribute for type and <![CDATA[ ... ]]> for content instead of serialize
-					$curXML->addChild($splitted[$i], ($i == count($splitted) - 1) ? serialize($value) : null);
+				if(!$curXML->{$splitted[$i]}) {
+					if($i == count($splitted) - 1) {
+						// check and format value
+						if(is_bool($value) || is_null($value))
+							$value = (int)$value;
+
+						// replace & and not &amp;
+						$value = preg_replace('/&(?!amp;)/', '&amp;', $value);
+
+						if(is_string($value) && !empty($value) && !preg_match('/[a-z0-9 ]+/i', $value))
+							$curXML->addChild($splitted[$i])->addCData($value);
+						else
+							$curXML->addChild($splitted[$i], $value);
+						$curXML->{$splitted[$i]}->addAttribute('type', gettype($value));
+					} else
+						$curXML->addChild($splitted[$i]);
+				}
 				if($i < count($splitted) - 1)
 					$curXML = $curXML->{$splitted[$i]};
 			}
