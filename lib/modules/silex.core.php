@@ -30,8 +30,8 @@ class silex_core implements IModule {
 		$this->page = PageFactory::getPage();
 
 		// Style
-		StyleFactory::init();
-		$this->style = StyleFactory::getStyle();
+		$styleFactory = new StyleFactory();
+		$this->style = $styleFactory->getStyle();
 
 
 		// Initiate templates
@@ -66,13 +66,17 @@ class silex_core implements IModule {
 		return 1;
 	}
 
+	public function getModuleGroup() {
+		return null;
+	}
+
 	/**
 	 * Get the methods wich are called in Silex provided by this module
 	 * called by __callStatic() in Silex (Silex::MethodName()->[...])
 	 * @return array
 	 */
 	public function getMethods() {
-		return ['getTemplate', 'getUser', 'getPage', 'getNav'];
+		return ['getTemplate', 'getUser', 'getPage', 'getNav', 'getStyle'];
 	}
 
 	/**
@@ -82,7 +86,7 @@ class silex_core implements IModule {
 	 * @return mixed
 	 */
 	public function callMethod($name, $args) {
-		if(in_array($name, ['getTemplate', 'getUser', 'getPage']))
+		if(in_array($name, ['getTemplate', 'getUser', 'getPage', 'getStyle']))
 			return $this->{strtolower(preg_replace('/^get(.*)$/', '$1', $name))};
 		if(method_exists($this, $name))
 			return call_user_func_array([$this, $name], $args);

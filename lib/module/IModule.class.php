@@ -27,6 +27,13 @@ interface IModule {
 	public function getPriority();
 
 	/**
+	 * does the module belongs to an module group?
+	 * this is needed for checking for modules (via status) wich deserve similar features and functions, like different text parsers
+	 * @return string|null
+	 */
+	public function getModuleGroup();
+
+	/**
 	 * Get the methods wich are called in Silex provided by this module
 	 * called by __callStatic() in Silex (Silex::MethodName()->[...])
 	 * @return array or nothing when no methods are provided

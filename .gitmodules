@@ -4,3 +4,7 @@
 [submodule "lib/message/parser"]
 	path = lib/message/parser
 	url = https://github.com/SilexLab/Markdown.git
+[submodule "lib/style/scss"]
+	path = lib/style/scss
+	url = https://github.com/SilexLab/scssphp.git
+	branch = submodule

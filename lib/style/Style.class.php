@@ -32,6 +32,22 @@ abstract class Style implements ITemplatable {
 	public abstract function getName();
 
 	/**
+	 * preprocess css files
+	 * @param  array $cssFiles
+	 * @return array
+	 */
+	public function preprocessor($cssFiles) {
+		if(Silex::getModule()->status('silex.css.preprocessor') == 1) {
+			$out = [];
+			foreach($cssFiles as $file) {
+				$out[] = Silex::getCSSPreprocessor($this->getPath())->compile($file);
+			}
+			return $out;
+		}
+		return $cssFiles;
+	}
+
+	/**
 	 * reads the style config and stores values
 	 */
 	public function readConfig() {
@@ -41,15 +57,15 @@ abstract class Style implements ITemplatable {
 		$this->title = (string)$config->title;
 
 		// CSS and JS
-		$this->cssFiles = (array)$config->{'css-files'}->file;
-		$this->cssAsync = (array)$config->{'css-async'}->file;
+		$this->cssFiles = $this->preprocessor((array)$config->{'css-files'}->file);
+		$this->cssAsync = $this->preprocessor((array)$config->{'css-async'}->file);
 		$this->jsFiles = (array)$config->{'js-files'}->file;
 	}
 
 	/**
 	 * @return string
 	 */
-	protected final function getPath() {
+	public final function getPath() {
 		return DIR_STYLE.$this->getName().'/';
 	}
 

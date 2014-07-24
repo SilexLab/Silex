@@ -7,6 +7,7 @@
 		]]>
 	</description>
 	<css-files>
+		<!-- <file>scss/test.scss</file> -->
 		<file>main.css</file>
 		<file>input.css</file>
 	</css-files>

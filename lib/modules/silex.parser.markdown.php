@@ -1,5 +1,5 @@
 <?php
-class silex_markdown implements IModule {
+class silex_parser_markdown implements IModule {
 	protected $markdown = null;
 
 	public function __construct() {}
@@ -12,6 +12,10 @@ class silex_markdown implements IModule {
 
 	public function getPriority() {
 		return 0;
+	}
+
+	public function getModuleGroup() {
+		return 'silex.parser';
 	}
 
 	public function getMethods() {

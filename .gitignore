@@ -6,3 +6,5 @@
 /composer.phar
 /logs/*
 docs/snippets/
+gource.bat
+gource.cfg

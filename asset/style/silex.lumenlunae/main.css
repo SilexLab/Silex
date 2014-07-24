@@ -50,7 +50,7 @@ a:hover {
 }
 h1, h2, h3, h4, h5, h6 {
 	margin: 5px 0 10px 0;
-	text-transform: uppercase;
+	/*text-transform: capitalize;*/
 }
 h1 { font-size: 30px; }
 h2 { font-size: 27px; }
@@ -58,6 +58,9 @@ h3 { font-size: 23px; }
 h4 { font-size: 20px; }
 h5 { font-size: 17px; }
 h6 { font-size: 13px; }
+h1.uc, h2.uc, h3.uc, h4.uc, h5.uc, h6.uc {
+	text-transform: uppercase;
+}
 
 header {
 	padding: 5px 0;

@@ -18,7 +18,7 @@ INSERT INTO `config` (`option`, `value`, `type`, `default_value`, `package`) VAL
 ('session.autologout_probability', '25', 'int(3)', '25', 1),
 ('session.cookie_time', '86400', 'int(8)', '86400', 1),
 ('session.name', 'silex', 'string(255)', 'silex', 1),
-('style.default', 'org.silex.lumenlunae', 'string(255)', 'org.silex.lumenlunae', 1),
+('style.default', 'silex.lumenlunae', 'string(255)', 'silex.lumenlunae', 1),
 ('time.timezone', 'Europe/Berlin', 'string(255)', 'Europe/Berlin', 1),
 ('url.base', '/', 'string(255)', '/', 1),
 ('url.format', '1', 'int(1)', '1', 1);

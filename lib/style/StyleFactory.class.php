@@ -6,34 +6,35 @@
  */
 
 class StyleFactory {
-	protected static $styleObjects = [];
+	protected $styleObjects = [];
 
-	public static function init() {
+	public function __construct() {
 		// Read all dem data
 		foreach(scandir(DIR_STYLE) as $file) {
 			if(!in_array($file, ['.', '..']) && is_dir(DIR_STYLE.$file) && preg_match('/^[a-zA-Z0-9_\-\.]+$/', $file)) {
 				try {
 					@include_once(DIR_STYLE.$file.'/'.$file.'.php');
 					$class = preg_replace('/\./', '_', $file);
-					self::$styleObjects[$file] = new $class;
-					if(!(self::$styleObjects[$file] instanceof Style))
+					$this->styleObjects[$file] = new $class;
+					if(!($this->styleObjects[$file] instanceof Style))
 						throw new StyleNotFoundException('Invalid Style');
 				} catch(Exception $e) {
-					unset(self::$styleObjects[$file]);
+					echo 'StyleFactory: '.$e->getMessage();
+					unset($this->styleObjects[$file]);
 				}
 			}
 		}
 	}
 
-	public static function getStyle() {
+	public function getStyle() {
 		// get default style
 		$style = Silex::getConfig()->get('style.default');
 
 		// TODO: get user style
 		// if user has custom style then $style = user's style
 
-		if(isset(self::$styleObjects[$style]))
-			return self::$styleObjects[$style];
+		if(isset($this->styleObjects[$style]))
+			return $this->styleObjects[$style];
 		
 		// Do you really want to torture your visitors with an ugly page without a style? Nice try, not with Silex. Silex protects visitors against ugly webpages. Use Silex now. Only today 20% off. 100% free and open source. Grab it now.
 		throw new StyleNotFoundException('The default style \''.$style.'\' could not be found.');

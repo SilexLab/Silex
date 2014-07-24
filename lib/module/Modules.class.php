@@ -7,6 +7,7 @@
 
 class Modules {
 	private $modules = [];
+	private $groups = [];
 	private $registered = [];
 	private $methods = [];
 
@@ -23,8 +24,11 @@ class Modules {
 				$class = preg_replace('/\./', '_', $module);
 
 				$obj = new $class;
-				if($obj instanceof IModule)
+				if($obj instanceof IModule) {
 					$this->modules[$module] = $obj;
+					if($obj->getModuleGroup())
+						$this->groups[$obj->getModuleGroup()][] = $module;
+				}
 				unset($obj);
 			}
 		}
@@ -53,7 +57,7 @@ class Modules {
 	 * @return int
 	 */
 	public function status($module) {
-		if(array_key_exists($module, $this->modules)) {
+		if(array_key_exists($module, $this->modules) || array_key_exists($module, $this->groups)) {
 			// TODO: check in database if module is enabled or disabled
 			if(true)
 				return 1;

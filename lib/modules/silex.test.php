@@ -18,6 +18,9 @@ class silex_test implements IModule {
 		return -1;
 	}
 
+	public function getModuleGroup() {
+		return null;
+	}
 
 	public function testest($v = null) {
 		// we are testing stuff
