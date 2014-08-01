@@ -8,3 +8,6 @@
 docs/snippets/
 gource.bat
 gource.cfg
+asset/style/silex.lumenlunae/scss/*.meta
+asset/style/silex.lumenlunae/cbe08353cc4beeaa4203d86039afc03c.css
+asset/style/silex.lumenlunae/eb05d6865168ce2b79ed298bda75c242.css
