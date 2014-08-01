@@ -17,7 +17,7 @@ input[type=password] {
 	border: 0;
 	border-bottom: 1px solid #ddd;
 	color: #2e2e2e;
-	transition: all .75s;;
+	transition: all .75s;
 }
 .input.big {
 	display: block;

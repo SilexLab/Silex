@@ -52,12 +52,12 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 5px 0 10px 0;
 	/*text-transform: capitalize;*/
 }
-h1 { font-size: 30px; }
-h2 { font-size: 27px; }
-h3 { font-size: 23px; }
-h4 { font-size: 20px; }
-h5 { font-size: 17px; }
-h6 { font-size: 13px; }
+h1 { font-size: 45px; }
+h2 { font-size: 40px; }
+h3 { font-size: 35px; }
+h4 { font-size: 30px; }
+h5 { font-size: 25px; }
+h6 { font-size: 20px; }
 h1.uc, h2.uc, h3.uc, h4.uc, h5.uc, h6.uc {
 	text-transform: uppercase;
 }
@@ -167,9 +167,10 @@ nav.breadcrumbs .crust::before {
 	display: block;
 	float: right;
 	margin-right: 5px;
-	border: 10px solid transparent;
+	margin-top: 2px;
+	border: 8px solid transparent;
 	border-right-width: 0;
-	border-left-width: 7px;
+	border-left-width: 5px;
 	border-left-color: #555;
 	content: "";
 	transition: border-color .75s;
@@ -181,11 +182,12 @@ nav.breadcrumbs .crust:hover::before {
 nav.breadcrumbs .crumb::after {
 	display: block;
 	float: right;
-	margin-right: -6px;
+	margin-right: -4px;
+	margin-top: 2px;
 	margin-left: 5px;
-	border: 10px solid transparent;
+	border: 8px solid transparent;
 	border-right-width: 0;
-	border-left-width: 7px;
+	border-left-width: 5px;
 	border-left-color: #eee;
 	content: "";
 }

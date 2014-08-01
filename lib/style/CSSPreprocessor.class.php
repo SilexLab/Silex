@@ -40,7 +40,7 @@ class CSSPreprocessor {
 			if(is_file($this->compiledLocation.'/'.$out) && is_file($this->styleDir.'/'.$meta) && file_get_contents($this->styleDir.'/'.$meta) == $md5Hash)
 				return $out;
 
-			file_put_contents($this->compiledLocation.'/'.$out, $this->scss->compile(file_get_contents($this->styleDir.'/'.$in), $in));
+			file_put_contents($this->compiledLocation.'/'.$out, $this->scss->compile(file_get_contents($this->styleDir.'/'.$in), $in, ['indentChar' => '	']));
 			file_put_contents($this->styleDir.'/'.$meta, $md5Hash);
 			return $out;
 		}

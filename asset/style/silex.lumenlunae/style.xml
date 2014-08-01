@@ -7,9 +7,10 @@
 		]]>
 	</description>
 	<css-files>
-		<!-- <file>scss/test.scss</file> -->
-		<file>main.css</file>
-		<file>input.css</file>
+		<file>scss/main.scss</file>
+		<file>scss/input.scss</file>
+		<!-- <file>main.css</file> -->
+		<!-- <file>input.css</file> -->
 	</css-files>
 	<css-async>
 		<file>font.css</file>
