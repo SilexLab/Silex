@@ -61,7 +61,7 @@ input {
 			width: 24px;
 			height: 24px;
 			border-radius: 2px;
-			background: url(images/icon-preview.svg) 50% 50% no-repeat;
+			background: url(../images/icon-preview.svg) 50% 50% no-repeat;
 			background-size: 20px;
 			cursor: pointer;
 			transition: background-color .75s;
@@ -79,7 +79,7 @@ input {
 	}
 
 	&[type=password] + .switch.focus, &[type=text] + .switch.focus {
-		background-image: url(images/icon-preview-f.svg);
+		background-image: url(../images/icon-preview-f.svg);
 	}
 
 

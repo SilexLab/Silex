@@ -51,7 +51,7 @@ abstract class Style implements ITemplatable {
 	 * reads the style config and stores values
 	 */
 	public function readConfig() {
-		$config = new XML($this->getPath().'style.xml');
+		$config = new XML($this->getPath().'description.xml');
 
 		// Read values
 		$this->title = (string)$config->title;

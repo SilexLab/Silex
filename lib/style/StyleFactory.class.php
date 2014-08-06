@@ -13,7 +13,7 @@ class StyleFactory {
 		foreach(scandir(DIR_STYLE) as $file) {
 			if(!in_array($file, ['.', '..']) && is_dir(DIR_STYLE.$file) && preg_match('/^[a-zA-Z0-9_\-\.]+$/', $file)) {
 				try {
-					@include_once(DIR_STYLE.$file.'/'.$file.'.php');
+					@include_once(DIR_STYLE.$file.'/style.php');
 					$class = preg_replace('/\./', '_', $file);
 					$this->styleObjects[$file] = new $class;
 					if(!($this->styleObjects[$file] instanceof Style))
@@ -39,5 +39,4 @@ class StyleFactory {
 		// Do you really want to torture your visitors with an ugly page without a style? Nice try, not with Silex. Silex protects visitors against ugly webpages. Use Silex now. Only today 20% off. 100% free and open source. Grab it now.
 		throw new StyleNotFoundException('The default style \''.$style.'\' could not be found.');
 	}
-
-} 
+}

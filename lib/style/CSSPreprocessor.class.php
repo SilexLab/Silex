@@ -14,35 +14,22 @@ class CSSPreprocessor {
 	private $scss = null;
 	private $compiledLocation = '';
 	private $styleDir = '';
+	public $cssSubDir = 'css/';
 
 	public function __construct($styleDir, $compiledLocation = '') {
 		$this->compiledLocation = $compiledLocation ? $compiledLocation : $styleDir;
-		$this->styleDir = $styleDir;
+		$this->styleDir = $styleDir.'/';
 		$this->scss = new scssc();
 		$this->scss->setFormatter('scss_formatter_nested_ex');
 	}
 
 	public function compile($in) {
-		$e = explode('/', $in);
-		$file = array_pop($e);
-		$path = implode('/', $e);
+		$pi = pathinfo($in);
+		if(preg_match('/^([a-zA-Z0-9_\-]+)\.scss$/', $pi['basename'])) {
+			$out = $this->cssSubDir.$pi['filename'].'.css';
 
-		if(preg_match('/^([a-zA-Z0-9_\-]+)\.scss$/', $file, $match)) {
-			// file with out extension
-			$fWOExt = $match[1];
-
-			$md5Name = md5($file);
-			$md5Hash = md5_file($this->styleDir.'/'.$in);
-
-			$out = $md5Name.'.css';
-			$meta = ($path ? $path.'/' : '').$match[1].'.meta';
-
-			// check if file need to be updated
-			if(is_file($this->compiledLocation.'/'.$out) && is_file($this->styleDir.'/'.$meta) && file_get_contents($this->styleDir.'/'.$meta) == $md5Hash)
-				return $out;
-
-			file_put_contents($this->compiledLocation.'/'.$out, $this->scss->compile(file_get_contents($this->styleDir.'/'.$in), $in));
-			file_put_contents($this->styleDir.'/'.$meta, $md5Hash);
+			if($this->scss->checkedCompile($this->styleDir.$in, $this->styleDir.$out))
+				$this->scss->compileFile($this->styleDir.$in, $this->styleDir.$out);
 			return $out;
 		}
 		return $in;
