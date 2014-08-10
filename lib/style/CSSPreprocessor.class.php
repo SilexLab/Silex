@@ -6,12 +6,14 @@
  */
 
 require_once 'scss/scss.inc.php';
+require_once 'scss/src/Formatter/NestedSilex.php';
 
 /**
  * Simple SCSS wrapper
  */
 class CSSPreprocessor {
 	private $scss = null;
+	private $server = null;
 	private $compiledLocation = '';
 	private $styleDir = '';
 	public $cssSubDir = 'css/';
@@ -19,8 +21,9 @@ class CSSPreprocessor {
 	public function __construct($styleDir, $compiledLocation = '') {
 		$this->compiledLocation = $compiledLocation ? $compiledLocation : $styleDir;
 		$this->styleDir = $styleDir.'/';
-		$this->scss = new scssc();
-		$this->scss->setFormatter('scss_formatter_nested_ex');
+		$this->scss = new \Scss\Compiler();
+		$this->scss->setFormatter('Scss\Formatter\NestedSilex');
+		$this->server = new \Scss\Server($this->styleDir.'scss/', $this->styleDir.'css/', $this->scss);
 	}
 
 	public function compile($in) {
@@ -28,14 +31,18 @@ class CSSPreprocessor {
 		if(preg_match('/^([a-zA-Z0-9_\-]+)\.scss$/', $pi['basename'])) {
 			$out = $this->cssSubDir.$pi['filename'].'.css';
 
-			if($this->scss->checkedCompile($this->styleDir.$in, $this->styleDir.$out))
-				$this->scss->compileFile($this->styleDir.$in, $this->styleDir.$out);
+			if($this->server->checkedCompile($this->styleDir.$in, $this->styleDir.$out))
+				$this->server->compileFile($this->styleDir.$in, $this->styleDir.$out);
 			return $out;
 		}
 		return $in;
 	}
 
-	public function getObj() {
-		return $scss;
+	public function getCompiler() {
+		return $this->scss;
+	}
+
+	public function getServer() {
+		return $this->server;
 	}
 }
