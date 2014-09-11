@@ -28,6 +28,9 @@
 			</div>
 		</div>
 	</div>
+{if isset($headline)}
+	<h1>{$headline|lang}</h1>
+{/if}
 </header>
 <section id="user-panel">
 	<div class="w-size">

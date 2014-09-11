@@ -7,13 +7,11 @@
 		]]>
 	</description>
 	<css-files>
+		<file>css/font.css</file>
 		<file>scss/main.scss</file>
 		<file>scss/input.scss</file>
-		<!-- <file>main.css</file> -->
-		<!-- <file>input.css</file> -->
 	</css-files>
 	<css-async>
-		<file>font.css</file>
 	</css-async>
 	<js-files>
 		<file>js/jquery.min.js</file>

@@ -20,8 +20,9 @@ class NavigationFactory {
 		foreach ($mainNav as $entry) {
 			$main[] = [
 				'title' => $entry->title, // title
-				'link' => URL::to($entry->target), // link
-				'active' => $entry->target == Silex::getPage()->getName() // is active?
+				'link' => URL::to($entry->target) ? URL::to($entry->target) : $entry->target, // link
+				'active' => $entry->target == Silex::getPage()->getName(), // is active?
+				'enabled' => (bool)$entry->enabled
 			];
 		}
 

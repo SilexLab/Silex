@@ -50,7 +50,8 @@ class Navigation {
 			foreach($title as $entry) {
 				$entries[] = ['title' => Silex::getLanguage()->get($entry['title']),
 					'link' => $entry['link'],
-					'active' => isset($entry['active']) ? $entry['active'] : false];
+					'active' => isset($entry['active']) ? $entry['active'] : false,
+					'enabled' => $entry['enabled']];
 			}
 			$this->entries = array_merge($entries, $this->entries);
 			return true;

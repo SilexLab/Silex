@@ -43,13 +43,14 @@ CREATE TABLE IF NOT EXISTS `navigation` (
   `target` varchar(255) NOT NULL,
   `position` tinyint(4) NOT NULL,
   `permission` tinytext NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `Target` (`target`),
   UNIQUE KEY `position` (`position`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
-INSERT INTO `navigation` (`id`, `title`, `target`, `position`, `permission`) VALUES
-(1, 'page.home', 'home', 1, '');
+INSERT INTO `navigation` (`id`, `title`, `target`, `position`, `permission`, `enabled`) VALUES
+(1, 'page.home', 'home', 1, '', 1);
 
 DROP TABLE IF EXISTS `permission`;
 CREATE TABLE IF NOT EXISTS `permission` (
@@ -89,6 +90,9 @@ CREATE TABLE IF NOT EXISTS `session` (
   `token` tinytext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `session` (`id`, `session_value`, `user_id`, `username`, `ip_address`, `user_agent`, `last_activity`, `token`) VALUES
+('v765csad8hr442mp033q228cgkju22eb', '', 0, '', '', '', 1410442787, '');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
