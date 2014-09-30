@@ -28,6 +28,7 @@ INSERT INTO `config` (`option`, `value`, `type`, `default_value`, `package`) VAL
 ('style.default', 'silex.lunaelumen', 'string(255)', 'silex.lunaelumen', 1),
 ('system.show_load', '1', 'bool', '0', 1),
 ('time.timezone', 'Europe/Berlin', 'string(255)', 'Europe/Berlin', 1),
+('url.assets', '', 'string(255)', '', 1),
 ('url.base', '/', 'string(255)', '/', 1),
 ('url.format', '1', 'int(1)', '1', 1);
 

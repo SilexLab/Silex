@@ -19,14 +19,24 @@ class Config {
 	 * @param array $config optional
 	 */
 	public static function init() {
-		$res = Silex::getDB()->query('SELECT * FROM `config`');
-		while ($row = $res->fetchObject()) {
-			$value = $row->value;
-			$type = $row->type;
-			self::formatValue($row->option, $value, $type);
+		$cacheFile = 'config';
+		if (file_exists(DCACHE.$cacheFile) && (DEBUG ? false : probably(90))) {
+			self::$config = unserialize(file_get_contents(DCACHE.$cacheFile));
+		} else {
+			$res = Silex::getDB()->query('SELECT * FROM `config`');
+			while ($row = $res->fetchObject()) {
+				$value = $row->value;
+				$type = $row->type;
+				self::formatValue($row->option, $value, $type);
 
-			self::$config[$row->option] = $value;
+				self::$config[$row->option] = $value;
+			}
+			
+			if (!DEBUG)
+				file_put_contents(DCACHE.$cacheFile, serialize(self::$config));
 		}
+
+		
 	}
 
 	/**

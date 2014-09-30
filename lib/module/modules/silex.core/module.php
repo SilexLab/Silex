@@ -50,11 +50,12 @@ class silex_core implements IModule {
 		Language::assignTemplate();
 
 		$baseURL = Config::get('url.base');
+		$assetsURL = Config::get('url.assets');
 		Template::assign([
 			'DEBUG' => DEBUG,
 			'url'   => [
 				'base'  => $baseURL,
-				'asset' => $baseURL.RASSET,
+				'asset' => $assetsURL ? $assetsURL : $baseURL.RASSET,
 				'tpl'   => $baseURL.RTPL,
 				'style' => $baseURL.RSTYLE
 			]
