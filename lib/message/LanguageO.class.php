@@ -56,14 +56,9 @@ class LanguageO implements ITemplatable {
 			$this->descriptionEn = (string)$info->{'description-en'};
 
 			/* Read language and generate heap */ // TODO: Only read on demand, e.g. only when somebody really gets lang vars
-			$cacheFile = 'lang-'.$this->id;
-			if (file_exists(DCACHE.$cacheFile) && (DEBUG ? false : probably(90))) {
-				$this->heap = unserialize(file_get_contents(DCACHE.$cacheFile));
-			} else {
-				$this->heap = UArray::toNode((new XML($customPath.$languageID.'/core.xml'))->asArray());
-				if (!DEBUG)
-					file_put_contents(DCACHE.$cacheFile, serialize($this->heap));
-			}
+			$this->heap = Cache::_(function($var) {
+				return UArray::toNode((new XML($var))->asArray());
+			}, 'lang-'.$this->id, $customPath.$languageID.'/core.xml');
 
 		} else {
 			throw new LanguageNotFoundException();

@@ -19,10 +19,7 @@ class Config {
 	 * @param array $config optional
 	 */
 	public static function init() {
-		$cacheFile = 'config';
-		if (file_exists(DCACHE.$cacheFile) && (DEBUG ? false : probably(90))) {
-			self::$config = unserialize(file_get_contents(DCACHE.$cacheFile));
-		} else {
+		self::$config = Cache::_(function() {
 			$res = Silex::getDB()->query('SELECT * FROM `config`');
 			while ($row = $res->fetchObject()) {
 				$value = $row->value;
@@ -31,12 +28,8 @@ class Config {
 
 				self::$config[$row->option] = $value;
 			}
-			
-			if (!DEBUG)
-				file_put_contents(DCACHE.$cacheFile, serialize(self::$config));
-		}
-
-		
+			return self::$config;
+		}, 'config');
 	}
 
 	/**

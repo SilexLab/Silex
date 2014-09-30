@@ -5,6 +5,8 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
+require_once 'lib/util/Cache.class.php';
+
 /**
  * Loads all the classes
  */
@@ -50,14 +52,10 @@ class Autoloader {
 	protected static function checkCache() {
 		$cacheFile = 'autoload-index';
 
-		// probably() changes the probably if it will use the cache file or run the indexing again
-		if (file_exists(DCACHE.$cacheFile) && (DEBUG ? false : probably(90))) {
-			self::$index = unserialize(file_get_contents(DCACHE.$cacheFile));
-		} else {
+		self::$index = Cache::_(function() {
 			self::indexClasses(preg_replace('/(.*)\/$/', '$1', RLIB));
-			if (!DEBUG)
-				file_put_contents(DCACHE.$cacheFile, serialize(self::$index));
-		}
+			return self::$index;
+		}, 'autoload-index');
 	}
 
 	/**
