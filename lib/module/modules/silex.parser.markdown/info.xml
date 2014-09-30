@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+	<module>silex.parser.markdown</module>
+	<group>silex.parser</group>
+	<name>Markdown Parser</name>
+
+	<author>Silex Lab</author>
+
+	<files>
+		<file>lib/message/MessageParser.class.php</file>
+		<file>lib/message/parser/Markdown.class.php</file>
+		<file>lib/message/parser/Parser.class.php</file>
+	</files>
+</info>

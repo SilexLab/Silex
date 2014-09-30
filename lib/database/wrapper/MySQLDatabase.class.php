@@ -10,19 +10,16 @@
  */
 class MySQLDatabase extends Database {
 	public function connect($host = '', $username = '', $password = '', $database = '', $port = 0) {
-		// Store information
+		if (!$port) $port = 3306;
 		$this->database = $database;
 
-		// Default port
-		if(!$port)
-			$port = 3306;
-
-		$dsn = 'mysql:host='.$host.';port='.$port.';dbname='.$database.';';
-		$options = [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'];
+		$options = [
+			PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+		];
 
 		try {
-			// Create PDO
-			$this->pdo = new PDO($dsn, $username, $password, $options);
+			$this->pdo = new PDO('mysql:host='.$host.';port='.$port.';dbname='.$database.';charset=utf8', $username, $password, $options);
 		} catch(PDOException $e) {
 			throw new DatabaseException('Failed to connect to MySQL server '.$host, $this);
 		}

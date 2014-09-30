@@ -1,82 +1,48 @@
 {* Default Base Template *}
 <header>
-	<div class="w-size">
-		<div class="w-content-h">
-			<div class="content-box">
-				<a href="{$url.base}"><img src="{$style.url_path}images/logo-single.svg" alt="Silex logo" title="Silex" id="page-logo"></a>
-			</div>
-			<div class="content-box">
-				<nav class="user">
-					<ul>
-						<li><a href="/search" title="{'general.search'|lang}" id="user-search"><img src="{$style.url_path}images/icon-magnifying-glass-b.svg" alt="{'general.search'|lang}" class="search"></a></li>
-						<li><a href="/login" title="{'general.login'|lang}" id="user-login"><img src="{$style.url_path}images/icon-logout-b.svg" alt="{'general.login'|lang}" class="loginout"></a></li>
-						<li><a href="/user/{$user.id}-{$user.name}">{$user.name}</a></li>
-						<li class="avatar"><a href="/user/{$user.id}-{$user.name}/avatar"><img src="{$style.url_path}images/icon-user-b.svg" alt="avatar" class="avatar"></a></li>
-					</ul>
-				</nav>
-			</div>
-			<div class="content-box right">
-				<nav class="main">
-					<ul>
+	<div class="container">
+		<img id="silex-logo" src="{$url.asset}/images/logo-white.svg" alt="Silex">
+		<nav class="main">
+			<ul>
 {foreach $nav.main as $entry}
-						<li{($entry.active) ? ' class="active"' : ''}>
-							<a href="{$entry.link}">{$entry.title}</a>
-						</li>
-{/foreach}
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</div>
-{if isset($headline)}
-	<h1>{$headline|lang}</h1>
+				<li{($entry.active) ? ' class="active"' : ''}>
+{if $entry.enabled}
+					<a href="{$entry.link}">{$entry.title}</a>
+{else}
+					<a class="disabled">{$entry.title}</a>
 {/if}
+				</li>
+{/foreach}
+			</ul>
+		</nav>
+		{if isset($header)}{$header}{/if}
+		{if isset($headline)}<h1>{$headline|lang}</h1>{/if}
+	</div>
 </header>
-<section id="user-panel">
-	<div class="w-size">
-		<div class="w-content">
-			User Panel
+<div class="notification">
+	<noscript>
+		<div class="info">
+			{'notification.javascript'|lang}
 		</div>
-	</div>
-</section>
-<section class="content-container main-content">
-	<div class="notification">
-		<noscript>
-			<div class="info">
-				{'notification.javascript'|lang}
-			</div>
-		</noscript>
-	</div>
-	<div class="w-size">
-		<div class="w-content">
-			<nav class="breadcrumbs">
-{foreach $nav.crumbs as $entry}
-				<a href="{$entry.link}" class="crust"><span class="crumb">{$entry.title}</span></a>
-{/foreach}
-			</nav>
-		</div>
-		<div class="w-content">
+	</noscript>
+</div>
+<section class="main-content">
 {include file=$page.template}
-		</div>
-		<div class="w-content">
-			<nav class="breadcrumbs">
-{foreach $nav.crumbs as $entry}
-				<a href="{$entry.link}" class="crust"><span class="crumb">{$entry.title}</span></a>
-{/foreach}
-			</nav>
-		</div>
-	</div>
 </section>
 <footer class="main">
-	<div class="w-size">
+	<div class="container">
 		<div class="w-content">
 			<div class="table">
-				<div>Flex column 1</div>
-				<div>Flex column 2</div>
-				<div>Flex column 3</div>
+				<div>
+					{$style.title}<br>
+					{$lang.name}
+				</div>
+				<div>You may should know, this site runs on Silex too.</div>
+				<div>
+					<p>IRC: <a href="http://chat.skyirc.net/?nick=silex_...&amp;channels=SilexLab&amp;prompt=1" target="_blank">#SilexLab</a> at <a href="http://skyirc.net/" target="_blank"><i class="i i-external-link-square"></i> SkyIrc</a></p>
+		<p><a href="https://github.com/SilexLab/Silex"><i class="i i-github-alt" title="Github repository"></i></a> <a href="https://github.com/SilexLab/Silex/issues"><i class="i i-exclamation-circle" title="Issues"></i></a></p>
+				</div>
 			</div>
-			{$style.title}<br>
-			{$lang.name}
 		</div>
 	</div>
 </footer>

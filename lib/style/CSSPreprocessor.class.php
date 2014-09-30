@@ -28,10 +28,10 @@ class CSSPreprocessor {
 
 	public function compile($in) {
 		$pi = pathinfo($in);
-		if(preg_match('/^([a-zA-Z0-9_\-]+)\.scss$/', $pi['basename'])) {
+		if (preg_match('/^([a-zA-Z0-9_\-]+)\.scss$/', $pi['basename'])) {
 			$out = $this->cssSubDir.$pi['filename'].'.css';
 
-			if($this->server->checkedCompile($this->styleDir.$in, $this->styleDir.$out))
+			if ($this->server->checkedCompile($this->styleDir.$in, $this->styleDir.$out))
 				$this->server->compileFile($this->styleDir.$in, $this->styleDir.$out);
 			return $out;
 		}

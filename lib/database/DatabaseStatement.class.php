@@ -33,7 +33,7 @@ class DatabaseStatement {
 		$this->database->incrementQueryCount();
 
 		try {
-			if(empty($parameters))
+			if (empty($parameters))
 				$this->statement->execute();
 			else
 				$this->statement->execute($parameters);
@@ -62,7 +62,7 @@ class DatabaseStatement {
 	 */
 	public function fetchAllArray($type = null) {
 		$return = [];
-		while($row = $this->fetchArray($type)) {
+		while ($row = $this->fetchArray($type)) {
 			$return[] = $row;
 		}
 		return $return;
@@ -74,7 +74,7 @@ class DatabaseStatement {
 	 */
 	public function fetchAllObject() {
 		$objects = [];
-		while($row = $this->statement->fetchObject())
+		while ($row = $this->statement->fetchObject())
 			$objects[] = $row;
 		return $objects;
 	}
@@ -95,8 +95,8 @@ class DatabaseStatement {
 	 * @return string
 	 */
 	public function getErrorDesc() {
-		if($this->statement !== null) {
-			if(isset($this->statement->errorInfo()[2])) {
+		if ($this->statement !== null) {
+			if (isset($this->statement->errorInfo()[2])) {
 				return $this->statement->errorInfo()[2];
 			}
 		}

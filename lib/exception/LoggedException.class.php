@@ -28,7 +28,7 @@ class LoggedException extends Exception {
 	public function _getMessage() {
 
 		// You're not supposed to see this, when not debugging
-		if(!Silex::isDebug()) {
+		if (!Silex::isDebug()) {
 			return 'This is an error. Is it not supposed to be here, neither are you. Send the displayed ID to the site admin.';
 		}
 
@@ -43,21 +43,21 @@ class LoggedException extends Exception {
 	 */
 	protected function logError() {
 		// You don't need no logfile
-		if(Silex::isDebug())
+		if (Silex::isDebug())
 			return '<b>Error logging disabled</b>';
 
 		// Logfile
-		$logDir = DIR_ROOT.'logs/';
+		$logDir = DROOT.'logs/';
 		$logFilePath = $logDir.date('Y-m-d', TIME).'.log';
 
 		// Check if logs directory exists, if not create
-		if(!is_dir($logDir))
+		if (!is_dir($logDir))
 			mkdir($logDir, 0755, true);
 
 		@touch($logFilePath);
 
 		// Check file
-		if(!is_file($logFilePath) || !is_writable($logFilePath)) {
+		if (!is_file($logFilePath) || !is_writable($logFilePath)) {
 			// Hey server admin, you need to fix this
 			return 'unable to write to logs directory';
 		}

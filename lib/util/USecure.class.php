@@ -14,7 +14,7 @@ class USecure {
 	 * @return  string
 	 */
 	public static function encryptPassword($password, $email, $rounds = '08') {
-		$hash = hash_hmac('whirlpool', str_pad($password, strlen($password) * 4, sha1($email), STR_PAD_BOTH), Silex::getConfig()->get('password.salt'), true);
+		$hash = hash_hmac('whirlpool', str_pad($password, strlen($password) * 4, sha1($email), STR_PAD_BOTH), Config::get('password.salt'), true);
 		$salt = UString::getRandomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ./');
 		return crypt($hash, '$2a$'.$rounds.'$'.$salt.'$');
 	}
@@ -27,7 +27,7 @@ class USecure {
 	 * @return  bool
 	 */
 	public static function checkPassword($password, $email, $stored) {
-		$hash = hash_hmac('whirlpool', str_pad($password, strlen($password) * 4, sha1($email), STR_PAD_BOTH), Silex::getConfig()->get('password.salt'), true);
+		$hash = hash_hmac('whirlpool', str_pad($password, strlen($password) * 4, sha1($email), STR_PAD_BOTH), Config::get('password.salt'), true);
 		return crypt($hash, $stored) == $stored;
 	}
 }

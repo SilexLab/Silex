@@ -2,6 +2,7 @@
 <info>
 	<!-- Language ID according to ISO 639-1 and ISO 3166 -->
 	<id>en-US</id>
+	<id-short>en</id-short>
 
 	<!-- Info in the language packs's language -->
 	<name>American English</name>

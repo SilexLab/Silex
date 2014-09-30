@@ -10,36 +10,36 @@
  */
 class Session {
 	public static function start() {
-		if(self::status() === PHP_SESSION_DISABLED)
+		if (self::status() === PHP_SESSION_DISABLED)
 			throw new CoreException('Sessions are disabled', 1, 'You can\'t use sessions with disabled sessions!');
 
 		// session configuration
-		if(!defined('SILEX_SESSION')) {
+		if (!defined('SILEX_SESSION')) {
 			define('SILEX_SESSION', true);
 
-			ini_set('session.gc_maxlifetime', Silex::getConfig()->get('session.autologout'));
-			ini_set('session.gc_probability', Silex::getConfig()->get('session.autologout_probability'));
+			ini_set('session.gc_maxlifetime', Config::get('session.autologout'));
+			ini_set('session.gc_probability', Config::get('session.autologout_probability'));
 			ini_set('session.gc_divisor', 100);
 			ini_set('session.hash_function', 1);
 			register_shutdown_function('session_write_close');
-			session_name(Silex::getConfig()->get('session.name'));
-			session_set_cookie_params(Silex::getConfig()->get('session.cookie_time'), '/', null, false, true);
+			session_name(Config::get('session.name'));
+			session_set_cookie_params(Config::get('session.cookie_time'), '/', null, false, true);
 
 			// session handler | TODO: support more
-			if(Silex::getConfig()->get('session.separate.database')) {
+			if (Config::get('session.separate.database')) {
 				session_set_save_handler(new SessionDatabaseHandler(DatabaseFactory::initDatabase(
-					Silex::getConfig()->get('session.database.wrapper'),
-					Silex::getConfig()->get('session.database.host'),
-					Silex::getConfig()->get('session.database.user'),
-					Silex::getConfig()->get('session.database.password'),
-					Silex::getConfig()->get('session.database.name'),
-					Silex::getConfig()->get('session.database.port')
+					Config::get('session.database.wrapper'),
+					Config::get('session.database.host'),
+					Config::get('session.database.user'),
+					Config::get('session.database.password'),
+					Config::get('session.database.name'),
+					Config::get('session.database.port')
 				), 'session'), true);
 			} else
 				session_set_save_handler(new SessionDatabaseHandler(Silex::getDB(), 'session'), true);
 
 			// Safety
-			Silex::getConfig()->remove(['session.separate.database',
+			Config::remove(['session.separate.database',
 				'session.database.wrapper',
 				'session.database.host',
 				'session.database.user',
@@ -49,7 +49,7 @@ class Session {
 		}
 
 		// start session if none exists
-		if(self::status() === PHP_SESSION_NONE && PHP_SAPI != 'cli')
+		if (self::status() === PHP_SESSION_NONE && PHP_SAPI != 'cli')
 			session_start();
 	}
 

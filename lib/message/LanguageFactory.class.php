@@ -20,10 +20,10 @@ class LanguageFactory {
 
 	public static function init() {
 		// Read all dem data
-		foreach(scandir(DIR_LANGUAGE) as $file) {
-			if(is_dir(DIR_LANGUAGE.$file) && preg_match('/^([a-z]{2}\-[A-Z]{2})$/', $file, $matches)) {
+		foreach (scandir(DLANG) as $file) {
+			if (is_dir(DLANG.$file) && preg_match('/^([a-z]{2}\-[A-Z]{2})$/', $file, $matches)) {
 				try {
-					self::$languageObjects[$matches[1]] = new Language($matches[1]);
+					self::$languageObjects[$matches[1]] = new LanguageO($matches[1]);
 				} catch(LanguageNotFoundException $e) {
 					unset(self::$languageObjects[$matches[1]]);
 				}
@@ -32,13 +32,13 @@ class LanguageFactory {
 
 		// Try to find the default language
 		// By now this is done only via the global config. User or location specific stuff is to come
-		$defaultLangID = Silex::getConfig()->get('language.default');
+		$defaultLangID = Config::get('language.default');
 
-		if(isset(self::$languageObjects[$defaultLangID])) {
+		if (isset(self::$languageObjects[$defaultLangID])) {
 			self::$defaultLanguage = self::$languageObjects[$defaultLangID];
 		}
 		// Use the first language loaded instead
-		elseif(!empty(self::$languageObjects)) {
+		elseif (!empty(self::$languageObjects)) {
 			self::$defaultLanguage = self::$languageObjects[current(array_keys(self::$languageObjects))];
 		} else {
 			throw new CoreException('Couldn\'t load any default language', 0 , 'No language could be loaded. Check your directory naming.');

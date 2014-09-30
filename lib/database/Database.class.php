@@ -38,7 +38,7 @@ abstract class Database {
 		try {
 			$pdoStatement = $this->pdo->query($query);
 			$this->incrementQueryCount();
-			if($pdoStatement instanceof PDOStatement)
+			if ($pdoStatement instanceof PDOStatement)
 			 	return new DatabaseStatement($this, $pdoStatement, $query);
 		} catch(PDOException $e) {
 			throw new DatabaseException('Failed to execute query.', $this);
@@ -48,7 +48,7 @@ abstract class Database {
 	public function prepare($query) {
 		try {
 			$pdoStatement = $this->pdo->prepare($query);
-			if($pdoStatement instanceof PDOStatement)
+			if ($pdoStatement instanceof PDOStatement)
 			 	return new DatabaseStatement($this, $pdoStatement, $query);
 		} catch(PDOException $e) {
 			throw new DatabaseException('Failed to prepare statement.', $this);
@@ -69,7 +69,7 @@ abstract class Database {
 
 	public function getVersion() {
 		try {
-			if($this->pdo !== null) {
+			if ($this->pdo !== null) {
 				return $this->pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
 			}
 		} catch(PDOException $e) {}
@@ -77,8 +77,8 @@ abstract class Database {
 	}
 
 	public function getErrorDesc() {
-		if($this->pdo !== null) {
-			if(isset($this->pdo->errorInfo()[2]))
+		if ($this->pdo !== null) {
+			if (isset($this->pdo->errorInfo()[2]))
 				return $this->pdo->errorInfo()[2];
 		}
 		return '';

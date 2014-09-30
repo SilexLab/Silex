@@ -18,7 +18,7 @@ class XML {
 	 */
 	public function __construct($data, $isString = false, $options = 0, $ns = '', $isPrefix = false) {
 		$this->xmlObj = new SimpleXMLExtended($data, $options, !$isString, $ns, $isPrefix);
-		if(!$this->xmlObj)
+		if (!$this->xmlObj)
 			throw new CoreException('Failed to load XML');
 	}
 

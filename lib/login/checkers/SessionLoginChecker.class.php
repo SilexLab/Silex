@@ -20,7 +20,7 @@ class SessionLoginChecker implements ILoginChecker {
 	 */
 	public function getUser() {
 		$user = null;
-		if(Session::get('userID', false)) {
+		if (Session::get('userID', false)) {
 			try {
 				$user = UserFactory::getUserByID(Session::get('userID'));
 			} catch(UserNotFoundException $e) {

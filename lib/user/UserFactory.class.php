@@ -25,15 +25,15 @@ class UserFactory {
 	 */
 	public static function getUserByID($userID) {
 		// Is he already buffered?
-		if(isset(self::$userBuffer[$userID]) && self::$userBuffer[$userID] instanceof User) {
+		if (isset(self::$userBuffer[$userID]) && self::$userBuffer[$userID] instanceof User) {
 			return self::$userBuffer[$userID];
 		}
 
 		// Create new
 		$query = Silex::getDB()->prepare('SELECT * FROM `user` WHERE `id` = :id')->execute([':id' => $userID]);
-		if($query->rowCount() == 1) {
+		if ($query->rowCount() == 1) {
 			$user = new User($query->fetchArray(PDO::FETCH_ASSOC));
-			if($user instanceof User) {
+			if ($user instanceof User) {
 				self::$userBuffer[(int)$user->getID()] = $user;
 				self::$nameToID[$user->getName()] = (int)$user->getID();
 				return $user;
@@ -51,15 +51,15 @@ class UserFactory {
 	 */
 	public static function getUserByName($userName) {
 		// Is he already buffered?
-		if(isset(self::$nameToID[$userName]) && self::$userBuffer[self::$nameToID[$userName]] instanceof User) {
+		if (isset(self::$nameToID[$userName]) && self::$userBuffer[self::$nameToID[$userName]] instanceof User) {
 			return self::$userBuffer[self::$nameToID[$userName]];
 		}
 
 		// Create new
 		$query = Silex::getDB()->prepare('SELECT * FROM `user` WHERE `name` = :name')->execute([':name' => $userName]);
-		if($query->rowCount() == 1) {
+		if ($query->rowCount() == 1) {
 			$user = new User($query->fetchArray(PDO::FETCH_ASSOC));
-			if($user instanceof User) {
+			if ($user instanceof User) {
 				self::$userBuffer[(int)$user->getID()] = $user;
 				self::$nameToID[$user->getName()] = (int)$user->getID();
 				return $user;

@@ -1,6 +1,7 @@
 /.idea/
 /lib/config.inc.php
 .svn
+/old/
 /cache/*
 /vendor/
 /composer.phar

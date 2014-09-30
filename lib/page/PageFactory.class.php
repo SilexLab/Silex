@@ -11,11 +11,11 @@ class PageFactory {
 
 	public static function init() {
 		// Find available wrappers
-		foreach(scandir(DIR_LIB.'pages/') as $pageFile) {
-			if(is_file(DIR_LIB.'pages/'.$pageFile) && preg_match('/^(([a-zA-Z0-9]+)Page).class.php$/', $pageFile, $pageMatch)) {
+		foreach (scandir(DLIB.'page/pages/') as $pageFile) {
+			if (is_file(DLIB.'page/pages/'.$pageFile) && preg_match('/^(([a-zA-Z0-9]+)Page).class.php$/', $pageFile, $pageMatch)) {
 				$class = $pageMatch[1];
 				$page = new $class();
-				if($page instanceof Page)
+				if ($page instanceof Page)
 					self::$pages[$page->getName()] = $page;
 
 				// Clear object
@@ -26,13 +26,13 @@ class PageFactory {
 
 	public static function getPage() {
 		// Try to get the page by url
-		if(isset(self::$pages[URL::getRoute(0)]))
+		if (isset(self::$pages[URL::getRoute(0)]))
 			return self::$pages[URL::getRoute(0)];
 		// Try to get the default page
-		if(URL::getRoute() == Silex::getConfig()->get('url.base') && isset(self::$pages[self::getDefaultPage()]))
+		if (URL::getRoute() == Config::get('url.base') && isset(self::$pages[self::getDefaultPage()]))
 			return self::$pages[self::getDefaultPage()];
 		// Try to get the error page (because requested site wasn't found)
-		if(isset(self::$pages['error']))
+		if (isset(self::$pages['error']))
 			return self::$pages['error'];
 
 		// Dude... something is wrong.
@@ -40,6 +40,6 @@ class PageFactory {
 	}
 
 	public static function getDefaultPage() {
-		return Silex::getConfig()->get('page.default');
+		return Config::get('page.default');
 	}
 }

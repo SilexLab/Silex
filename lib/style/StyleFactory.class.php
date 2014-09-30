@@ -10,13 +10,13 @@ class StyleFactory {
 
 	public function __construct() {
 		// Read all dem data
-		foreach(scandir(DIR_STYLE) as $file) {
-			if(!in_array($file, ['.', '..']) && is_dir(DIR_STYLE.$file) && preg_match('/^[a-zA-Z0-9_\-\.]+$/', $file)) {
+		foreach (scandir(DSTYLE) as $file) {
+			if (!in_array($file, ['.', '..']) && is_dir(DSTYLE.$file) && preg_match('/^[a-zA-Z0-9_\-\.]+$/', $file)) {
 				try {
-					@include_once(DIR_STYLE.$file.'/style.php');
+					include_once(DSTYLE.$file.'/style.php');
 					$class = preg_replace('/\./', '_', $file);
 					$this->styleObjects[$file] = new $class;
-					if(!($this->styleObjects[$file] instanceof Style))
+					if (!($this->styleObjects[$file] instanceof Style))
 						throw new StyleNotFoundException('Invalid Style');
 				} catch(Exception $e) {
 					echo 'StyleFactory: '.$e->getMessage();
@@ -28,12 +28,12 @@ class StyleFactory {
 
 	public function getStyle() {
 		// get default style
-		$style = Silex::getConfig()->get('style.default');
+		$style = Config::get('style.default');
 
 		// TODO: get user style
 		// if user has custom style then $style = user's style
 
-		if(isset($this->styleObjects[$style]))
+		if (isset($this->styleObjects[$style]))
 			return $this->styleObjects[$style];
 		
 		// Do you really want to torture your visitors with an ugly page without a style? Nice try, not with Silex. Silex protects visitors against ugly webpages. Use Silex now. Only today 20% off. 100% free and open source. Grab it now.

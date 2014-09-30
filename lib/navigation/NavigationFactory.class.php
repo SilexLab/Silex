@@ -5,7 +5,7 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-class NavigationFactory {
+class NavigationFactory implements ITemplatable {
 	protected $main;
 	protected $breadcrumbs;
 
@@ -29,11 +29,13 @@ class NavigationFactory {
 		$this->main->prepend($main);
 	}
 
-	public function getTemplateArray() {
-		return [
-			'main'   => $this->main->get(),
-			'crumbs' => $this->breadcrumbs->get()
-		];
+	public function assignTemplate() {
+		Template::assign(['nav' =>
+			[
+				'main'   => $this->main->get(),
+				'crumbs' => $this->breadcrumbs->get()
+			]
+		]);
 	}
 
 	public function getMain() {

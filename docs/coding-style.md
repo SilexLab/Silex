@@ -37,7 +37,7 @@ class ExampleClass implements IFooInterface {
 
 	public function makeItWork($iAmAnArgument) {
 		// Hey, do something pretty
-		if($this->fooBool) {
+		if ($this->fooBool) {
 			$this->array['herp_derp'] .= $fooVar++;
 		}
 
@@ -45,7 +45,7 @@ class ExampleClass implements IFooInterface {
 	}
 
 	public static function staticMethod($value) {
-		if($value <= 4) {
+		if ($value <= 4) {
 			return true;
 		} else {
 			return false;

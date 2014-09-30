@@ -49,7 +49,7 @@ class CoreException extends LoggedException implements IPrintableException {
 		$id = $this->logError();
 
 		// Try to get the site title
-		$title = (Silex::getConfig() ? ' · '.Silex::getConfig()->get('page.title') : '');
+		$title = (Silex::getConfig() ? ' · '.Config::get('page.title') : '');
 
 		/* Print HTML */
 		@header('HTTP/1.1 503 Service Unavailable');
@@ -75,7 +75,7 @@ class CoreException extends LoggedException implements IPrintableException {
 	</head>
 	<body>
 		<h1>Fatal Error</h1>';
-		if(Silex::isDebug()) {
+		if (Silex::isDebug()) {
 			echo '		<h2>'.UString::encodeHTML($this->_getMessage()).'</h2>
 		<p>'.UString::encodeHTML($this->getDescription()).'</p>
 		<h3>Information</h3>

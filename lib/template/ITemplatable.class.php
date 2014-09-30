@@ -10,5 +10,5 @@ interface ITemplatable {
 	 * Return an array suitable for assignment in an template variable
 	 * @return array
 	 */
-	public function getTemplateArray();
-} 
+	public function assignTemplate();
+}

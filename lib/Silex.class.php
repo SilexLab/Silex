@@ -10,37 +10,43 @@
  */
 class Silex {
 	protected static $db = null;
-	protected static $config = null;
-	protected static $modules = null;
 
 	/**
 	 * Start Silex up!
 	 */
 	public final function __construct() {
-		// Read config file
-		if(!is_file(DIR_LIB.'config.inc.php'))
-			throw new CoreException('Y U NO HAVE A CONFIG FILE?!', 0, 'Your config file can\'t be found.');
-		$config = require_once DIR_LIB.'config.inc.php';
+		if (!defined('CLASS_SILEX')) {
+			define('CLASS_SILEX', 1);
 
-		self::$db = DatabaseFactory::initDatabase(
-			$config['database.wrapper'],
-			$config['database.host'],
-			$config['database.user'],
-			$config['database.password'],
-			$config['database.name'],
-			$config['database.port']);
-		self::$config = new Config($config);
+			// Get config file
+			if (!is_file(DLIB.'config.inc.php'))
+				throw new CoreException('Y U NO HAVE A CONFIG FILE?!', 0, 'Your config file can\'t be found.');
+			$config = require_once DLIB.'config.inc.php';
 
-		// Set default timezone
-		date_default_timezone_set(self::$config->get('time.timezone')); // TODO: prefer user settings
+			// Connect to the database
+			self::$db = DatabaseFactory::initDatabase(
+				$config['database.wrapper'],
+				$config['database.host'],
+				$config['database.user'],
+				$config['database.password'],
+				$config['database.name'],
+				$config['database.port']);
+			// Unset $config for security reasons
+			unset($config);
 
-		// Modules
-		self::$modules = new Modules(DIR_LIB.'modules/');
-		Event::fire('silex.construct.before_modules_register');
-		self::$modules->register();
-		Event::fire('silex.construct.after_modules_register');
+			// Load the config
+			Config::init();
 
-		Event::fire('silex.construct.end');
+			// Set default timezone // TODO: prefer user settings
+			date_default_timezone_set(Config::get('time.timezone'));
+
+			// Registering modules
+			Modules::init(DLIB.'module/modules/');
+			Modules::register();
+
+			// That's it
+			Event::fire('silex.construct.end');
+		}
 	}
 
 	/**
@@ -48,7 +54,7 @@ class Silex {
 	 * @return mixed
 	 */
 	public static final function __callStatic($name, $args) {
-		return self::$modules->callMethod($name, $args);
+		return Modules::callMethod($name, $args);
 	}
 
 	/**
@@ -56,7 +62,7 @@ class Silex {
 	 * @param Exception $e
 	 */
 	public static final function handleException(Exception $e) {
-		if($e instanceof IPrintableException) {
+		if ($e instanceof IPrintableException) {
 			$e->show();
 			exit(1);
 		}
@@ -74,7 +80,7 @@ class Silex {
 	 * @throws CoreException
 	 */
 	public static final function handleError($errorNo, $message, $filename, $lineNo) {
-		if(error_reporting() != 0) {
+		if (error_reporting() != 0) {
 			$type = 'errors';
 			switch($errorNo) {
 				case 2:
@@ -94,30 +100,6 @@ class Silex {
 	 */
 	public static final function getDB() {
 		return self::$db;
-	}
-
-	/**
-	 * Get the config instance
-	 * @return Config
-	 */
-	public static final function getConfig() {
-		//return self::$config->get($node);
-		return self::$config;
-	}
-
-	/**
-	 * @return Language
-	 */
-	public static final function getLanguage() {
-		// TODO: Which language does he/she/it want?
-		return LanguageFactory::getDefaultLanguage();
-	}
-
-	/**
-	 * @return Modules
-	 */
-	public static final function getModule() {
-		return self::$modules;
 	}
 
 	/**

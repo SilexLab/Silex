@@ -26,7 +26,7 @@ class SessionDatabaseHandler implements SessionHandlerInterface {
 		$s = $this->db->prepare('SELECT * FROM `'.$this->table.'` WHERE `id` = :id LIMIT 1');
 		$s->execute([':id' => $session_id]);
 		$result = $s->fetchObject();
-		if($result)
+		if ($result)
 			return $result->session_value;
 		return '';
 	}
@@ -34,7 +34,7 @@ class SessionDatabaseHandler implements SessionHandlerInterface {
 	public function write($session_id, $session_data) {
 		$s = $this->db->prepare('SELECT COUNT(*) FROM `'.$this->table.'` WHERE `id` = :id');
 		$s->execute([':id' => $session_id]);
-		if($s->fetchArray()['COUNT(*)'] == 0) {
+		if ($s->fetchArray()['COUNT(*)'] == 0) {
 			$s = $this->db->prepare('INSERT INTO `'.$this->table.'` (`id`, `session_value`, `last_activity`) VALUES (:id, :value, :time)');
 			return (bool)$s->execute([':id' => $session_id, ':value' => $session_data, ':time' => time()]);
 		}

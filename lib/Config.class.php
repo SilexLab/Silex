@@ -12,43 +12,30 @@ class Config {
 	/**
 	 * @var array $config
 	 */
-	private $config = [];
+	private static $config = [];
 
 	/**
 	 * Get the config
 	 * @param array $config optional
 	 */
-	public function __construct(array $config = []) {
-		// Fetch config
-		if($config) {
-			// Just remove these entries
-			UArray::removeElements($config, ['database.host', 'database.user', 'database.password', 'database.name', 'database.port', 'database.wrapper']);
-			$this->config = $config;
-		}
-		$config = Silex::getDB()->query('SELECT * FROM `config`')->fetchAllObject();
+	public static function init() {
+		$res = Silex::getDB()->query('SELECT * FROM `config`');
+		while ($row = $res->fetchObject()) {
+			$value = $row->value;
+			$type = $row->type;
+			self::formatValue($row->option, $value, $type);
 
-		// Now work with that stuff you got
-		if($config) {
-			foreach ($config as $c) {
-				$value = $c->value;
-				$type = $c->type;
-				$this->formatValue($c->option, $value, $type);
-
-				// TODO: for ACP, include type
-				$this->config[$c->option] = $value;
-			}
+			self::$config[$row->option] = $value;
 		}
 	}
-
-	private function __clone() {}
 
 	/**
 	 * Get the value of a config option
 	 * @param  string $node
 	 * @return mixed
 	 */
-	public function get($node) {
-		return array_key_exists($node, $this->config) ? $this->config[$node] : null;
+	public static function get($node) {
+		return array_key_exists($node, self::$config) ? self::$config[$node] : null;
 	}
 
 	/**
@@ -57,39 +44,39 @@ class Config {
 	 * @param  mixed  $value
 	 * @return null
 	 */
-	public function set($node, $value) {
-		if(defined('ACP')) {
+	public static function set($node, $value) {
+		if (defined('ACP')) {
 			// TODO: Set the value
 		}
 		return null;
 	}
 
-	public function remove($node) {
-		if(is_array($node))
-			UArray::removeElements($this->config, $node);
-		else if(isset($this->config[$node]))
-			unset($this->config[$node]);
+	public static function remove($node) {
+		if (is_array($node))
+			UArray::removeElements(self::$config, $node);
+		else if (isset(self::$config[$node]))
+			unset(self::$config[$node]);
 		else
 			return false;
 		return true;
 	}
 
-	public function asXML() {
+	public static function asXML() {
 		$xml = new XML('<config> </config>', true);
-		foreach ($this->config as $node => $value) {
+		foreach (self::$config as $node => $value) {
 			$splitted = explode('.', $node);
 			$curXML = $xml;
-			for($i = 0; $i < count($splitted); $i++) {
-				if(!$curXML->{$splitted[$i]}) {
-					if($i == count($splitted) - 1) {
+			for ($i = 0; $i < count($splitted); $i++) {
+				if (!$curXML->{$splitted[$i]}) {
+					if ($i == count($splitted) - 1) {
 						// check and format value
-						if(is_bool($value) || is_null($value))
+						if (is_bool($value) || is_null($value))
 							$value = (int)$value;
 
 						// replace & and not &amp;
 						$value = preg_replace('/&(?!amp;)/', '&amp;', $value);
 
-						if(is_string($value) && !empty($value) && !preg_match('/[a-z0-9 ]+/i', $value))
+						if (is_string($value) && !empty($value) && !preg_match('/[a-z0-9 ]+/i', $value))
 							$curXML->addChild($splitted[$i])->addCData($value);
 						else
 							$curXML->addChild($splitted[$i], $value);
@@ -97,7 +84,7 @@ class Config {
 					} else
 						$curXML->addChild($splitted[$i]);
 				}
-				if($i < count($splitted) - 1)
+				if ($i < count($splitted) - 1)
 					$curXML = $curXML->{$splitted[$i]};
 			}
 		}
@@ -112,34 +99,34 @@ class Config {
 	 * @param           $type
 	 * @throws CoreException
 	 */
-	private function formatValue($node, &$value, &$type) {
+	private static function formatValue($node, &$value, &$type) {
 		preg_match('/^[a-zA-Z]+/', $type, $match);
 		switch ($match[0]) {
 			case 'string':
 				$value = (string)$value;
-				if(defined('ACP'))
-					$type = $this->parseType($type, true);
+				if (defined('ACP'))
+					$type = self::parseType($type, true);
 				break;
 			case 'int':
 				$value = (int)$value;
-				if(defined('ACP'))
-					$type = $this->parseType($type);
+				if (defined('ACP'))
+					$type = self::parseType($type);
 				break;
 			case 'float':
 				$value = (float)$value;
-				if(defined('ACP'))
-					$type = $this->parseType($type);
+				if (defined('ACP'))
+					$type = self::parseType($type);
 				break;
 			case 'bool':
-				if(in_array($value, ['true', '1']))
+				if (in_array($value, ['true', '1']))
 					$value = true;
-				else if(in_array($value, ['false', '0']))
+				else if (in_array($value, ['false', '0']))
 					$value = false;
 				else
 					throw new CoreException('The config node "'.$node.'" is in the wrong format. Bool expected, the value is: "'.$value.'"');
 				break;
 			default:
-				throw new CoreException('The type ('.$this->config[$node]['Type'].') of the node "'.$node.'" is not a valid type.');
+				throw new CoreException('The type ('.self::$config[$node]['Type'].') of the node "'.$node.'" is not a valid type.');
 		}
 	}
 
@@ -148,22 +135,22 @@ class Config {
 	 * @param           $type
 	 * @param bool      $onlyLength optional
 	 */
-	private function parseType(&$type, $onlyLength = false) {
-		if(!$onlyLength && preg_match('/(\-{0,1}[0-9]+(\.[0-9]+){0,1}){0,1}\|(\-{0,1}[0-9]+(\.[0-9]+){0,1}){0,1}/', $type, $range)) {
+	private static function parseType(&$type, $onlyLength = false) {
+		if (!$onlyLength && preg_match('/(\-{0,1}[0-9]+(\.[0-9]+){0,1}){0,1}\|(\-{0,1}[0-9]+(\.[0-9]+){0,1}){0,1}/', $type, $range)) {
 			// Range
 			$range = $range[0];
 			$aR = explode('|', $range);
-			if(isset($aR[0]) && !empty($aR[0]) && isset($aR[1]) && !empty($aR[1])) {
+			if (isset($aR[0]) && !empty($aR[0]) && isset($aR[1]) && !empty($aR[1])) {
 				// Range
-				if($aR[0] < $aR[1]) {
+				if ($aR[0] < $aR[1]) {
 					$type = ['range' => ['min' => (int)$aR[0], 'max' => (int)$aR[1]]];
 				}
-			} else if(isset($aR[0]) && !empty($aR[0])){ // Min
+			} else if (isset($aR[0]) && !empty($aR[0])){ // Min
 				$type = ['range' => ['min' => (int)$aR[0]]];
 			} else { // Max
 				$type = ['range' => ['max' => (int)$aR[1]]];
 			}
-		} else if(preg_match('/[0-9]+/', $type, $length)) {
+		} else if (preg_match('/[0-9]+/', $type, $length)) {
 			// Length
 			$type = ['length' => $length];
 		}

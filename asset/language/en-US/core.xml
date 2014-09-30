@@ -7,7 +7,11 @@
 	</general>
 	<page>
 		<home>Home</home>
-		<design>Design</design>
+		<demo>Demo</demo>
+		<forum>Forum</forum>
+		<support>Support</support>
+		<development>Development</development>
+		<about>About</about>
 	</page>
 	<group>
 		<guest>Guest</guest>
@@ -29,4 +33,7 @@
 		<show-password>Show Password</show-password>
 		<search>Search</search>
 	</input>
+	<headline>
+		<welcome>Welcome to Silex</welcome>
+	</headline>
 </language>

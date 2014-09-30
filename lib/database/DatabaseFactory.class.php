@@ -25,14 +25,14 @@ class DatabaseFactory {
 	 * @return Database
 	 */
 	public static function initDatabase($dbWrapper, $dbHost, $dbUser, $dbPassword, $dbName, $dbPort) {
-		if(!defined('CLASS_DATABASE_FACTORY')) {
+		if (!defined('CLASS_DATABASE_FACTORY')) {
 			define('CLASS_DATABASE_FACTORY', true);
 			// Find available wrappers
-			foreach(scandir(DIR_LIB.'database/wrapper/') as $wrapper) {
-				if(is_file(DIR_LIB.'database/wrapper/'.$wrapper) && preg_match('/^(([a-zA-Z0-9]+)Database).class.php$/', $wrapper, $databaseMatch)) {
+			foreach (scandir(DLIB.'database/wrapper/') as $wrapper) {
+				if (is_file(DLIB.'database/wrapper/'.$wrapper) && preg_match('/^(([a-zA-Z0-9]+)Database).class.php$/', $wrapper, $databaseMatch)) {
 					$class = $databaseMatch[1];
 					$db = new $class();
-					if($db instanceof Database)
+					if ($db instanceof Database)
 						self::$databaseWrapper[$db->getID()] = $db;
 	
 					// Clear object
@@ -42,7 +42,7 @@ class DatabaseFactory {
 		}
 
 		// Check wrapper
-		if(!isset(self::$databaseWrapper[$dbWrapper]))
+		if (!isset(self::$databaseWrapper[$dbWrapper]))
 			throw new CoreException('Database wrapper not supported', 0, 'The database wrapper "'.$dbWrapper.'" isn\'t supported.');
 		
 		// Connect to database
@@ -50,7 +50,7 @@ class DatabaseFactory {
 		$db->connect($dbHost, $dbUser, $dbPassword, $dbName, $dbPort);
 
 		// Does it work?
-		if(!($db instanceof Database) || !$db->isSupported())
+		if (!($db instanceof Database) || !$db->isSupported())
 			throw new CoreException('Failed to create a database object.', 0, 'Failed to create the database object. Either there was a connection error or the DB type isn\'t supported.');
 
 		// Clear all instances

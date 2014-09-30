@@ -38,8 +38,8 @@ abstract class Style implements ITemplatable {
 	 */
 	public function preprocessor($cssFiles) {
 		$out = [];
-		foreach($cssFiles as $file) {
-			if(Silex::getModule()->status('silex.css.preprocessor') == 1) {
+		foreach ($cssFiles as $file) {
+			if (Modules::status('silex.css.preprocessor') == 1) {
 				$out[] = [
 					'file' => Silex::getCSSPreprocessor($this->getPath())->compile((string)$file),
 					'media' => isset($file->attributes()->media) ? $file->attributes()->media : ''
@@ -73,30 +73,32 @@ abstract class Style implements ITemplatable {
 	 * @return string
 	 */
 	public final function getPath() {
-		return DIR_STYLE.$this->getName().'/';
+		return DSTYLE.$this->getName().'/';
 	}
 
 	/**
 	 * @return string
 	 */
 	protected final function getRelativePath() {
-		return REL_STYLE.$this->getName().'/';
+		return RSTYLE.$this->getName().'/';
 	}
 
 	public final function getTitle() {
 		return $this->title;
 	}
 
-	public final function getTemplateArray() {
-		return [
-			'title' => $this->getTitle(),
-			'name' => $this->getName(),
-			'path' => $this->getPath(),
-			'url_path' => Silex::getConfig()->get('url.base').$this->getRelativePath(),
-			'css_files' => $this->cssFiles,
-			'css_async' => $this->cssAsync,
-			'js_files' => $this->jsFiles,
-			'object' => $this
-		];
+	public final function assignTemplate() {
+		Template::assign(['style' =>
+			[
+				'title' => $this->getTitle(),
+				'name' => $this->getName(),
+				'path' => $this->getPath(),
+				'url_path' => Config::get('url.base').$this->getRelativePath(),
+				'css_files' => $this->cssFiles,
+				'css_async' => $this->cssAsync,
+				'js_files' => $this->jsFiles,
+				'object' => $this
+			]
+		]);
 	}
 }

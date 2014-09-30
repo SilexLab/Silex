@@ -6,5 +6,5 @@
  */
 
 function smarty_modifier_config($node) {
-	return Silex::getConfig()->get($node);
+	return Config::get($node);
 }

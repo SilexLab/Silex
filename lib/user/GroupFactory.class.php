@@ -9,13 +9,13 @@ class GroupFactory {
 	protected static $groups = [];
 
 	public static function get($id) {
-		if(isset(self::$groups[$id]))
+		if (isset(self::$groups[$id]))
 			return self::$groups[$id];
 
-		if(!is_int($id))
+		if (!is_int($id))
 			return false;
 
-		if(Silex::getDB()->exists('group', '`id` = '.$id))
+		if (Silex::getDB()->exists('group', '`id` = '.$id))
 			self::$groups[$id] = new Group($id);
 	}
 }

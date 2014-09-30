@@ -36,7 +36,7 @@ class UString {
 	public static function urlEncodeSlashes($url) {
 		$newURL = '';
 		$url = explode('/', $url);
-		for($i = 0; $i < sizeof($url); $i++)
+		for ($i = 0; $i < sizeof($url); $i++)
 			$newURL .= urlencode($url[$i]).(($i < sizeof($url) - 1) ? '/' : '');
 		return $newURL;
 	}
@@ -50,7 +50,7 @@ class UString {
 	public static function rawUrlEncodeSlashes($url) {
 		$newURL = '';
 		$url = explode('/', $url);
-		for($i = 0; $i < sizeof($url); $i++)
+		for ($i = 0; $i < sizeof($url); $i++)
 			$newURL .= rawurlencode($url[$i]).(($i < sizeof($url) - 1) ? '/' : '');
 		return $newURL;
 	}
@@ -75,7 +75,7 @@ class UString {
 	public static function getRandomString($length,
 		$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!?@(){}[]\/=~$%&#*-+.,_') {
 		$result = '';
-		for($i = 0; $i < $length; $i++)
+		for ($i = 0; $i < $length; $i++)
 			$result .= $pool{rand(0, strlen($pool) - 1)};
 		return $result;
 	}

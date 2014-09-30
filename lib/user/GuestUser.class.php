@@ -19,7 +19,7 @@ class GuestUser extends User {
 	}
 
 	public function getName() {
-		return Silex::getLanguage()->get($this->name);
+		return Language::get($this->name);
 	}
 
 	public function getMail() {

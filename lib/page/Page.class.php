@@ -22,7 +22,7 @@ abstract class Page implements ITemplatable {
 	 * Get the file name of the template (base "framework")
 	 * @return string
 	 */
-	public function getTemplateBase() {
+	public function getTemplateBody() {
 		return 'default.tpl';
 	}
 
@@ -50,14 +50,16 @@ abstract class Page implements ITemplatable {
 	 * Return an array suitable for assignment in an template variable
 	 * @return array
 	 */
-	public function getTemplateArray() {
-		return [
-			'name' => $this->getName(),
-			'title' => $this->getTitle(),
-			'base_tpl' => $this->getTemplateBase(),
-			'template' => $this->getTemplateName(),
-			'is_active' => $this->isActive(),
-			'object' => $this
-		];
+	public function assignTemplate() {
+		Template::assign(['page' =>
+			[
+				'name' => $this->getName(),
+				'title' => $this->getTitle(),
+				'body' => $this->getTemplateBody(),
+				'template' => $this->getTemplateName(),
+				'is_active' => $this->isActive(),
+				'object' => $this
+			]
+		]);
 	}
 } 

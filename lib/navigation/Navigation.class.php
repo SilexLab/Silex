@@ -23,14 +23,14 @@ class Navigation {
 	 */
 	public function add($title, $link = '', $active = false) {
 		// add multiple entries
-		if(is_array($title)) {
+		if (is_array($title)) {
 			$success = true;
-			foreach($title as $entry)
+			foreach ($title as $entry)
 				$success = $this->add($entry['title'], $entry['link'], isset($entry['active']) ? $entry['active'] : false);
 			return $success;
 		}
 		// add a single entry
-		if($link && $this->entries[] = ['title' => Silex::getLanguage()->get($title), 'link' => $link, 'active' => $active])
+		if ($link && $this->entries[] = ['title' => Language::get($title), 'link' => $link, 'active' => $active])
 			return true;
 		return false;
 	}
@@ -45,17 +45,17 @@ class Navigation {
 	public function prepend($title, $link = '', $active = false) {
 		$entries = [];
 
-		if(is_array($title)) {
+		if (is_array($title)) {
 			$success = true;
-			foreach($title as $entry) {
-				$entries[] = ['title' => Silex::getLanguage()->get($entry['title']),
+			foreach ($title as $entry) {
+				$entries[] = ['title' => Language::get($entry['title']),
 					'link' => $entry['link'],
 					'active' => isset($entry['active']) ? $entry['active'] : false,
 					'enabled' => $entry['enabled']];
 			}
 			$this->entries = array_merge($entries, $this->entries);
 			return true;
-		} else if($link && $entries[] = ['title' => Silex::getLanguage()->get($title), 'link' => $link, 'active' => $active]) {
+		} else if ($link && $entries[] = ['title' => Language::get($title), 'link' => $link, 'active' => $active]) {
 			$this->entries = array_merge($entries, $this->entries);
 			return true;
 		}
@@ -69,8 +69,8 @@ class Navigation {
 	 */
 	public function remove($id) {
 		// remove by id
-		if(is_int($id)) {
-			if(isset($this->entries[$id])) {
+		if (is_int($id)) {
+			if (isset($this->entries[$id])) {
 				// remove this entry
 				unset($this->entries[$id]);
 				// re-index array
@@ -90,14 +90,14 @@ class Navigation {
 	 * @return array
 	 */
 	public function get($id = -1) {
-		if(is_int($id)) {
-			if($id == -1)
+		if (is_int($id)) {
+			if ($id == -1)
 				return $this->entries;
-			if(isset($this->entries[$id]))
+			if (isset($this->entries[$id]))
 				return $this->entries[$id];
-		} else if(is_string($id)) {
+		} else if (is_string($id)) {
 			$id = $this->getID($id);
-			if($id !== false)
+			if ($id !== false)
 				return $this->entries[$id];
 		}
 		return false;
@@ -109,8 +109,8 @@ class Navigation {
 	 * @return mixed  int if success false if not
 	 */
 	public function getID($title) {
-		for($i = 0; $i < sizeof($this->entries); $i++) { 
-			if($this->entries[$i]['title'] == $title)
+		for ($i = 0; $i < sizeof($this->entries); $i++) { 
+			if ($this->entries[$i]['title'] == $title)
 				return $i;
 		}
 		return false;
@@ -125,17 +125,17 @@ class Navigation {
 		$id = false;
 
 		// get id
-		if(is_int($title) && isset($this->entries[$title]))
+		if (is_int($title) && isset($this->entries[$title]))
 			$id = $title;
 		else
 			$id = $this->getID($title);
 
 		// no id?
-		if($id === false)
+		if ($id === false)
 			return false;
 
 		// toggle active
-		if($active >= 0)
+		if ($active >= 0)
 			$this->entries[$id]['active'] = (bool)$active;
 		else
 			$this->entries[$id]['active'] ^= true;

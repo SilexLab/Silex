@@ -14,7 +14,7 @@ class SQLiteDatabase extends Database {
 		$this->database = $database;
 
 		// Default port
-		if(!$port)
+		if (!$port)
 			$port = 3306;
 
 		$dsn = 'sqlite:'.$database.';';

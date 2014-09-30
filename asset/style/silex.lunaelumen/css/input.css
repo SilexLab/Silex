@@ -1,0 +1,164 @@
+#user-search-bar {
+   width: 60%;
+}
+
+.input {
+   display: inline-block;
+   width: 250px;
+}
+   .input.big {
+      display: block;
+      margin: 0 auto;
+      width: 400px;
+   }
+   .input.password::after {
+      content: "";
+   }
+
+input[type=text], input[type=date], input[type=email], input[type=number], input[type=search], input[type=time], input[type=password] {
+   box-sizing: border-box;
+   margin: 4px;
+   padding: 0 5px;
+   width: 100%;
+   height: 25px;
+   border: 0;
+   border-bottom: 1px solid #ddd;
+   color: #2e2e2e;
+   transition: all 0.75s;
+}
+   input.big {
+      display: block;
+      margin: 5px auto;
+      width: 400px;
+      height: 30px;
+      border-bottom: 2px solid #ddd;
+      background: transparent;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+   }
+   input:hover {
+      border-color: #ccc;
+      transition: all 0.25s;
+   }
+   input:focus, input.focus {
+      border-color: #17a7df;
+      transition: all 0.25s;
+   }
+   input[type=password] + .switch, input[type=text] + .switch {
+      position: relative;
+      display: block;
+      float: right;
+      margin-top: -29px;
+      width: 24px;
+      height: 24px;
+      border-radius: 2px;
+      background: url(../images/icon-preview.svg) 50% 50% no-repeat;
+      background-size: 20px;
+      cursor: pointer;
+      transition: background-color 0.75s;
+   }
+      input[type=password].big + .switch, input[type=text].big + .switch {
+         margin-top: -33px;
+         margin-right: 3px;
+      }
+   input[type=password] + .switch:hover, input[type=text] + .switch:hover {
+      background-color: rgba(127, 127, 127, .25);
+      transition: background-color 0.25s;
+   }
+   input[type=password] + .switch.focus, input[type=text] + .switch.focus {
+      background-image: url(../images/icon-preview-f.svg);
+   }
+/* Buttons */
+.button, button, input[type=button], input[type=submit], input[type=file] {
+   display: inline-block;
+   box-sizing: border-box;
+   margin: 0 5px;
+   padding: 0 13px;
+   min-width: 120x;
+   height: 30px;
+   border: 1px solid #d6d6d6;
+   border-radius: 2px;
+   background: #f6f6f6;
+   color: #666;
+   text-align: center;
+   text-transform: uppercase;
+   font-weight: bold;
+   line-height: 30px;
+   cursor: pointer;
+   transition: all 0.25s;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+   .button:hover, button:hover, input[type=button]:hover, input[type=submit]:hover, input[type=file]:hover {
+      background: rgba(153, 153, 153, .2);
+   }
+   .button:active, button:active, input[type=button]:active, input[type=submit]:active, input[type=file]:active {
+      background: rgba(153, 153, 153, .4);
+   }
+   .button.highlight, button.highlight, input[type=button].highlight, input[type=submit].highlight, input[type=file].highlight {
+      border: 1px solid #5187df;
+      background: #2196f3;
+      color: #fff;
+   }
+      .button.highlight:hover, button.highlight:hover, input[type=button].highlight:hover, input[type=submit].highlight:hover, input[type=file].highlight:hover {
+         background: #1e88e5;
+      }
+      .button.highlight:active, button.highlight:active, input[type=button].highlight:active, input[type=submit].highlight:active, input[type=file].highlight:active {
+         border-color: #2f5bb7;
+         background: #1976d2;
+      }
+   .button.flat, button.flat, input[type=button].flat, input[type=submit].flat, input[type=file].flat {
+      margin: 0;
+      border: 0;
+      background: none;
+      box-shadow: none;
+      color: #4d4d4d;
+   }
+      .button.flat.highlight, button.flat.highlight, input[type=button].flat.highlight, input[type=submit].flat.highlight, input[type=file].flat.highlight {
+         color: #2196f3;
+      }
+      .button.flat:hover, button.flat:hover, input[type=button].flat:hover, input[type=submit].flat:hover, input[type=file].flat:hover {
+         background: rgba(153, 153, 153, .2);
+      }
+      .button.flat:active, button.flat:active, input[type=button].flat:active, input[type=submit].flat:active, input[type=file].flat:active {
+         background: rgba(153, 153, 153, .4);
+      }
+   .button.float, button.float, input[type=button].float, input[type=submit].float, input[type=file].float {
+      display: block;
+      float: left;
+   }
+
+.button-bar::after {
+   display: block;
+   clear: both;
+   height: 0;
+   content: "";
+}
+
+.button-group::after {
+   display: block;
+   clear: both;
+   height: 0;
+   content: "";
+}
+   .button-group > .button, .button-group > button, .button-group > input[type=button], .button-group > input[type=submit], .button-group > input[type=file] {
+      display: block;
+      float: left;
+      margin-right: 0;
+      margin-left: 0;
+   }
+   .button-group > :nth-child(n+2) {
+      border-left: none;
+      border-radius: 0;
+   }
+   .button-group > :first-child {
+      margin-left: 5px;
+      border-radius: 2px 0 0 2px;
+   }
+   .button-group > :last-child {
+      margin-right: 5px;
+      border-radius: 0 2px 2px 0;
+   }

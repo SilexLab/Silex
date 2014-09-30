@@ -17,17 +17,17 @@ define('DEBUG', true);
 define('NL', PHP_EOL);
 
 // Relative directories
-define('REL_LIB', 'lib/');
-define('REL_CACHE', 'cache/');
-define('REL_ASSET', 'asset/');
-define('REL_TPL', REL_ASSET.'template/');
-define('REL_LANGUAGE', REL_ASSET.'language/');
-define('REL_STYLE', REL_ASSET.'style/');
+define('RLIB', 'lib/');
+define('RCACHE', 'cache/');
+define('RASSET', 'asset/');
+define('RTPL', RASSET.'template/');
+define('RLANG', RASSET.'language/');
+define('RSTYLE', RASSET.'style/');
 
 // Directories
-define('DIR_LIB', DIR_ROOT.REL_LIB);
-define('DIR_CACHE', DIR_ROOT.REL_CACHE);
-define('DIR_ASSET', DIR_ROOT.REL_ASSET);
-define('DIR_TPL', DIR_ROOT.REL_TPL);
-define('DIR_LANGUAGE', DIR_ROOT.REL_LANGUAGE);
-define('DIR_STYLE', DIR_ROOT.REL_STYLE);
+define('DLIB', DROOT.RLIB);
+define('DCACHE', DROOT.RCACHE);
+define('DASSET', DROOT.RASSET);
+define('DTPL', DROOT.RTPL);
+define('DLANG', DROOT.RLANG);
+define('DSTYLE', DROOT.RSTYLE);

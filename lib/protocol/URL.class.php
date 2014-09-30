@@ -20,19 +20,19 @@ class URL {
 		self::$format = $format;
 		self::$base = $base;
 		// get url config
-		if(!self::$format)
-			self::$format = Silex::getConfig()->get('url.format');
-		if(!self::$base)
-			self::$base = Silex::getConfig()->get('url.base');
+		if (!self::$format)
+			self::$format = Config::get('url.format');
+		if (!self::$base)
+			self::$base = Config::get('url.base');
 
 		// get route
-		if(isset($_GET[self::ROUTE_PARAM])) {
+		if (isset($_GET[self::ROUTE_PARAM])) {
 			self::$route = UString::urlEncodeSlashes($_GET[self::ROUTE_PARAM]);
 			self::$aRoute = explode('/', trim(self::$route, '/'));
 
 			// redirect to fix the url format if it's wrong
 			$url = self::$route.self::getParams(true, false);
-			if(preg_match('/[\/]+$/', self::$route) || (self::$format && $url != self::getURL())) {
+			if (preg_match('/[\/]+$/', self::$route) || (self::$format && $url != self::getURL())) {
 				self::$route = preg_replace('/[\/]+$/', '', self::$route);
 				$url = self::$route.self::getParams(true, false);
 				header('Location: '.$url);
@@ -48,35 +48,35 @@ class URL {
 	 */
 	public static function to($route, array $params = [], $asHTML = true) {
 		// check if route is valid
-		if(!is_string($route))
+		if (!is_string($route))
 			return false;
-		if(!preg_match('/^[a-zA-Z0-9\/\-_]+$/', $route))
+		if (!preg_match('/^[a-zA-Z0-9\/\-_]+$/', $route))
 			return false;
 
 		// make everything ok
 		$route = preg_replace('/(^[\/]+)|([\/]+$)/', '', $route);
 
 		// is it the default page? if yes, remove route
-		if($route == PageFactory::getDefaultPage())
+		if ($route == PageFactory::getDefaultPage())
 			$route = '';
 
 		// url route
 		$url = '';
-		if(!self::$format)
+		if (!self::$format)
 			$url = '?'.self::ROUTE_PARAM.'=';
 		$url .= $route;
 
 		// attach parameters
-		if(!empty($params)) {
-			if(!self::$format)
+		if (!empty($params)) {
+			if (!self::$format)
 				$url .= ($asHTML ? '&amp;' : '&');
 			else
 				$url .= '?';
 
 			$i = 0;
-			foreach($params as $key => $value) {
+			foreach ($params as $key => $value) {
 				$url .= $key.'='.$value;
-				if(++$i < sizeof($params))
+				if (++$i < sizeof($params))
 					$url .= ($asHTML ? '&amp;' : '&');
 			}
 		}
@@ -100,14 +100,14 @@ class URL {
 	public static function getParams($asString = true, $asHTML = true) {
 		$aURL = [];
 		$sURL = '?';
-		foreach($_GET as $key => $value) {
-			if($key == self::ROUTE_PARAM)
+		foreach ($_GET as $key => $value) {
+			if ($key == self::ROUTE_PARAM)
 				continue;
 			$aURL[$key] = $value;
 			$sURL .= $key.'='.$value.($asHTML ? '&amp;' : '&');
 		}
 
-		if($asString)
+		if ($asString)
 			return substr($sURL, 0, ($asHTML ? -5 : -1));
 		return $aURL;
 	}
@@ -138,10 +138,10 @@ class URL {
 	 * @return mixed
 	 */
 	public static function comparePos($routePosition, $expected, $redirect = false, $redirectTo = '') {
-		if(isset(self::$aRoute[$routePosition])) {
-			if(self::$aRoute[$routePosition] == $expected)
+		if (isset(self::$aRoute[$routePosition])) {
+			if (self::$aRoute[$routePosition] == $expected)
 				return true;
-			if($redirect)
+			if ($redirect)
 				header('Location: '.($redirectTo ? $redirectTo : $expected));
 			return false;
 		}

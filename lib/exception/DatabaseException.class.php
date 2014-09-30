@@ -39,7 +39,7 @@ class DatabaseException extends CoreException {
 		$this->dbType = $this->db->getType();
 
 		// Prefer statement's errors
-		if($this->preparedStatement !== null && $this->preparedStatement->getErrorNumber()) {
+		if ($this->preparedStatement !== null && $this->preparedStatement->getErrorNumber()) {
 			$this->errorNumber = $this->preparedStatement->getErrorNumber();
 			$this->errorDesc = $this->preparedStatement->getErrorDesc();
 		} else {
@@ -68,7 +68,7 @@ class DatabaseException extends CoreException {
 	 * return string
 	 */
 	public function getSqlVersion() {
-		if($this->sqlVersion === '') {
+		if ($this->sqlVersion === '') {
 			try {
 				$this->sqlVersion = $this->db->getVersion();
 			} catch(DatabaseException $e) {
@@ -89,13 +89,13 @@ class DatabaseException extends CoreException {
 		$this->information .= '<strong>SQL version:</strong> '.UString::encodeHTML($this->getSqlVersion()).'<br />'.NL;
 
 		// Do we have some additional query stuff?
-		if($this->preparedStatement !== null) {
+		if ($this->preparedStatement !== null) {
 			$this->information .= '<strong>SQL query:</strong> '.UString::encodeHTML($this->preparedStatement->getQuery()).'<br />'.NL;
 
 			// Parameters?
 			$parameters = $this->preparedStatement->getParameters();
-			if(!empty($parameters)) {
-				foreach($parameters as $key => $value) {
+			if (!empty($parameters)) {
+				foreach ($parameters as $key => $value) {
 					$this->information .= '<strong>SQL parameter '.$key.':</strong> '.UString::encodeHTML($value).'<br />'.NL;
 				}
 			}

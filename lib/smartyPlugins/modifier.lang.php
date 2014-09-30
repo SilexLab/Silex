@@ -6,5 +6,5 @@
  */
 
 function smarty_modifier_lang($node) {
-	return Silex::getLanguage()->get($node);
+	return Language::get($node);
 }

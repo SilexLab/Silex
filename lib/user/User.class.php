@@ -5,7 +5,7 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-class User {
+class User implements ITemplatable {
 	protected $id = 0;
 	protected $name = '';
 	protected $mail = '';
@@ -74,12 +74,14 @@ class User {
 		return true;
 	}
 
-	public function getTemplateArray() {
-		return [
-			'name' => $this->getName(),
-			'id' => $this->id,
-			'mail' => $this->getMail(),
-			'is_guest' => $this->isGuest()
-		];
+	public function assignTemplate() {
+		Template::assign(['user' =>
+			[
+				'name' => $this->getName(),
+				'id' => $this->id,
+				'mail' => $this->getMail(),
+				'is_guest' => $this->isGuest()
+			]
+		]);
 	}
 }

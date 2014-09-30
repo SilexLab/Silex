@@ -29,20 +29,20 @@ class Event {
 	 * @param array  $args optional
 	 */
 	public static function fire($hook, array $args = []) {
-		if(isset(self::$events[$hook])) {
+		if (isset(self::$events[$hook])) {
 			// additional call parameters
 			//$args = func_get_args();
 			//array_shift($args);
 
 			// sort listeners
 			usort(self::$events[$hook], function($a, $b) {
-				if($a[1] > $b[1] && $a[1] != 0) return -1;
-				if($a[1] < $b[1] && $b[1] != 0) return 1;
+				if ($a[1] > $b[1] && $a[1] != 0) return -1;
+				if ($a[1] < $b[1] && $b[1] != 0) return 1;
 				return 0;
 			});
 
 			// call the registered functions
-			foreach(self::$events[$hook] as $listener) {
+			foreach (self::$events[$hook] as $listener) {
 				call_user_func_array($listener[0], $args);
 			}
 		}
