@@ -14,3 +14,7 @@
 	path = lib/style/preprocessor/scss
 	url = https://github.com/SilexLab/scss.git
 	branch = submodule
+[submodule "lib/template/twig"]
+	path = lib/template/twig
+	url = https://github.com/SilexLab/twig.git
+	branch = submodule

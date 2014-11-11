@@ -14,6 +14,7 @@ class Autoloader {
 	protected static $directories = [];
 	protected static $index = [];
 	protected static $ignoreList = [];
+	protected static $namespaceList = [];
 
 	/**
 	 * Register this autoloader
@@ -23,20 +24,37 @@ class Autoloader {
 		if (!defined('SILEX_AUTOLOADER')) {
 			define('SILEX_AUTOLOADER', true);
 
-			// We are now an autoloader
-			spl_autoload_register(['self', 'autoload']);
-
 			// Ignore these directories
+			$modules = 'lib/module/modules';
 			self::$ignoreList = [
-				'lib/modules',
-				// no more wildcards
-				'lib/template/smarty/plugins',
-				'lib/template/smarty/sysplugins',
-				'lib/template/smarty-plugins'
+				$modules
 			];
+
+			// Search for more autoloader settings in modules
+			// TODO: Cache this
+			foreach (scandir($modules) as $module) {
+				if (is_file($modules.'/'.$module.'/autoloader.json')) {
+					$settings = json_decode(file_get_contents($modules.'/'.$module.'/autoloader.json'));
+
+					// add paths to ignoreList
+					if (isset($settings->ignore)) {
+						self::$ignoreList = array_merge(self::$ignoreList, (array)$settings->ignore);
+					}
+
+					// add namespaces
+					if (isset($settings->namespace)) {
+						foreach ($settings->namespace as $namespace => $path) {
+							self::$namespaceList[$namespace] = $path;
+						}
+					}
+				}
+			}
 
 			// Index php classes
 			self::checkCache();
+
+			// And now we have an autoloader
+			spl_autoload_register(['self', 'autoload']);
 		}
 	}
 
@@ -45,7 +63,17 @@ class Autoloader {
 	 * @param string $className
 	 */
 	public static function autoload($className) {
-		if (isset(self::$index[$className]))
+		// handle namespace if namespace
+		if (strpos($className, '\\') !== false) {
+			$ns = explode('\\', $className);
+
+			if (array_key_exists($ns[0], self::$namespaceList)) {
+				require_once Dir::ROOT.self::$namespaceList[$ns[0]].
+					substr(str_replace('\\', '/', $className), strlen($ns[0])).
+					'.php';
+			}
+		// handle indexed classes
+		} else if (isset(self::$index[$className]))
 			require_once Dir::ROOT.self::$index[$className];
 	}
 
