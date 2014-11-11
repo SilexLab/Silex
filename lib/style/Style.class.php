@@ -73,14 +73,14 @@ abstract class Style implements ITemplatable {
 	 * @return string
 	 */
 	public final function getPath() {
-		return DSTYLE.$this->getName().'/';
+		return Dir::STYLE.$this->getName().'/';
 	}
 
 	/**
 	 * @return string
 	 */
 	protected final function getRelativePath() {
-		return RSTYLE.$this->getName().'/';
+		return Dir::STYLE.$this->getName().'/';
 	}
 
 	public final function getTitle() {

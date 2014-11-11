@@ -20,8 +20,8 @@ class LanguageFactory {
 
 	public static function init() {
 		// Read all dem data
-		foreach (scandir(DLANG) as $file) {
-			if (is_dir(DLANG.$file) && preg_match('/^([a-z]{2}\-[A-Z]{2})$/', $file, $matches)) {
+		foreach (scandir(Dir::LANG) as $file) {
+			if (is_dir(Dir::LANG.$file) && preg_match('/^([a-z]{2}\-[A-Z]{2})$/', $file, $matches)) {
 				try {
 					self::$languageObjects[$matches[1]] = new LanguageO($matches[1]);
 				} catch(LanguageNotFoundException $e) {

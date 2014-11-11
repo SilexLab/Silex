@@ -22,7 +22,7 @@ class LoginCheck {
 
 	public static function init() {
 		// Load LoginCheckers
-		foreach (scandir(DLIB.'login/checkers/') as $file) {
+		foreach (scandir(Dir::LIB.'login/checkers/') as $file) {
 			// Get the class
 			if (!preg_match('/^([a-zA-Z0-9]+LoginChecker)\.class\.php$/', $file, $matches))
 				continue;

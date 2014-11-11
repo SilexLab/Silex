@@ -34,7 +34,7 @@ class LanguageO implements ITemplatable {
 	 */
 	public function __construct($languageID, $customPath = '') {
 		if (empty($customPath))
-			$customPath = DLANG;
+			$customPath = Dir::LANG;
 
 		// Wrong naming
 		if (!preg_match('/^[a-z]{2}-[A-Z]{2}$/', $languageID)) {

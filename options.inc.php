@@ -5,29 +5,32 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
+/* PHP ini settings */
 ini_set('default_charset', 'UTF-8');
 ini_set('php.input_encoding', 'UTF-8');
 ini_set('php.internal_encoding', 'UTF-8');
 ini_set('php.output_encoding', 'UTF-8');
 
-define('SILEX_VERSION', '0.1.0-DEV');
+/* Constants */
 define('DEBUG', true);
+
+// Helper constant for Dir class
+define('ROOT', dirname(__FILE__));
+// Directory constants
+class Dir {
+	// root directory
+	const ROOT  = ROOT.'/';
+
+	// all constants are relative to ROOT
+	const LIB   = 'lib/';
+	const CACHE = 'cache/';
+	const ASSET = 'asset/';
+	const TPL   = self::ASSET.'template/';
+	const LANG  = self::ASSET.'language/';
+	const STYLE = self::ASSET.'style/';
+}
 
 // New line
 define('NL', PHP_EOL);
 
-// Relative directories
-define('RLIB', 'lib/');
-define('RCACHE', 'cache/');
-define('RASSET', 'asset/');
-define('RTPL', RASSET.'template/');
-define('RLANG', RASSET.'language/');
-define('RSTYLE', RASSET.'style/');
-
-// Directories
-define('DLIB', DROOT.RLIB);
-define('DCACHE', DROOT.RCACHE);
-define('DASSET', DROOT.RASSET);
-define('DTPL', DROOT.RTPL);
-define('DLANG', DROOT.RLANG);
-define('DSTYLE', DROOT.RSTYLE);
+/* Other settings */

@@ -11,8 +11,8 @@ class PageFactory {
 
 	public static function init() {
 		// Find available wrappers
-		foreach (scandir(DLIB.'page/pages/') as $pageFile) {
-			if (is_file(DLIB.'page/pages/'.$pageFile) && preg_match('/^(([a-zA-Z0-9]+)Page).class.php$/', $pageFile, $pageMatch)) {
+		foreach (scandir(Dir::LIB.'page/pages/') as $pageFile) {
+			if (is_file(Dir::LIB.'page/pages/'.$pageFile) && preg_match('/^(([a-zA-Z0-9]+)Page).class.php$/', $pageFile, $pageMatch)) {
 				$class = $pageMatch[1];
 				$page = new $class();
 				if ($page instanceof Page)

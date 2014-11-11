@@ -114,7 +114,7 @@ class Modules {
 
 	/**
 	 * Sort by priority
-	 * (the output array contains no more the objects)
+	 * (the output array does not more contain objects)
 	 * @param  array $modules
 	 * @return array
 	 */

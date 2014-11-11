@@ -1,22 +1,24 @@
 {* Default Base Template *}
 <header>
-	<div class="container">
-		<img id="silex-logo" src="{$url.asset}/images/logo-white.svg" alt="Silex">
-		<nav class="main">
-			<ul>
-{foreach $nav.main as $entry}
-				<li{($entry.active) ? ' class="active"' : ''}>
-{if $entry.enabled}
-					<a href="{$entry.link}">{$entry.title}</a>
-{else}
-					<a class="disabled">{$entry.title}</a>
-{/if}
-				</li>
-{/foreach}
-			</ul>
-		</nav>
-		{if isset($header)}{$header}{/if}
-		{if isset($headline)}<h1>{$headline|lang}</h1>{/if}
+	<div class="flair">
+		<div class="container">
+			<img id="silex-logo" src="{$url.asset}/images/logo-white.svg" alt="Silex">
+			<nav class="main">
+				<ul>
+	{foreach $nav.main as $entry}
+					<li{($entry.active) ? ' class="active"' : ''}>
+	{if $entry.enabled}
+						<a href="{$entry.link}">{$entry.title}</a>
+	{else}
+						<a class="disabled">{$entry.title}</a>
+	{/if}
+					</li>
+	{/foreach}
+				</ul>
+			</nav>
+			{if isset($header)}{$header}{/if}
+			{if isset($headline)}<h1>{$headline|lang}</h1>{/if}
+		</div>
 	</div>
 </header>
 <div class="notification">

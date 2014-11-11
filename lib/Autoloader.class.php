@@ -30,9 +30,9 @@ class Autoloader {
 			self::$ignoreList = [
 				'lib/modules',
 				// no more wildcards
-				'lib/smarty/plugins',
-				'lib/smarty/sysplugins',
-				'lib/smartyPlugins'
+				'lib/template/smarty/plugins',
+				'lib/template/smarty/sysplugins',
+				'lib/template/smartyPlugins'
 			];
 
 			// Index php classes
@@ -46,14 +46,14 @@ class Autoloader {
 	 */
 	public static function autoload($className) {
 		if (isset(self::$index[$className]))
-			require_once DROOT.self::$index[$className];
+			require_once Dir::ROOT.self::$index[$className];
 	}
 
 	protected static function checkCache() {
 		$cacheFile = 'autoload-index';
 
 		self::$index = Cache::_(function() {
-			self::indexClasses(preg_replace('/(.*)\/$/', '$1', RLIB));
+			self::indexClasses(preg_replace('/(.*)\/$/', '$1', Dir::LIB));
 			return self::$index;
 		}, 'autoload-index');
 	}

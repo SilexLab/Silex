@@ -10,10 +10,10 @@ class StyleFactory {
 
 	public function __construct() {
 		// Read all dem data
-		foreach (scandir(DSTYLE) as $file) {
-			if (!in_array($file, ['.', '..']) && is_dir(DSTYLE.$file) && preg_match('/^[a-zA-Z0-9_\-\.]+$/', $file)) {
+		foreach (scandir(Dir::STYLE) as $file) {
+			if (!in_array($file, ['.', '..']) && is_dir(Dir::STYLE.$file) && preg_match('/^[a-zA-Z0-9_\-\.]+$/', $file)) {
 				try {
-					include_once(DSTYLE.$file.'/style.php');
+					include_once(Dir::STYLE.$file.'/style.php');
 					$class = preg_replace('/\./', '_', $file);
 					$this->styleObjects[$file] = new $class;
 					if (!($this->styleObjects[$file] instanceof Style))

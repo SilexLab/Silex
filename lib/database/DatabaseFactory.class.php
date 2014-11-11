@@ -28,8 +28,8 @@ class DatabaseFactory {
 		if (!defined('CLASS_DATABASE_FACTORY')) {
 			define('CLASS_DATABASE_FACTORY', true);
 			// Find available wrappers
-			foreach (scandir(DLIB.'database/wrapper/') as $wrapper) {
-				if (is_file(DLIB.'database/wrapper/'.$wrapper) && preg_match('/^(([a-zA-Z0-9]+)Database).class.php$/', $wrapper, $databaseMatch)) {
+			foreach (scandir(Dir::LIB.'database/wrapper/') as $wrapper) {
+				if (is_file(Dir::LIB.'database/wrapper/'.$wrapper) && preg_match('/^(([a-zA-Z0-9]+)Database).class.php$/', $wrapper, $databaseMatch)) {
 					$class = $databaseMatch[1];
 					$db = new $class();
 					if ($db instanceof Database)

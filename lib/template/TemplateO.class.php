@@ -23,11 +23,11 @@ class TemplateO {
 		// set cache/compile settings
 		$this->caching = $caching;
 		$this->smarty->caching = $caching;
-		$this->smarty->setCacheDir(DCACHE);
-		$this->smarty->setCompileDir(DCACHE.'template/');
+		$this->smarty->setCacheDir(Dir::CACHE);
+		$this->smarty->setCompileDir(Dir::CACHE.'template/');
 
 		// Add our plugins dir
-		$this->smarty->addPluginsDir(DLIB.'smartyPlugins/');
+		$this->smarty->addPluginsDir(Dir::LIB.'template/smartyPlugins/');
 	}
 
 	/**

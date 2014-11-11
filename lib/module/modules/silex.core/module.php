@@ -37,7 +37,7 @@ class silex_core implements IModule {
 
 
 		// Initiate templates
-		Template::init(DTPL, !Silex::isDebug());
+		Template::init(Dir::TPL, !Silex::isDebug());
 		$this->page->prepare();
 		$this->navigation->prepare();
 
@@ -55,9 +55,9 @@ class silex_core implements IModule {
 			'DEBUG' => DEBUG,
 			'url'   => [
 				'base'  => $baseURL,
-				'asset' => $assetsURL ? $assetsURL : $baseURL.RASSET,
-				'tpl'   => $baseURL.RTPL,
-				'style' => $baseURL.RSTYLE
+				'asset' => $assetsURL ? $assetsURL : $baseURL.Dir::ASSET,
+				'tpl'   => $baseURL.Dir::TPL,
+				'style' => $baseURL.Dir::STYLE
 			]
 		]);
 

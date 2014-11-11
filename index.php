@@ -9,19 +9,16 @@
 define('MICROTIME', microtime(true));
 define('TIME', time());
 
-// Where are we?
-define('DROOT', dirname(__FILE__).'/');
-
 // Load common stuff
-require_once DROOT.'options.inc.php';
-require_once DLIB.'corefunctions.inc.php';
+require_once 'options.inc.php';
+require_once Dir::LIB.'corefunctions.inc.php';
 
 // Register autoloader
-require_once DLIB.'Autoloader.class.php';
+require_once Dir::LIB.'Autoloader.class.php';
 Autoloader::register();
 
 // Load third-party stuff
-if(!is_file(DROOT.'lib/smarty/Smarty.class.php')) {
+if(!is_file(Dir::LIB.'/smarty/Smarty.class.php')) {
 	header('Content-Type: text/plain; charset=UTF-8');
 	die('Please run:
   git submodule foreach git pull');
@@ -31,7 +28,7 @@ if(!is_file(DROOT.'lib/smarty/Smarty.class.php')) {
 set_exception_handler(['Silex', 'handleException']);
 set_error_handler(['Silex', 'handleError'], E_ALL);
 
-// Now lets start Silex
+// Now bootstrap
 new Silex();
 
 // PHP execution time / debugging mode

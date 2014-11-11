@@ -47,7 +47,7 @@ class LoggedException extends Exception {
 			return '<b>Error logging disabled</b>';
 
 		// Logfile
-		$logDir = DROOT.'logs/';
+		$logDir = Dir::ROOT.'logs/';
 		$logFilePath = $logDir.date('Y-m-d', TIME).'.log';
 
 		// Check if logs directory exists, if not create

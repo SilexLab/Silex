@@ -84,17 +84,20 @@ a {
 
 header {
    background-color: #414345;
-   padding: 15px 0;
    color: #fff;
    background-image: url('../images/header.jpg');
-   background-position: 50% 90%;
+   background-position: 50%;
+   background-size: cover;
    background-repeat: no-repeat;
 }
-   @media screen and (min-width: 2000px) {
-   header {
-      background-size: 100% auto;
-}
+   header .flair {
+      padding: 15px 0;
+      transition: all 0.25s;
+      background: transparent;
    }
+      header .flair .blue {
+         background: rgba(71, 173, 232, 0.3);
+      }
    header h1, header h2, header h3, header h4, header h5, header h6 {
       margin-top: 35px;
       margin-bottom: 0;

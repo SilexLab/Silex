@@ -9,6 +9,8 @@
  * One class to rule them all
  */
 class Silex {
+	const VERSION = '0.1.0-DEV';
+
 	protected static $db = null;
 
 	/**
@@ -19,9 +21,9 @@ class Silex {
 			define('CLASS_SILEX', 1);
 
 			// Get config file
-			if (!is_file(DLIB.'config.inc.php'))
+			if (!is_file(Dir::LIB.'config.inc.php'))
 				throw new CoreException('Y U NO HAVE A CONFIG FILE?!', 0, 'Your config file can\'t be found.');
-			$config = require_once DLIB.'config.inc.php';
+			$config = require_once Dir::LIB.'config.inc.php';
 
 			// Connect to the database
 			self::$db = DatabaseFactory::initDatabase(
@@ -41,7 +43,7 @@ class Silex {
 			date_default_timezone_set(Config::get('time.timezone'));
 
 			// Registering modules
-			Modules::init(DLIB.'module/modules/');
+			Modules::init(Dir::LIB.'module/modules/');
 			Modules::register();
 
 			// That's it
