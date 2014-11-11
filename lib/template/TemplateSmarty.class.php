@@ -5,8 +5,10 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-// objective Template
-class TemplateO {
+require_once 'smarty/Smarty.class.php';
+
+// Smarty template wrapper
+class TemplateSmarty implements ITemplate {
 	private $smarty = null;
 	private $caching = true;
 	private $templateDirs = [];

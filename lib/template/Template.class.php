@@ -5,7 +5,7 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-// Static wrapper
+// Template wrapper
 class Template {
 	private static $template = null;
 	private static $init = false;
@@ -16,7 +16,8 @@ class Template {
 	 */
 	public static function init($dirs, $caching = true) {
 		if(!self::$init) {
-			self::$template = new TemplateO($dirs, $caching);
+			// TODO: check which template module is installed and active
+			self::$template = new TemplateSmarty($dirs, $caching);
 			self::$init = true;
 		}
 	}
