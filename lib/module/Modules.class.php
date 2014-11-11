@@ -6,7 +6,7 @@
  */
 
 class Modules {
-	private static $moduleFile = 'module.php';
+	const MODULE_FILE = 'module.php';
 	private static $modules = [];
 	private static $groups = [];
 	private static $registered = [];
@@ -20,8 +20,8 @@ class Modules {
 	public static function init($modulesPath) {
 		if (!self::$init) {
 			foreach (scandir($modulesPath) as $module) {
-				if (is_file($modulesPath.$module.'/'.self::$moduleFile)) {
-					require_once $modulesPath.$module.'/'.self::$moduleFile;
+				if (is_file($modulesPath.$module.'/'.self::MODULE_FILE)) {
+					require_once $modulesPath.$module.'/'.self::MODULE_FILE;
 					$class = preg_replace('/\./', '_', $module);
 
 					$obj = new $class;
@@ -75,7 +75,7 @@ class Modules {
 	 * @param string $source
 	 */
 	public static function load($module = '', $source = '') {
-		// TODO: don't register disabled modules (database)
+		// TODO: don't load/register disabled modules (database)
 		if (empty($module)) {
 			foreach (self::prioritySort(self::$modules) as $module => $n) {
 				self::load($module, $module);
@@ -114,7 +114,7 @@ class Modules {
 
 	/**
 	 * Sort by priority
-	 * (the output array does not more contain objects)
+	 * (the output array does not contain objects)
 	 * @param  array $modules
 	 * @return array
 	 */

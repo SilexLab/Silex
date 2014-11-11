@@ -1,0 +1,24 @@
+{
+	"name": "SCSS Preprocessor",
+	"module": "silex.css.preprocessor.scss",
+	"group": "silex.css.preprocessor",
+
+	"author": "Silex Lab",
+
+	"files": [
+		"lib/style/CSSPreprocessor.class.php", //
+		"lib/style/scss/scss.inc.php",
+		"lib/style/scss/src/Colors.php",
+		"lib/style/scss/src/Compiler.php",
+		"lib/style/scss/src/Formatter.php",
+		"lib/style/scss/src/Parser.php",
+		"lib/style/scss/src/Server.php",
+		"lib/style/scss/src/Version.php",
+		"lib/style/scss/src/Formatter/Compact.php",
+		"lib/style/scss/src/Formatter/Compressed.php",
+		"lib/style/scss/src/Formatter/Crunched.php",
+		"lib/style/scss/src/Formatter/Expanded.php",
+		"lib/style/scss/src/Formatter/Nested.php",
+		"lib/style/scss/src/Formatter/NestedSilex.php"
+	]
+}
