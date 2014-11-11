@@ -4,7 +4,7 @@ class silex_css_preprocessor_scss implements IModule {
 
 	public function __construct() {}
 
-	public function register() {}
+	public function load() {}
 
 	public function getParents() {
 		return null;

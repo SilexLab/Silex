@@ -1,10 +1,10 @@
 <?php
 class silex_test implements IModule {
 	public function __construct() {
-		Event::listen('silex.construct.end', [$this, 'testest']);
 	}
 
-	public function register() {
+	public function load() {
+		Event::listen('silex.construct.end', [$this, 'testest']);
 	}
 
 	public function getParents() {

@@ -32,7 +32,7 @@ class Autoloader {
 				// no more wildcards
 				'lib/template/smarty/plugins',
 				'lib/template/smarty/sysplugins',
-				'lib/template/smartyPlugins'
+				'lib/template/smarty-plugins'
 			];
 
 			// Index php classes

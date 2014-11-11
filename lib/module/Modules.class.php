@@ -70,15 +70,15 @@ class Modules {
 	}
 
 	/**
-	 * Register a modul
+	 * Load module(s) and register in the system
 	 * @param string $module
 	 * @param string $source
 	 */
-	public static function register($module = '', $source = '') {
+	public static function load($module = '', $source = '') {
 		// TODO: don't register disabled modules (database)
 		if (empty($module)) {
 			foreach (self::prioritySort(self::$modules) as $module => $n) {
-				self::register($module, $module);
+				self::load($module, $module);
 			}
 		} else {
 			$m = self::$modules[$module];
@@ -98,7 +98,7 @@ class Modules {
 				foreach ($m->getParents() as $parent => $importance) {
 					if (!in_array($parent, self::$registered)) {
 						if (array_key_exists($parent, self::$modules) && $parent != $source)
-							self::register($parent, $source);
+							self::load($parent, $source);
 						else if (!array_key_exists($parent, self::$modules) && $importance == 'required')
 							return;
 					}
@@ -106,7 +106,7 @@ class Modules {
 			}
 
 			if (!in_array($module, self::$registered)) {
-				$m->register();
+				$m->load();
 				self::$registered[] = $module;
 			}
 		}

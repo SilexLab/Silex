@@ -17,12 +17,7 @@ require_once Dir::LIB.'corefunctions.inc.php';
 require_once Dir::LIB.'Autoloader.class.php';
 Autoloader::register();
 
-// Load third-party stuff
-if(!is_file(Dir::LIB.'/smarty/Smarty.class.php')) {
-	header('Content-Type: text/plain; charset=UTF-8');
-	die('Please run:
-  git submodule foreach git pull');
-}
+// git submodule foreach git pull'
 
 // Set exception handler
 set_exception_handler(['Silex', 'handleException']);

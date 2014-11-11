@@ -7,10 +7,10 @@ class silex_core implements IModule {
 	protected $navigation = null;
 
 	public function __construct() {
-		// Something what is to do when module object is created (not registered!)
+		// Something what is to do when module object is created (not loaded! -> load())
 	}
 
-	public function register() {
+	public function load() {
 		/* do all the stuff */
 		// User and session stuff
 		Session::start();

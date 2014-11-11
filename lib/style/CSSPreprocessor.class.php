@@ -5,8 +5,8 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-require_once 'scss/scss.inc.php';
-require_once 'scss/src/Formatter/NestedSilex.php';
+require_once 'preprocessor/scss/scss.inc.php';
+require_once 'preprocessor/scss/src/Formatter/NestedSilex.php';
 
 /**
  * Simple SCSS wrapper

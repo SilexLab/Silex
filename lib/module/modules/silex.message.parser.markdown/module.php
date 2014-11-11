@@ -1,10 +1,10 @@
 <?php
-class silex_parser_markdown implements IModule {
+class silex_message_parser_markdown implements IModule {
 	protected $markdown = null;
 
 	public function __construct() {}
 
-	public function register() {}
+	public function load() {}
 
 	public function getParents() {
 		return null;

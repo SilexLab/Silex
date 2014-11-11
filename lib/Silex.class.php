@@ -42,9 +42,9 @@ class Silex {
 			// Set default timezone // TODO: prefer user settings
 			date_default_timezone_set(Config::get('time.timezone'));
 
-			// Registering modules
+			// Register and load modules
 			Modules::init(Dir::LIB.'module/modules/');
-			Modules::register();
+			Modules::load();
 
 			// That's it
 			Event::fire('silex.construct.end');

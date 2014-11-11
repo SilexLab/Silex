@@ -7,10 +7,10 @@
 
 interface IModule {
 	/**
-	 * register the module
+	 * load the module
 	 * @return void
 	 */
-	public function register();
+	public function load();
 
 	/**
 	 * does this module need another module to be loaded first?

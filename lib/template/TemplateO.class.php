@@ -27,7 +27,7 @@ class TemplateO {
 		$this->smarty->setCompileDir(Dir::CACHE.'template/');
 
 		// Add our plugins dir
-		$this->smarty->addPluginsDir(Dir::LIB.'template/smartyPlugins/');
+		$this->smarty->addPluginsDir(Dir::LIB.'template/smarty-plugins/');
 	}
 
 	/**
