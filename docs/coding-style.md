@@ -5,27 +5,23 @@ Throughout all our projects we aim to use one unified coding style for best read
 
 ## PHP (and JavaScript)
 
-Pure PHP-scripts starts with the __<?php__ tag in line 1 but never closing it at the end.
-This prevents an inadvertent output of whitespaces.
+**PSR**  
+We adopted the coding standard recommendations [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md).  
 
-**Indentation and Brace Style**  
-The brace style follows the 1TBS, the one true brace style. Tabulators are used to indent subordinated code.
+**PSR differences**  
+We are using ```else if``` instead of ```elseif``` because it is the default for most c-languages.
 
-**Spacing**  
-Between the function- or statement names and their brackets there are no spaces.
-Operators (except "++", "--", "::", "->" or ".") have spaces before and after.
-
-**Naming**  
-All variable, function- and method names are lowerCamelCase, meaning the first letter is always lower case. Classes, including interfaces, are named using UpperCamelCase, capitalising the first letter. Interface's names are prepended with an `I` (capital i).
-However, keys of arrays are named lower case and by using underscores `_`.
-Constants are named all upper case and using underscores, e.g. `DEBUG_CONSTANT`.
 
 #### Example
 
 ```php
 <?php
+namespace silex\namespace;
 
-class ExampleClass implements IFooInterface {
+use silex\namespace\subnamespace\Class;
+
+class ExampleClass implements FooInterface
+{
 	const RANDOM_CONSTANT = 42;
 
 	protected $fooVar = 0;
@@ -35,7 +31,8 @@ class ExampleClass implements IFooInterface {
 	// Abbreviations keep the case of the first letter throughout the whole abbreviation
 	protected $htmlUsesHTTP;
 
-	public function makeItWork($iAmAnArgument) {
+	public function makeItWork($iAmAnArgument)
+	{
 		// Hey, do something pretty
 		if ($this->fooBool) {
 			$this->array['herp_derp'] .= $fooVar++;
@@ -44,7 +41,8 @@ class ExampleClass implements IFooInterface {
 		return $fooVar;
 	}
 
-	public static function staticMethod($value) {
+	public static function staticMethod($value)
+	{
 		if ($value <= 4) {
 			return true;
 		} else {
@@ -52,11 +50,15 @@ class ExampleClass implements IFooInterface {
 		}
 	}
 	
-	public function isFoo() {
-		return $this->fooBool;
+	public function isFoo($echo = false)
+	{
+		if (!$echo)
+			return $this->fooBool;
+		echo 'It is ' . ($this->fooBool ? 'Foo' : 'Bar');
 	}
 	
-	public function getArray() {
+	public function getArray()
+	{
 		return $this->array;
 	}
 

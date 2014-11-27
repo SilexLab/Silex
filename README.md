@@ -8,13 +8,11 @@ Silex is in a very early state of development and is therefore not ready for any
 
 ### Requirements
 * An up-to-date webserver like nginx, lighttpd or apache <sup>[[1]](#notes)</sup>
-* PHP __5.4__ or later <sup>[[2]](#notes)</sup>
+* PHP __5.6__ or later
 	* Matching PDO driver for the database of your choice
-	* Enabled cURL, fopen or wget
-	* Enabled zlib
 	* Writeable and enabled cache directory
-* A database such as MySQL 5, PostgreSQL, MSSQL or SQLite 3 <sup>[[3]](#notes)</sup>
-* Some love ♥ <sup>[[4]](#notes)</sup>
+* A SQL database such as MySQL 5, PostgreSQL, MSSQL or SQLite 3 <sup>[[2]](#notes)</sup>
+* Some love ♥ <sup>[[3]](#notes)</sup>
 
 ### Documents
 * __[Silex Flavored Markdown](https://rawgithub.com/SilexLab/Silex/master/docs/silex-flavored-markdown-de.html)__ (DE)
@@ -31,6 +29,5 @@ Silex' developers are open for criticism, collaborators or any assistive help yo
 
 #### Notes
 __<sup>[1]</sup>__ Silex is developed primarily under nginx  
-__<sup>[2]</sup>__ PHP 5.5 would be better, maybe 5.6 too. Uh... Just use a current PHP version greater than 5.4!  
-__<sup>[3]</sup>__ Currently only tested and working with MySQL  
-__<sup>[4]</sup>__ We ♥ you
+__<sup>[2]</sup>__ Currently only tested and working with MySQL  
+__<sup>[3]</sup>__ We ♥ you
