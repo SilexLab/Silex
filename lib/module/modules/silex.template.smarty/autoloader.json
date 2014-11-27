@@ -1,6 +1,0 @@
-{
-	"ignore": [
-		"lib/template/smarty",
-		"lib/template/smarty-plugins"
-	]
-}

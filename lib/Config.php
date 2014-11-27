@@ -45,7 +45,7 @@ class Config
 			// remove this later maybe
 			// self::castValue($row->option, $value, $type);
 
-			self::$config[$row->option] = $value;
+			self::$config[$row->id] = $value;
 		}
 	}
 

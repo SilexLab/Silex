@@ -1,6 +1,0 @@
-{
-	"ignore": [ "lib/template/liquid" ],
-	"namespace": {
-		"Liquid": "lib/template/liquid"
-	}
-}

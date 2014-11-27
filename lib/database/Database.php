@@ -18,13 +18,26 @@ class Database
 	 */
 	protected static $db = null;
 
+	/**
+	 * Initialize wrapper with a database adapter
+	 *
+	 * @param AdapterInterface $database
+	 */
 	public static function init(AdapterInterface $database)
 	{
 		self::$db = $database;
 	}
 
+	/**
+	 * Redirect static called methods to the adapter
+	 *
+	 * @param string $name
+	 * @param array $arguments
+	 */
 	public static function __callStatic($name, $arguments)
 	{
 		return self::$db->{$name}(...$arguments);
 	}
+
+	// TODO: wrap PDOStatements in DatabaseStatement (if some adapter isn't using PDO)
 }
