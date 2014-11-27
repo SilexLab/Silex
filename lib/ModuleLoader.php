@@ -24,41 +24,98 @@ class ModuleLoader
 	protected $modules = [];
 
 	/**
+	 * @var array Containing all executed (run()) modules
+	 */
+	protected $executed = [];
+
+	/**
 	 * @param string $path The top directory there the modules are located
 	 */
 	public function __construct($path)
 	{
 		$this->setPath($path);
+
+		// convert namespace "_" to "." for include path
+		Autoloader::addRule('silex\\modules', function($subject) {
+			return str_replace('_', '.', $subject);
+		});
 	}
 
 	/**
 	 * Load modules
 	 *
-	 * @param array $modules optional
 	 * @return bool Successful loaded
 	 * @throws CoreException
 	 */
-	public function load(array $modules = [])
+	public function load()
 	{
 		if (!empty($this->modules))
 			return false;
 
-		if ($modules)
-			$this->modules = $modules;
-		else {
-			$statement = DB::query('SELECT * FROM `modules`');
-			while ($row = $statement->fetchObject()) {
-				if (is_file($this->path . $row->id . '/module.php')) {
-					$this->modules[$row->id] = [
-						'enabled' => (int)$row->enabled
-					];
-				} else {
-					throw new CoreException('Module "' . $row->id . '" which is defined in the database does not exists', 1);
-				}
+		// Get available modules from database and pack into $this->modules
+		$statement = DB::query('SELECT * FROM `modules`');
+		while ($row = $statement->fetchObject()) {
+			if (is_file($this->path . $row->id . '/Module.php')) {
+				$class = '\\silex\\modules\\' . str_replace('.', '_', $row->id) . '\\Module';
+				$this->modules[$row->id] = [
+					'module' => (bool)$row->enabled ? new $class() : null,
+					'enabled' => (int)$row->enabled
+				];
+			} else {
+				throw new CoreException('Module "' . $row->id . '" which is defined in the database does not exists', 1);
 			}
 		}
 
 		return true;
+	}
+
+	/**
+	 * Sort modules and execute the run() method
+	 */
+	public function run($module = '', $source = '')
+	{
+		if (empty($module)) {
+			foreach ($this->prioritySort($this->modules) as $module => $n) {
+				$this->run($module, $module);
+			}
+		} else {
+			$m = $this->modules[$module]['module'];
+
+			// Get parents
+			if ($m->getParents()) {
+				foreach ($m->getParents() as $parent => $importance) {
+					if (!in_array($parent, $this->executed)) {
+						if (array_key_exists($parent, $this->modules)
+							&& $parent != $source
+							&& $this->modules[$parent]['enabled'])
+						{
+							$this->run($parent, $source);
+						} else if ((!array_key_exists($parent, $this->modules) || !$this->modules[$parent]['enabled'])
+							&& $importance == 'required')
+						{
+							// Throw exception? 'Required module not found'
+							return;
+						}
+					}
+				}
+			}
+
+			if (!in_array($module, $this->executed)) {
+				$m->run();
+				$this->executed[] = $module;
+			}
+		}
+	}
+
+	/**
+	 * Get the module instance
+	 *
+	 * @param string module name
+	 * @return ModuleInterface|null
+	 */
+	public function get($module)
+	{
+		return isset($this->modules[$module]) ? $this->modules[$module]['module'] : null;
 	}
 
 	/**
@@ -73,7 +130,7 @@ class ModuleLoader
 	public function getStatus($module)
 	{
 		if (array_key_exists($module, $this->modules))
-			return $this->modules[$module]->enabled;
+			return $this->modules[$module]['enabled'];
 
 		return -1;
 	}
@@ -97,5 +154,34 @@ class ModuleLoader
 	public function getPath()
 	{
 		return $this->path;
+	}
+
+	/**
+	 * Sort by priority
+	 * (the output array does not contain objects)
+	 *
+	 * @param  array $modules
+	 * @return array
+	 */
+	private function prioritySort(array $modules)
+	{
+		// TODO: convert to generator if possible
+		$hold = [];
+		$holdDefault = [];
+
+		// Get priority
+		foreach ($modules as $name => $m) {
+			$priority = $m['module']->getPriority();
+			if ($priority <= -1)
+				$holdDefault[$name] = $priority;
+			else
+				$hold[$name] = $priority;
+		}
+
+		// Sort by priority
+		asort($hold);
+
+		// Add default priorities at the end
+		return array_merge($hold, $holdDefault);
 	}
 }

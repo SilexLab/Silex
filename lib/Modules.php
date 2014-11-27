@@ -34,14 +34,17 @@ class Modules
 	}
 
 	/**
-	 * @see ModuleLoader::getStatus()
+	 * Redirect static called methods to the loader
+	 *
+	 * @param string $name
+	 * @param array $arguments
 	 * @throws CoreException
 	 */
-	public static function getStatus($module)
+	public static function __callStatic($name, $arguments)
 	{
 		if (!self::$loader)
 			throw new CoreException('The modules aren\'t loaded via a module loader', 1);
-			
-		return self::$loader->getStatus($module);
+
+		return self::$loader->{$name}(...$arguments);
 	}
 }

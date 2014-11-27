@@ -32,7 +32,11 @@ database\Factory::init($config);
 // Initiate configuration
 Config::init();
 
+// Enable sessions
+// Session::start();
+
 // Load modules
 Modules::load(new ModuleLoader('lib/modules/'));
+Modules::run();
 
 Silex::init();
