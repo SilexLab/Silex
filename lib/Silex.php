@@ -18,12 +18,11 @@ class Silex
 	const VERSION = '0.1.0-dev';
 
 	/**
-	 * Initiate some stuff
+	 * Deprechated
 	 */
 	public static function init()
 	{
 		//
-		echo 'S:i';
 	}
 
 	/**
@@ -71,7 +70,7 @@ class Silex
 					$type = 'notice';
 					break;
 			}
-			throw new CoreException('PHP '.$type.' in file '.$filename.' ('.$lineNo.'): '.$message, 0);
+			throw new CoreException('PHP ' . $type . ' in file ' . $filename . ' (' . $lineNo . '): ' . $message, 0);
 
 			// TODO: Implement return?
 			// Don't execute PHP internal error handler

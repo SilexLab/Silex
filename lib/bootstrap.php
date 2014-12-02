@@ -33,7 +33,7 @@ database\Factory::init($config);
 Config::init();
 
 // Enable sessions
-// Session::start();
+session\Session::start();
 
 // Load modules
 Modules::load(new ModuleLoader('lib/modules/'));

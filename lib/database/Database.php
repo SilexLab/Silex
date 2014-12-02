@@ -14,7 +14,7 @@ namespace silex\database;
 class Database
 {
 	/**
-	 * @var null|DatabaseInterface Holds the database adapter object passed by init(...)
+	 * @var AdapterInterface Holds the database adapter object passed by init(...)
 	 */
 	protected static $db = null;
 
@@ -37,6 +37,16 @@ class Database
 	public static function __callStatic($name, $arguments)
 	{
 		return self::$db->{$name}(...$arguments);
+	}
+
+	/**
+	 * Return the database adapter
+	 *
+	 * @return AdapterInterface
+	 */
+	public static function getAdapter()
+	{
+		return self::$db;
 	}
 
 	// TODO: wrap PDOStatements in DatabaseStatement (if some adapter isn't using PDO)

@@ -11,7 +11,7 @@ Silex is in a very early state of development and is therefore not ready for any
 * PHP __5.6__ or later
 	* Matching PDO driver for the database of your choice
 	* Writeable and enabled cache directory
-* A SQL database such as MySQL 5, PostgreSQL, MSSQL or SQLite 3 <sup>[[2]](#notes)</sup>
+* A SQL database such as MySQL 5, SQLite 3, PostgreSQL or MSSQL <sup>[[2]](#notes)</sup>
 * Some love ♥ <sup>[[3]](#notes)</sup>
 
 ### Documents
