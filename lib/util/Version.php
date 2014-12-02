@@ -95,18 +95,26 @@ class Version
 		if (is_numeric($v))
 			return $v;
 
-		switch ($v) {
+		switch (strtolower($v)) {
 			case 'dev':
 				return -4;
+
 			case 'a':
 			case 'alpha':
 				return -3;
+
 			case 'b':
 			case 'beta':
 				return -2;
+
 			case 'pre':
 			case 'rc':
 				return -1;
+
+			case 'p':
+			case 'pl':
+				return 1;
+
 			default:
 				return 0;
 		}
@@ -133,18 +141,23 @@ class Version
 			case '==':
 			case 'eq':
 				return $result == 0;
+
 			case '<':
 			case 'lt':
 				return $result === -1;
+
 			case '>':
 			case 'gt':
 				return $result === 1;
+
 			case '<=':
 			case 'le':
 				return $result == -1 || $result === 0;
+
 			case '>=':
 			case 'ge':
 				return $result === 1 || $result === 0;
+
 			case '!=':
 			case '<>':
 			case 'ne':
