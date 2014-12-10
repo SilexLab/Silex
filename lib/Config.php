@@ -38,14 +38,13 @@ class Config
 
 		$res = DB::query('SELECT * FROM `config`');
 		while ($row = $res->fetchObject()) {
-			$value = $row->value;
-			$type = $row->type;
+			// $type = $row->type;
 
 			// castValue isn't really nessasary and makes the load ~0.1 - 1 ms longer
 			// remove this later maybe
 			// self::castValue($row->option, $value, $type);
 
-			self::$config[$row->id] = $value;
+			self::$config[$row->id] = $row->value;
 		}
 	}
 
@@ -57,7 +56,7 @@ class Config
 	 */
 	public static function get($node)
 	{
-		return array_key_exists($node, self::$config) ? self::$config[$node] : null;
+		return isset(self::$config[$node]) ? self::$config[$node] : null;
 	}
 
 	/**

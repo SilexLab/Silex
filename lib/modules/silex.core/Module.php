@@ -8,6 +8,8 @@
 
 namespace silex\modules\silex_core;
 
+use \silex\message\Message;
+
 class Module implements \silex\ModuleInterface
 {
 	public function __construct()
@@ -17,7 +19,7 @@ class Module implements \silex\ModuleInterface
 
 	public function run()
 	{
-		//
+		Message::init();
 	}
 
 	public function getParents()

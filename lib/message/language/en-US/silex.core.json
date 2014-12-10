@@ -1,0 +1,36 @@
+{
+	"general": {
+		"search": "Search",
+		"login": "Login",
+		"logout": "Logout"
+	},
+	"page": {
+		"home": "Home"
+	},
+	"user": {
+		"group": {
+			"guest": "Guest",
+			"guests": "Guests",
+			"user": "User",
+			"users": "Users",
+			"moderator": "Moderator",
+			"moderators": "Moderators",
+			"admin": "Administrator",
+			"admins": "Administrators"
+		},
+		"guest": "Guest"
+	},
+	"notification": {
+		"javascript": "Please enable your javascript in order to view this site."
+	},
+	"input": {
+		"username": "Username",
+		"email": "E-Mail",
+		"password": "Password",
+		"show-password": "Show Password",
+		"search": "Search"
+	},
+	"headline": {
+		"welcome": "Welcome to Silex"
+	}
+}
