@@ -18,7 +18,7 @@ class Silex
 	const VERSION = '0.1.0-dev';
 
 	/**
-	 * Deprechated
+	 * Deprecated
 	 */
 	public static function init()
 	{

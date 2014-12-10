@@ -1,5 +1,8 @@
+// YOU HAVE TO REMOVE THE COMMENTS BEFORE YOU CAN USE THIS FILE, JSON DOESN'T SUPPORT COMMENTS
+// ===========================================================================================
+//
 // This file will be generated as "config.json" by the future Silex installer
-// But for now you can copy/rename this file, change the following data by hand and remove the comments
+// But for now you can copy/rename this file, change the following data by hand
 {
 	"database": {
 		"adapter": "mysql",
