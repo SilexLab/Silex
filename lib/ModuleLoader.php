@@ -119,6 +119,21 @@ class ModuleLoader
 	}
 
 	/**
+	 * Generator for a list of modules matching the status
+	 *
+	 * @param int $status optional 0 - 1
+	 * @param bool $getInstance optional
+	 * @yield string|ModuleInterface
+	 */
+	public function getAll($status = 1, $getInstance = false)
+	{
+		foreach ($this->modules as $key => $value) {
+			if ($value['enabled'] == $status)
+				yield $getInstance ? $value['module'] : $key;
+		}
+	}
+
+	/**
 	 * Get the status of a module
 	 *  1 = enabled
 	 *  0 = disabled
