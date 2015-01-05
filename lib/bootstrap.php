@@ -20,23 +20,11 @@ Autoloader::register();
 // User configuration
 if (!is_file('lib/config.json'))
 	trigger_error('Your config file is missing.', E_USER_ERROR);
-$config = json_decode(file_get_contents('lib/config.json'));
 
 // Error and exception handler
 set_error_handler(['silex\\Silex', 'errorHandler'], E_ALL);
 set_exception_handler(['silex\\Silex', 'exceptionHandler']);
 
-// Initiate database
-database\Factory::init($config);
-
-// Initiate configuration
-Config::init();
-
-// Enable sessions
-session\Session::start();
-
-// Load modules
-Modules::load(new ModuleLoader('lib/modules/'));
-Modules::run();
-
-Silex::init();
+$app = new Silex(json_decode(file_get_contents('lib/config.json')));
+$app->setAsMainApp();
+$app->boot();

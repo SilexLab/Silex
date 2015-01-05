@@ -13,27 +13,6 @@ use silex\exception\CoreException;
 class Modules
 {
 	/**
-	 * ModuleLoader Object
-	 *
-	 * @var ModuleLoader
-	 */
-	protected static $loader = null;
-
-	/**
-	 * Load the modules via ModuleLoader
-	 *
-	 * @param ModuleLoader $loader
-	 * @throws CoreException
-	 */
-	public static function load(ModuleLoader $loader)
-	{
-		self::$loader = $loader;
-
-		if (!self::$loader->load())
-			throw new CoreException('Modules could not loaded', 1);
-	}
-
-	/**
 	 * Redirect static called methods to the loader
 	 *
 	 * @param string $name
@@ -42,9 +21,9 @@ class Modules
 	 */
 	public static function __callStatic($name, $arguments)
 	{
-		if (!self::$loader)
+		if (!Silex::getApp()->getModules())
 			throw new CoreException('The modules aren\'t loaded via a module loader', 1);
 
-		return self::$loader->{$name}(...$arguments);
+		return Silex::getApp()->getModules()->{$name}(...$arguments);
 	}
 }

@@ -11,18 +11,75 @@ namespace silex;
 use silex\exception\CoreException;
 
 /**
- * Main library of Silex
+ * Main class of Silex application
  */
 class Silex
 {
 	const VERSION = '0.1.0-dev';
 
 	/**
-	 * Deprecated
+	 * Application
+	 *
+	 * @var Silex
 	 */
-	public static function init()
+	private static $app = null;
+
+	/**
+	 * ModuleLoader Object
+	 *
+	 * @var ModuleLoader
+	 */
+	private $moduleLoader = null;
+
+	public function __construct($config)
 	{
-		//
+		// Initiate database
+		database\Factory::init($config);
+
+		// Initiate configuration
+		Config::init();
+
+		// Enable sessions
+		session\Session::start();
+	}
+
+	public function boot()
+	{
+		// Load modules
+		$this->moduleLoader = new ModuleLoader('lib/modules/');
+		if (!$this->moduleLoader->load())
+			throw new CoreException('Modules could not loaded', 1);
+
+		// Run loaded modules
+		$this->moduleLoader->run();
+	}
+
+	/**
+	 * Get the ModuleLoader instance
+	 *
+	 * @return ModuleLoader
+	 */
+	public function getModules()
+	{
+		return $this->moduleLoader;
+	}
+
+	/**
+	 * Set this app as main app, so it can be called via Silex::getApp()
+	 */
+	public function setAsMainApp()
+	{
+		self::$app = $this;
+	}
+
+	/**
+	 * Get the main application
+	 *
+	 * @return Silex
+	 */
+	public static function getApp()
+	{
+		return self::$app;
 	}
 
 	/**
@@ -43,7 +100,7 @@ class Silex
 	}
 
 	/**
-	 * Catches php errors and throws instead a system exception
+	 * Catches php errors and throws a system exception instead
 	 *
 	 * @param int $errorNo
 	 * @param string $message
